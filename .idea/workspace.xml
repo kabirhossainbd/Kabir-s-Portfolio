@@ -9,7 +9,35 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0707702-f639-4027-aa6e-3da453072b10" name="Changes" comment="fix some design" />
+    <list default="true" id="b0707702-f639-4027-aa6e-3da453072b10" name="Changes" comment="fix some design">
+      <change afterPath="$PROJECT_DIR$/assets/projects/foodStoreBanner.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/ispBanner.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/ispLogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/quickMart.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/quickMartBanner.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/bookstudyBanner.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/projects/bookStudyBanner.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/covidB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/earbender.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/foodstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/projects/foodStore.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/hereiam.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/hereiamB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/medkit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/medkitB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/quranB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/snackbar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/portfolio/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/portfolio/utils/project_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/utils/project_utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/portfolio/utils/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/utils/utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +70,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="new_update" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -68,8 +96,9 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mdkabirhossain/Documents/Portfolio/assets/projects&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mdkabirhossain/Documents/Kabir-s-Portfolio/assets/projects&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }

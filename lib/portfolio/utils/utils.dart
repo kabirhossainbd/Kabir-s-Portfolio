@@ -42,7 +42,7 @@ class StaticUtils {
     "mailto:kabirhossenbd1971@gmail.com",
   ];
 
-  static const String resume = 'https://drive.google.com/file/d/1k1PYiY3IynoPRO5xZWJFC3SmuKkeZI6j/view';
+  static const String resume = 'https://drive.google.com/file/d/1UU_YY0Iuk1PRUhwcj8teqwY5SU2WLZqw/view?usp=sharing';
 
   static const String gitHub = "https://github.com/kabirhossainbd";
 }

@@ -9,7 +9,7 @@ void openURL(String url) => launchUrl(
 final kTools = [
   "Flutter & Dart",
   "Android & Java/Kotlin",
-  "Problem Solver"
+  "Problem Solver",
   "Responsive Design",
   "Good Communication",
   "Dependency Injection",
