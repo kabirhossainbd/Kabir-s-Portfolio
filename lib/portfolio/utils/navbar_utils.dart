@@ -4,17 +4,16 @@ class NavBarUtils {
   static const List<String> names = [
     'HOME',
     'ABOUT ME',
-    'SERVICE',
+    'SERVICES',
     'PROJECTS',
     'CONTACT',
   ];
 
   static const List<IconData> icons = [
-    Icons.home,
-    Icons.person,
-    Icons.work,
-    Icons.build,
-    Icons.settings,
-    Icons.contact_page,
+    Icons.home_rounded,
+    Icons.person_rounded,
+    Icons.design_services_rounded,
+    Icons.work_rounded,
+    Icons.mark_email_unread_rounded,
   ];
 }

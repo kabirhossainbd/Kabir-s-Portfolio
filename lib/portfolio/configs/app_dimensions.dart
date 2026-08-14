@@ -51,7 +51,7 @@ class AppDimensions {
 
   static String inString() {
     final x = UI.width! / UI.height!;
-    final ps = ui.window.physicalSize;
+    final ps = ui.PlatformDispatcher.instance.implicitView?.physicalSize ?? Size.zero;
     return """
       Width: ${UI.width} | ${ps.width}
       Height: ${UI.height} | ${ps.height}

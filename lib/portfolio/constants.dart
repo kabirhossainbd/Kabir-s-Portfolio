@@ -5,15 +5,13 @@ void openURL(String url) => launchUrl(
       Uri.parse(url),
     );
 
-// Tools & Tech
 final kTools = [
   "Flutter & Dart",
-  "Android & Java/Kotlin",
-  "Problem Solver",
-  "Responsive Design",
-  "Good Communication",
-  "Dependency Injection",
-  "Critical Thinking",
-  "Leadership",
-  "Git",
+  "Android & iOS",
+  "GetX & Provider & BLoC",
+  "Firebase & REST APIs",
+  "Clean Architecture",
+  "Git & GitHub CI/CD",
+  "UI/UX Implementation",
+  "Problem Solving & Leadership",
 ];

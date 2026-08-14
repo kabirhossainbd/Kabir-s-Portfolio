@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
 
 
   cupertino_icons: ^1.0.2
@@ -44,10 +46,12 @@ dependencies:
   mailto: ^2.0.0
   flip_card: ^0.6.0
   carousel_slider: ^5.0.0
-  font_awesome_flutter: ^10.1.0
+
 
   # state management
   provider: ^6.0.1
+  rive: ^0.14.11
+  iconsax: ^0.0.8
 
 
 
@@ -65,16 +69,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/work/
     - assets/photos/
     - assets/services/
     - assets/projects/
-
-  fonts:
-    - family: Agustina
-      fonts:
-        - asset: fonts/agustina/agustina.otf
-
-    - family: Montserrat
-      fonts:
-        - asset: fonts/montserrat/montserrat.ttf

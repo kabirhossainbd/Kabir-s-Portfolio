@@ -1,174 +1,186 @@
-import 'package:portpolio/portfolio/configs/app_dimensions.dart';
-import 'package:portpolio/portfolio/configs/app_theme.dart';
+import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/configs/app_typography.dart';
 import 'package:portpolio/portfolio/configs/space.dart';
-import 'package:portpolio/portfolio/constants.dart';
 import 'package:portpolio/portfolio/provider/app_provider.dart';
 import 'package:portpolio/portfolio/utils/about_utils.dart';
 import 'package:portpolio/portfolio/utils/utils.dart';
-import 'package:portpolio/portfolio/utils/work_utils.dart';
-import 'package:portpolio/portfolio/widget/about_me_data.dart';
-import 'package:portpolio/portfolio/widget/community_button.dart';
 import 'package:portpolio/portfolio/widget/custom_text_heading.dart';
-import 'package:portpolio/portfolio/widget/tech_widget.dart';
+import 'package:portpolio/portfolio/widget/glass_container.dart';
+import 'package:portpolio/portfolio/widget/skill_percentage_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_html/html.dart' as html;
-import 'package:flutter/material.dart';
 
 class AboutTab extends StatelessWidget {
   const AboutTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     final appProvider = Provider.of<AppProvider>(context);
+    final isDark = appProvider.isDark;
+
     return Container(
       padding: Space.h,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Center(
-            child: CustomSectionHeading(
-              text: '\nAbout Me',
-            ),
+          const CustomSectionHeading(
+            text: 'About & Expertise',
           ),
-          
-          Space.y1!,
-          Image.asset(
-            StaticUtils.profileFormal,
-            height: height * 0.27,
-          ),
-          SizedBox(
-            height: height * 0.03,
-          ),
-          Text(
-            "Who am I?",
-            style: AppText.b2!.copyWith(
-              color: AppTheme.c!.primary,
-            ),
+          const CustomSectionSubHeading(
+            text: 'Transforming ideas into high-performance cross-platform mobile apps.',
           ),
           Space.y1!,
-          Text(
-            AboutUtils.aboutMeHeadline,
-            style: AppText.b2b!.copyWith(
-              fontFamily: 'Montserrat',
-                color: appProvider.isDark ? Colors.white : Colors.black
+
+          // Bento Card 1: Bio & Avatar
+          GlassContainer(
+            padding: const EdgeInsets.all(24),
+            borderRadius: BorderRadius.circular(24),
+            borderGradient: LinearGradient(
+              colors: isDark
+                  ? [const Color(0xFF00D2FF), const Color(0xFFA855F7)]
+                  : [const Color(0xFF0066FF), const Color(0xFF8B5CF6)],
             ),
-          ),
-          SizedBox(
-            height: height * 0.02,
-          ),
-          Text(
-            AboutUtils.aboutMeDetail,
-            style: AppText.l1!.copyWith(
-              height: 2,
-              letterSpacing: 1.1,
-              fontFamily: 'Montserrat',
-                color: appProvider.isDark ? Colors.white : Colors.black
-            ),
-          ),
-          Space.y!,
-          Divider(
-            color: Colors.grey[800],
-            thickness: AppDimensions.normalize(0.5),
-          ),
-          Space.y!,
-          Text(
-            'SKILLS',
-            style: AppText.l1!.copyWith(
-              color: AppTheme.c!.primary,
-            ),
-          ),
-          Wrap(
-            children: kTools
-                .map(
-                  (e) => ToolTechWidget(techName: e),
-                )
-                .toList(),
-          ),
-          Space.y!,
-          Divider(
-            color: Colors.grey[800],
-            thickness: AppDimensions.normalize(0.5),
-          ),
-          Space.y!,
-          Row(
-            children: [
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AboutMeData(
-                    data: "Name",
-                    information: "Md. Kabir Hossain",
+            child: Row(
+              children: [
+                Container(
+                  width: 130,
+                  height: 155,
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    gradient: LinearGradient(
+                      colors: isDark
+                          ? [const Color(0xFF00D2FF), const Color(0xFFA855F7)]
+                          : [const Color(0xFF0066FF), const Color(0xFF8B5CF6)],
+                    ),
                   ),
-                  AboutMeData(
-                    data: "From",
-                    information: "Uttora, Dhaka, Bangladesh",
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: width > 710 ? width * 0.2 : width * 0.05,
-              ),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AboutMeData(
-                    data: "Email",
-                    information: "kabirhossenbd1971@gmail.com",
-                  ),
-                  AboutMeData(
-                    data: "Hobby",
-                    information: "Cricket, Football",
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Space.y1!,
-          Row(
-            children: [
-              SizedBox(
-                height: AppDimensions.normalize(13),
-                width: AppDimensions.normalize(40),
-                child: OutlinedButton(
-                  onPressed: () => html.window.open(StaticUtils.resume, 'pdf'),
-                  child:  Text(
-                    "Resume",
-                    style: TextStyle( color: appProvider.isDark ? Colors.white : Colors.black),
-                  ),
-                ),
-              ),
-              Space.x!,
-              Container(
-                width: width * 0.05,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.grey[900]!,
-                      width: 2.0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(21),
+                    child: Image.asset(
+                      StaticUtils.coloredPhoto,
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
                     ),
                   ),
                 ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                    children: WorkUtils.logos
-                        .asMap()
-                        .entries
-                        .map(
-                          (e) => CommunityIconBtn(
-                            icon: e.value,
-                            link: WorkUtils.communityLinks[e.key],
-                            height: WorkUtils.communityLogoHeight[e.key],
+                const SizedBox(width: 20),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AboutUtils.aboutMeHeadline,
+                        style: AppText.b2b!.copyWith(
+                          fontFamily: 'Montserrat',
+                          fontSize: 17,
+                          color: isDark ? Colors.white : const Color(0xFF0F172A),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        AboutUtils.aboutMeDetail,
+                        style: TextStyle(
+                          fontSize: 13,
+                          height: 1.5,
+                          color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      ElevatedButton.icon(
+                        onPressed: () => html.window.open(StaticUtils.resume, 'pdf'),
+                        icon: const Icon(Icons.download_rounded, size: 16, color: Colors.white),
+                        label: const Text('Download Resume', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF0066FF),
+                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Bento Card 2: Tech Matrix
+          GlassContainer(
+            padding: const EdgeInsets.all(24),
+            borderRadius: BorderRadius.circular(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '⚡ TECH STACK & SKILLS MATRIX',
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF0066FF)),
+                ),
+                const SizedBox(height: 14),
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: AboutUtils.techStackCategories.map((category) {
+                    return Container(
+                      width: 280,
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isDark ? Colors.white10 : Colors.black.withValues(alpha: 0.03),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            category['category'] as String,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: isDark ? const Color(0xFF00D2FF) : const Color(0xFF0066FF),
+                            ),
                           ),
-                        )
-                        .toList()),
-              ),
-            ],
-          )
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 6,
+                            runSpacing: 6,
+                            children: (category['items'] as List<String>).map((item) {
+                              return Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  item,
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: isDark ? Colors.white70 : Colors.black87,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  '📊 PROFICIENCY & EXPERTISE GRAPH',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF00D2FF)),
+                ),
+                const SizedBox(height: 14),
+                ...AboutUtils.skillsProficiency.map(
+                  (item) => SkillPercentageBar(
+                    title: item['title'] as String,
+                    subtitle: item['subtitle'] as String?,
+                    percentage: item['percentage'] as double,
+                    isDark: isDark,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

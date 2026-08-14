@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/animations/entrance_fader.dart';
-import 'package:portpolio/portfolio/configs/app_dimensions.dart';
 import 'package:portpolio/portfolio/configs/app_theme.dart';
-import 'package:portpolio/portfolio/provider/app_provider.dart';
 import 'package:portpolio/portfolio/provider/scroll_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -15,63 +13,85 @@ class ArrowOnTop extends StatefulWidget {
 
 class ArrowOnTopState extends State<ArrowOnTop> {
   bool isHover = false;
+  bool showArrow = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final scrollProvider = Provider.of<ScrollProvider>(context, listen: false);
+      scrollProvider.scrollController.addListener(_onScroll);
+      _onScroll();
+    });
+  }
+
+  void _onScroll() {
+    if (!mounted) return;
+    final scrollProvider = Provider.of<ScrollProvider>(context, listen: false);
+    if (!scrollProvider.scrollController.hasClients) return;
+    final offset = scrollProvider.scrollController.offset;
+    if (offset > 300 && !showArrow) {
+      setState(() => showArrow = true);
+    } else if (offset <= 300 && showArrow) {
+      setState(() => showArrow = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final appProvider = Provider.of<AppProvider>(context);
     final scrollProvider = Provider.of<ScrollProvider>(context);
 
-    return Positioned(
-      bottom: AppDimensions.normalize(30),
-      right: -7,
-      child: EntranceFader(
-        offset: const Offset(0, 20),
-        child: Padding(
-          padding:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.025),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              InkWell(
-                borderRadius: BorderRadius.circular(8.0),
-                onTap: () => scrollProvider.scroll(0),
-                onHover: (isHovering) {
-                  if (isHovering) {
-                    setState(() {
-                      isHover = true;
-                    });
-                  } else {
-                    setState(() {
-                      isHover = false;
-                    });
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: appProvider.isDark ? Colors.white : Colors.black,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      bottomLeft: Radius.circular(8.0),
-                    ),
-                    boxShadow: isHover
-                        ? [
-                            const BoxShadow(
-                              blurRadius: 12.0,
-                              offset: Offset(2.0, 3.0),
-                            )
-                          ]
-                        : [],
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 350),
+      curve: Curves.easeInOut,
+      bottom: showArrow ? 30 : -80,
+      right: 20,
+      child: AnimatedOpacity(
+        duration: const Duration(milliseconds: 350),
+        opacity: showArrow ? 1.0 : 0.0,
+        child: EntranceFader(
+          offset: const Offset(0, 20),
+          child: MouseRegion(
+            onEnter: (_) => setState(() => isHover = true),
+            onExit: (_) => setState(() => isHover = false),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.c!.primary!,
+                    const Color(0xFF06B6D4),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.c!.primary!.withValues(alpha: isHover ? 0.6 : 0.3),
+                    blurRadius: isHover ? 20 : 12,
+                    offset: const Offset(0, 6),
                   ),
-                  child: Icon(
-                    Icons.arrow_drop_up_outlined,
-                    color: AppTheme.c!.primary!,
-                    size: MediaQuery.of(context).size.height * 0.05,
+                ],
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(16),
+                  onTap: () => scrollProvider.scroll(0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Icon(
+                      Icons.keyboard_arrow_up_rounded,
+                      color: Colors.white,
+                      size: 26,
+                    ),
                   ),
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+

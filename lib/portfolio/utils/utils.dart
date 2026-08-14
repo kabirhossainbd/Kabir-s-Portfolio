@@ -10,15 +10,9 @@ class StaticUtils {
   static const String hi = 'assets/hi.gif';
 
   // photos
-  static const String profileFormal = 'assets/photos/mobile.png';
-  static const String coloredPhoto = 'assets/photos/mobile.png';
+  static const String profileFormal = 'assets/photos/profile.png';
+  static const String coloredPhoto = 'assets/photos/profile.png';
   static const String profileCasual = 'assets/photos/profile.png';
-
-  // work
-  static const String dsc = 'assets/work/dsc.png';
-  static const String sastaticket = 'assets/work/st.png';
-  static const String university = 'assets/work/cui.png';
-  static const String fullterIsb = 'assets/work/flutterIsl.png';
 
   // services
   static const String uiux = 'assets/services/ui.png';
@@ -42,7 +36,7 @@ class StaticUtils {
     "mailto:kabirhossenbd1971@gmail.com",
   ];
 
-  static const String resume = 'https://drive.google.com/file/d/1UU_YY0Iuk1PRUhwcj8teqwY5SU2WLZqw/view?usp=sharing';
+  static const String resume = 'https://drive.google.com/file/d/1fktTBY1Q-HXKk_uNI6hh0FvAm5YZcx77/view?usp=sharing';
 
   static const String gitHub = "https://github.com/kabirhossainbd";
 }

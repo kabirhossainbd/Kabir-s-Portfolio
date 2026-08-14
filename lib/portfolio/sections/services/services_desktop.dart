@@ -16,6 +16,7 @@ class ServiceDesktopState extends State<ServiceDesktop> {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
+      margin: const EdgeInsets.only(top: 60, bottom: 40),
       padding: Space.hf(4),
       child: Column(
         children: [

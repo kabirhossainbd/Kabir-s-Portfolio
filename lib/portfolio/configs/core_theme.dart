@@ -3,33 +3,37 @@ import 'package:flutter/material.dart';
 const fontFamily = 'Montserrat';
 
 final themeLight = ThemeData(
-  primaryColorLight:  Colors.blue,
   brightness: Brightness.light,
-  primaryColor: Colors.blue,
-  highlightColor: Colors.black,
+  primaryColor: const Color(0xFF0066FF),
+  primaryColorLight: const Color(0xFF38BDF8),
+  highlightColor: const Color(0xFF8B5CF6),
   canvasColor: Colors.white,
   fontFamily: fontFamily,
   splashColor: Colors.transparent,
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: const Color(0xFFF8FAFC),
   colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
-    secondary: Colors.black,
+    secondary: const Color(0xFF8B5CF6),
     brightness: Brightness.light,
-    background: Colors.white,
+    surface: Colors.white,
   ),
 );
 
 final themeDark = ThemeData(
   brightness: Brightness.dark,
-  primaryColorDark: Colors.blue,
-  primaryColor: Colors.blue,
-  highlightColor: Colors.blue,
-  canvasColor: Colors.white,
+  primaryColor: const Color(0xFF00D2FF),
+  primaryColorDark: const Color(0xFF38BDF8),
+  highlightColor: const Color(0xFFA855F7),
+  canvasColor: const Color(0xFF0B0F19),
   fontFamily: fontFamily,
   splashColor: Colors.transparent,
-  scaffoldBackgroundColor: Colors.black,
-  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
-    secondary: Colors.blue,
+  scaffoldBackgroundColor: const Color(0xFF0B0F19),
+  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan).copyWith(
+    secondary: const Color(0xFFA855F7),
     brightness: Brightness.dark,
-    background: Colors.grey[800],
+    surface: const Color(0xFF111827),
   ),
 );
+
+
+
+

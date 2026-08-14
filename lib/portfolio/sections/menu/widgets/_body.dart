@@ -14,10 +14,21 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     final scrollProvider = Provider.of<ScrollProvider>(context);
 
-    return ListView.builder(
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       controller: scrollProvider.controller,
-      itemCount: BodyUtils.views.length,
-      itemBuilder: (context, index) => BodyUtils.views[index],
+      child: Column(
+        children: BodyUtils.views
+            .asMap()
+            .entries
+            .map(
+              (e) => Container(
+                key: scrollProvider.sectionKeys[e.key],
+                child: e.value,
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }
