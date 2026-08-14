@@ -9,198 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0707702-f639-4027-aa6e-3da453072b10" name="Changes" comment="fix some design and add new pdf link">
-      <change afterPath="$PROJECT_DIR$/assets/projects/ic_deen_islam.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/projects/ic_lens_guard.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/projects/ic_money_trail.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/projects/ic_prantik_tour.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/projects/img_deen_islam.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/projects/img_lens_quard.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/projects/img_money_trail.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/projects/img_prantik_tour_plan.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flutter_01.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/portfolio/widget/glass_container.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/portfolio/widget/quick_stats.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/portfolio/widget/skill_percentage_bar.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/portfolio/widget/smart_icon.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/portfolio/widget/splash_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/.filecache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/app.dill" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/app.dill.deps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/dart2js.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/dart2js.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/flutter_assets.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/gen_localizations.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/main.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/main.dart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/main.dart.js.deps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/outputs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/service_worker.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/web_entrypoint.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/web_plugin_registrant.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/web_release_bundle.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/web_resources.d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/web_service_worker.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/web_static_assets.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/b8e209ee15a5f57b8c947ee27a6e5f02/web_templated_files.stamp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/photos/mobile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/photos/profile.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/photos/profile.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/work/cui.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/work/dsc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/work/flutterIsl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/work/st.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/.last_build_id" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/AssetManifest.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/AssetManifest.bin.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/AssetManifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/FontManifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/NOTICES" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/hi.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/photos/mobile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/photos/profile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/android.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/bookool.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/bookstudyBanner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/covid.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/covidB.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/earbender.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/fnfBanner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/fnfLogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/foodstore.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/gypsy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/gypsyBanner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/hereiam.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/hereiamB.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/java.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/medkit.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/medkitB.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/messenger.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/nubBook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/quranB.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/projects/snackbar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/services/app.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/services/blog.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/services/fiverr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/services/open.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/services/open_b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/services/rapid.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/services/ui.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/work/cui.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/work/dsc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/work/flutterIsl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/assets/work/st.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/fonts/MaterialIcons-Regular.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/fonts/agustina/agustina.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/fonts/montserrat/montserrat.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_feather_icons/fonts/feather.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_inappwebview/assets/t_rex_runner/t-rex.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_inappwebview/assets/t_rex_runner/t-rex.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_AMS-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Caligraphic-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Caligraphic-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Fraktur-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Fraktur-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Math-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Math-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Script-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size1-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size2-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size3-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size4-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Typewriter-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/packages/wakelock_web/assets/no_sleep.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/assets/shaders/ink_sparkle.frag" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/canvaskit.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/canvaskit.js.symbols" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/canvaskit.wasm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/chromium/canvaskit.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/chromium/canvaskit.js.symbols" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/chromium/canvaskit.wasm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/skwasm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/skwasm.js.symbols" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/skwasm.wasm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/canvaskit/skwasm.worker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/flutter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/flutter_bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/flutter_service_worker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/icons/Icon-192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/icons/Icon-512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/icons/Icon-maskable-192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/icons/Icon-maskable-512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/loader.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/main.dart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/web/version.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/configs/app_dimensions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/configs/app_dimensions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/configs/app_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/configs/app_theme.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/configs/core_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/configs/core_theme.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/provider/scroll_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/provider/scroll_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/responsive/responsive.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/responsive/responsive.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/about/about_desktop.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/about/about_desktop.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/about/about_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/about/about_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/about/about_tablet.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/about/about_tablet.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/contact/contact_desktop.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/contact/contact_desktop.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/contact/contact_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/contact/contact_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/home/home_desktop.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/home/home_desktop.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/home/home_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/home/home_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/home/home_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/home/home_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/menu/main_section.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/menu/main_section.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/menu/widgets/_body.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/menu/widgets/_body.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/menu/widgets/_mobile_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/menu/widgets/_mobile_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/menu/widgets/_navbar_desktop.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/menu/widgets/_navbar_desktop.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/portfolio/portfolio_desktop.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/portfolio/portfolio_desktop.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/portfolio/portfolio_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/portfolio/portfolio_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/services/services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/services/services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/services/services_desktop.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/services/services_desktop.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/services/services_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/services/services_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/sections/services/widgets/_services_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/sections/services/widgets/_services_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/utils/about_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/utils/about_utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/utils/contact_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/utils/contact_utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/utils/navbar_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/utils/navbar_utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/utils/project_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/utils/project_utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/utils/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/utils/utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/utils/work_utils.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/widget/arrow_on_top.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/widget/arrow_on_top.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/widget/custom_text_heading.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/widget/custom_text_heading.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/widget/footer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/widget/footer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/widget/navbar_actions_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/widget/navbar_actions_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/widget/navbar_logo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/widget/navbar_logo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/widget/project_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/widget/project_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/widget/social_links.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/widget/social_links.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/portfolio/widget/tech_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/portfolio/widget/tech_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
-    </list>
+    <list default="true" id="b0707702-f639-4027-aa6e-3da453072b10" name="Changes" comment="hughes update for 2nd version" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -336,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737913928426</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="hughes update for 2nd version">
+      <option name="closed" value="true" />
+      <created>1786729134722</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1786729134723</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -357,7 +174,8 @@
     <MESSAGE value="update new design" />
     <MESSAGE value="fix some design" />
     <MESSAGE value="fix some design and add new pdf link" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix some design and add new pdf link" />
+    <MESSAGE value="hughes update for 2nd version" />
+    <option name="LAST_COMMIT_MESSAGE" value="hughes update for 2nd version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

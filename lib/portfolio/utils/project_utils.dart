@@ -5,10 +5,12 @@ class ProjectUtils {
     "assets/projects/ispBanner.png",
     "assets/projects/bookStudyBanner.png",
     "assets/projects/quickMartBanner.png",
-   "assets/projects/img_deen_islam.webp",
-   "assets/projects/img_lens_quard.webp",
-   "assets/projects/img_money_trail.webp",
-   "assets/projects/img_prantik_tour_plan.webp",
+    "assets/projects/img_deen_islam.webp",
+    "assets/projects/img_lens_quard.webp",
+    "assets/projects/img_money_trail.webp",
+    "assets/projects/img_prantik_tour_plan.webp",
+    "assets/projects/aktivkalender_banner.png",
+    "assets/projects/rabattello_banner.png",
   ];
 
   static const List<String?> icons = [
@@ -21,6 +23,8 @@ class ProjectUtils {
     "assets/projects/ic_lens_guard.webp",
     "assets/projects/ic_money_trail.webp",
     "assets/projects/ic_prantik_tour.webp",
+    "assets/projects/aktivkalender_icon.png",
+    "assets/projects/rabattello_icon.png",
   ];
 
   static const List<String> titles = [
@@ -33,6 +37,8 @@ class ProjectUtils {
     "Lens Guard",
     "SIMEC Expense Tracker",
     "Prantik SIMEC",
+    "Aktivkalender",
+    "Rabattello",
   ];
 
   static const List<String> description = [
@@ -45,6 +51,8 @@ class ProjectUtils {
     "Smart camera security and surveillance application for real-time video streaming, motion alerts, and automated camera monitoring.",
     "Feature-rich financial management and expense tracking app to manage daily budgets, corporate expenses, and generate detailed financial reports.",
     "Enterprise workforce and operational management application built for field team coordination, task tracking, and corporate workflows.",
+    "Aktivkalender is a modern Swedish event discovery and activity management app for community engagement, scheduling, activity creation, and interactive bookmarks.",
+    "Rabattello is a Swedish discounts & nearby campaign discovery application providing users with local store deals, location-based notifications, category filtering, and deal saving features.",
   ];
 
   static const List<String> links = [
@@ -57,5 +65,7 @@ class ProjectUtils {
     "https://play.google.com/store/apps/details?id=com.lens_guard",
     "https://play.google.com/store/apps/details?id=com.simec.expense.tracker&hl=en",
     "https://play.google.com/store/apps/details?id=com.prantik.simec&hl=en",
+    "https://play.google.com/store/apps/details?id=com.altivkalender.webbiab",
+    "https://play.google.com/store/apps/details?id=com.webbitory.rabattello",
   ];
 }
