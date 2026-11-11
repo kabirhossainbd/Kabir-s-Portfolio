@@ -58,8 +58,8 @@ void main() {
 
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
-    final revealedOpacity = tester.widget<Opacity>(find.byType(Opacity));
-    expect(revealedOpacity.opacity, 1.0);
+    expect(find.byType(Opacity), findsNothing);
+    expect(find.text('Hero Content'), findsOneWidget);
   });
 
   testWidgets('ScrollReveal reveals visible content cleanly', (tester) async {
@@ -76,8 +76,8 @@ void main() {
 
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
-    final opacity = tester.widget<Opacity>(find.byType(Opacity));
-    expect(opacity.opacity, 1.0);
+    expect(find.byType(Opacity), findsNothing);
+    expect(find.text('Section Card'), findsOneWidget);
   });
 }
 

@@ -52,6 +52,7 @@ class AboutMobile extends StatelessWidget {
                         StaticUtils.coloredPhoto,
                         fit: BoxFit.cover,
                         alignment: Alignment.topCenter,
+                        cacheWidth: 280,
                       ),
                     ),
                   ),

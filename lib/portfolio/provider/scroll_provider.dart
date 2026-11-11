@@ -4,18 +4,36 @@ class ScrollProvider extends ChangeNotifier {
   final scrollController = ScrollController();
   final List<GlobalKey> sectionKeys = List.generate(6, (_) => GlobalKey());
 
+  /// Notifies hero animations whether the top section is still near the viewport
+  /// so off-screen continuous tickers pause during scrolling.
+  final ValueNotifier<bool> isHeroVisible = ValueNotifier<bool>(true);
+
   int _activeIndex = 0;
   int get activeIndex => _activeIndex;
+  double _lastCheckedOffset = -100;
 
   ScrollProvider() {
-    scrollController.addListener(_updateActiveSection);
+    scrollController.addListener(_onScroll);
   }
 
   ScrollController get controller => scrollController;
 
-  void _updateActiveSection() {
+  void _onScroll() {
     if (!scrollController.hasClients) return;
+    final offset = scrollController.offset;
 
+    final heroVisible = offset < 720;
+    if (isHeroVisible.value != heroVisible) {
+      isHeroVisible.value = heroVisible;
+    }
+
+    // Throttle active-section RenderBox lookups to >=28px scroll increments
+    if ((offset - _lastCheckedOffset).abs() < 28) return;
+    _lastCheckedOffset = offset;
+    _updateActiveSection();
+  }
+
+  void _updateActiveSection() {
     int bestIndex = 0;
     double bestDistance = double.infinity;
 
@@ -38,7 +56,7 @@ class ScrollProvider extends ChangeNotifier {
     }
   }
 
-  void scroll(int index, {int delayMs = 60}) {
+  void scroll(int index, {int delayMs = 20}) {
     if (!scrollController.hasClients) return;
     if (index < 0 || index >= sectionKeys.length) return;
 
@@ -73,27 +91,28 @@ class ScrollProvider extends ChangeNotifier {
 
         scrollController.animateTo(
           finalTarget,
-          duration: const Duration(milliseconds: 700),
-          curve: Curves.easeInOutCubic,
+          duration: const Duration(milliseconds: 380),
+          curve: Curves.easeOutCubic,
         );
       } else if (keyContext != null && keyContext.mounted) {
         Scrollable.ensureVisible(
           keyContext,
-          duration: const Duration(milliseconds: 700),
-          curve: Curves.easeInOutCubic,
+          duration: const Duration(milliseconds: 380),
+          curve: Curves.easeOutCubic,
         );
       }
     });
   }
 
   void scrollMobile(int index) {
-    scroll(index, delayMs: 220);
+    scroll(index, delayMs: 140);
   }
 
   @override
   void dispose() {
-    scrollController.removeListener(_updateActiveSection);
+    scrollController.removeListener(_onScroll);
     scrollController.dispose();
+    isHeroVisible.dispose();
     super.dispose();
   }
 }

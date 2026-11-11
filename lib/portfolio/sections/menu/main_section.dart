@@ -42,60 +42,58 @@ class _MainPageState extends State<MainPage> {
       extendBodyBehindAppBar: true,
       drawer: !Responsive.isDesktop(context) ? const MobileDrawer() : null,
 
-      body: SelectionArea(
-        child: SafeArea(
-          child: Stack(
-            children: [
-              RevealScope(
-                isRevealed: !_showSplash,
-                child: Stack(
-                  children: [
-                    const Body(),
-                    const ArrowOnTop(),
-                    Responsive.isTablet(context) || Responsive.isMobile(context)
-                        ? const NavBarTablet()
-                        : const NavbarDesktop(),
-                  ],
-                ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            RevealScope(
+              isRevealed: !_showSplash,
+              child: Stack(
+                children: [
+                  const Body(),
+                  const ArrowOnTop(),
+                  Responsive.isTablet(context) || Responsive.isMobile(context)
+                      ? const NavBarTablet()
+                      : const NavbarDesktop(),
+                ],
               ),
-              IgnorePointer(
-                ignoring: !_showSplash,
-                child: AnimatedSwitcher(
-                  duration: MediaQuery.disableAnimationsOf(context)
-                      ? Duration.zero
-                      : const Duration(milliseconds: 420),
-                  switchOutCurve: Curves.easeOutCubic,
-                  transitionBuilder: (Widget child, Animation<double> animation) {
-                    final scale = Tween<double>(begin: 1.04, end: 1.0).animate(
-                      CurvedAnimation(
-                        parent: animation,
-                        curve: Curves.easeOutCubic,
-                      ),
-                    );
-                    return FadeTransition(
-                      opacity: animation,
-                      child: ScaleTransition(
-                        scale: scale,
-                        child: child,
-                      ),
-                    );
-                  },
-                  child: _showSplash
-                      ? SplashScreenWidget(
-                          key: const ValueKey('splash_screen_overlay'),
-                          onFinish: () {
-                            if (mounted) {
-                              setState(() {
-                                _showSplash = false;
-                              });
-                            }
-                          },
-                        )
-                      : const SizedBox.shrink(key: ValueKey('splash_done')),
-                ),
+            ),
+            IgnorePointer(
+              ignoring: !_showSplash,
+              child: AnimatedSwitcher(
+                duration: MediaQuery.disableAnimationsOf(context)
+                    ? Duration.zero
+                    : const Duration(milliseconds: 420),
+                switchOutCurve: Curves.easeOutCubic,
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  final scale = Tween<double>(begin: 1.04, end: 1.0).animate(
+                    CurvedAnimation(
+                      parent: animation,
+                      curve: Curves.easeOutCubic,
+                    ),
+                  );
+                  return FadeTransition(
+                    opacity: animation,
+                    child: ScaleTransition(
+                      scale: scale,
+                      child: child,
+                    ),
+                  );
+                },
+                child: _showSplash
+                    ? SplashScreenWidget(
+                        key: const ValueKey('splash_screen_overlay'),
+                        onFinish: () {
+                          if (mounted) {
+                            setState(() {
+                              _showSplash = false;
+                            });
+                          }
+                        },
+                      )
+                    : const SizedBox.shrink(key: ValueKey('splash_done')),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

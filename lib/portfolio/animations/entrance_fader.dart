@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:portpolio/portfolio/provider/scroll_provider.dart';
+import 'package:provider/provider.dart';
 
 /// Coordinates entrance animations so hero and navbar elements begin their
 /// staggered reveal right as the splash screen transitions out.
@@ -129,6 +131,9 @@ class EntranceFaderState extends State<EntranceFader>
       animation: _curvedAnimation,
       child: widget.child,
       builder: (context, child) {
+        if (_controller.isCompleted) {
+          return child!;
+        }
         final double opacity = _curvedAnimation.value.clamp(0.0, 1.0);
         Widget content = Transform.translate(
           offset: Offset(_dxAnimation.value, _dyAnimation.value),
@@ -173,6 +178,7 @@ class FloatingMotion extends StatefulWidget {
 class _FloatingMotionState extends State<FloatingMotion>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
+  ValueNotifier<bool>? _heroVisibleNotifier;
 
   @override
   void initState() {
@@ -186,8 +192,25 @@ class _FloatingMotionState extends State<FloatingMotion>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    ValueNotifier<bool>? notifier;
+    try {
+      notifier = Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
+    } on ProviderNotFoundException {
+      notifier = null;
+    }
+    if (notifier != _heroVisibleNotifier) {
+      _heroVisibleNotifier?.removeListener(_syncPlayback);
+      _heroVisibleNotifier = notifier;
+      _heroVisibleNotifier?.addListener(_syncPlayback);
+    }
+    _syncPlayback();
+  }
+
+  void _syncPlayback() {
+    if (!mounted) return;
     final disableAnimations = MediaQuery.disableAnimationsOf(context);
-    if (disableAnimations) {
+    final visible = _heroVisibleNotifier?.value ?? true;
+    if (disableAnimations || !visible) {
       _controller.stop();
     } else if (!_controller.isAnimating) {
       _controller.repeat();
@@ -196,6 +219,7 @@ class _FloatingMotionState extends State<FloatingMotion>
 
   @override
   void dispose() {
+    _heroVisibleNotifier?.removeListener(_syncPlayback);
     _controller.dispose();
     super.dispose();
   }

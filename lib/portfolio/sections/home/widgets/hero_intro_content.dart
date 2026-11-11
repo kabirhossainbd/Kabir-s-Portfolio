@@ -29,6 +29,7 @@ class HeroIntroContent extends StatefulWidget {
 class _HeroIntroContentState extends State<HeroIntroContent>
     with SingleTickerProviderStateMixin {
   late final AnimationController _shimmerController;
+  ValueNotifier<bool>? _heroVisibleNotifier;
 
   @override
   void initState() {
@@ -42,7 +43,24 @@ class _HeroIntroContentState extends State<HeroIntroContent>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (MediaQuery.disableAnimationsOf(context)) {
+    ValueNotifier<bool>? notifier;
+    try {
+      notifier = Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
+    } on ProviderNotFoundException {
+      notifier = null;
+    }
+    if (notifier != _heroVisibleNotifier) {
+      _heroVisibleNotifier?.removeListener(_syncPlayback);
+      _heroVisibleNotifier = notifier;
+      _heroVisibleNotifier?.addListener(_syncPlayback);
+    }
+    _syncPlayback();
+  }
+
+  void _syncPlayback() {
+    if (!mounted) return;
+    final visible = _heroVisibleNotifier?.value ?? true;
+    if (MediaQuery.disableAnimationsOf(context) || !visible) {
       _shimmerController.stop();
     } else if (!_shimmerController.isAnimating) {
       _shimmerController.repeat();
@@ -51,6 +69,7 @@ class _HeroIntroContentState extends State<HeroIntroContent>
 
   @override
   void dispose() {
+    _heroVisibleNotifier?.removeListener(_syncPlayback);
     _shimmerController.dispose();
     super.dispose();
   }

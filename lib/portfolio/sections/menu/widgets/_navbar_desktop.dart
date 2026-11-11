@@ -29,8 +29,9 @@ class NavbarDesktop extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: GlassContainer(
-            blur: 12,
-            opacity: 0.15,
+            blur: 0,
+            color: (isDark ? AppColors.surfaceDark : Colors.white)
+                .withValues(alpha: 0.94),
           borderRadius: BorderRadius.circular(24),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           borderColor: isDark
@@ -107,7 +108,9 @@ class NavBarTablet extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: GlassContainer(
-            blur: 12,
+            blur: 0,
+            color: (isDark ? AppColors.surfaceDark : Colors.white)
+                .withValues(alpha: 0.94),
           borderRadius: BorderRadius.circular(20),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           borderColor: isDark

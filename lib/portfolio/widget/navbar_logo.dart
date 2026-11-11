@@ -22,7 +22,10 @@ class NavBarLogo extends StatelessWidget {
           child: CircleAvatar(
             radius: 18,
             backgroundColor: colors.background,
-            backgroundImage: const AssetImage(StaticUtils.profileCasual),
+            backgroundImage: const ResizeImage(
+              AssetImage(StaticUtils.profileCasual),
+              width: 96,
+            ),
           ),
         ),
         const SizedBox(width: 10),

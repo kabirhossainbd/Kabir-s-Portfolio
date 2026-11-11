@@ -67,6 +67,7 @@ class _ProjectCardState extends State<ProjectCard> {
                               child: Image.asset(
                                 widget.banner!,
                                 fit: BoxFit.cover,
+                                cacheWidth: 960,
                               ),
                             ),
                             Positioned(
@@ -112,6 +113,7 @@ class _ProjectCardState extends State<ProjectCard> {
                                     child: Image.asset(
                                       widget.projectIcon!,
                                       fit: BoxFit.contain,
+                                      cacheWidth: 120,
                                     ),
                                   ),
                                 ),
@@ -257,6 +259,7 @@ class _ProjectCardState extends State<ProjectCard> {
                                         child: Image.asset(
                                           widget.banner!,
                                           fit: BoxFit.cover,
+                                          cacheWidth: 640,
                                         ),
                                       ),
                                       Container(
@@ -321,6 +324,7 @@ class _ProjectCardState extends State<ProjectCard> {
                                   child: Image.asset(
                                     widget.projectIcon!,
                                     fit: BoxFit.contain,
+                                    cacheWidth: 120,
                                   ),
                                 ),
                               ),

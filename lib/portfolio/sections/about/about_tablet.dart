@@ -52,6 +52,7 @@ class AboutTab extends StatelessWidget {
                         StaticUtils.coloredPhoto,
                         fit: BoxFit.cover,
                         alignment: Alignment.topCenter,
+                        cacheWidth: 300,
                       ),
                     ),
                   ),

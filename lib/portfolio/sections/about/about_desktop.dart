@@ -80,6 +80,7 @@ class AboutDesktop extends StatelessWidget {
                                       StaticUtils.coloredPhoto,
                                       fit: BoxFit.cover,
                                       alignment: Alignment.topCenter,
+                                      cacheWidth: 320,
                                     ),
                                   ),
                                 ),

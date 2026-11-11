@@ -115,6 +115,7 @@ class _ServiceCardState extends State<ServiceCard> {
                       widget.serviceIcon,
                       height: 36,
                       width: 36,
+                      cacheWidth: 96,
                     ),
                   ),
                   const SizedBox(height: AppSpacing.md),

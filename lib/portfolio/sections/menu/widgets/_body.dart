@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/provider/scroll_provider.dart';
 import 'package:portpolio/portfolio/utils/utils.dart';
@@ -15,16 +13,18 @@ class Body extends StatelessWidget {
     final scrollProvider = Provider.of<ScrollProvider>(context, listen: false);
 
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       controller: scrollProvider.controller,
       child: Column(
         children: BodyUtils.views
             .asMap()
             .entries
             .map(
-              (e) => Container(
-                key: scrollProvider.sectionKeys[e.key],
-                child: e.value,
+              (e) => RepaintBoundary(
+                child: KeyedSubtree(
+                  key: scrollProvider.sectionKeys[e.key],
+                  child: e.value,
+                ),
               ),
             )
             .toList(),

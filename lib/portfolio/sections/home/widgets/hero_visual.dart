@@ -2,7 +2,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/animations/entrance_fader.dart';
 import 'package:portpolio/portfolio/design_system/design_system.dart';
+import 'package:portpolio/portfolio/provider/scroll_provider.dart';
 import 'package:portpolio/portfolio/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 /// Interactive futuristic developer centerpiece with 3D pointer tilt,
 /// concentric orbital tech rings, framed portrait, and floating HUD telemetry.
@@ -24,6 +26,7 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
     with SingleTickerProviderStateMixin {
   late final AnimationController _orbitController;
   final ValueNotifier<Offset> _normalizedTilt = ValueNotifier<Offset>(Offset.zero);
+  ValueNotifier<bool>? _heroVisibleNotifier;
   bool _isHovered = false;
 
   @override
@@ -38,7 +41,24 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (MediaQuery.disableAnimationsOf(context)) {
+    ValueNotifier<bool>? notifier;
+    try {
+      notifier = Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
+    } on ProviderNotFoundException {
+      notifier = null;
+    }
+    if (notifier != _heroVisibleNotifier) {
+      _heroVisibleNotifier?.removeListener(_syncPlayback);
+      _heroVisibleNotifier = notifier;
+      _heroVisibleNotifier?.addListener(_syncPlayback);
+    }
+    _syncPlayback();
+  }
+
+  void _syncPlayback() {
+    if (!mounted) return;
+    final visible = _heroVisibleNotifier?.value ?? true;
+    if (MediaQuery.disableAnimationsOf(context) || !visible) {
       _orbitController.stop();
     } else if (!_orbitController.isAnimating) {
       _orbitController.repeat();
@@ -47,6 +67,7 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
 
   @override
   void dispose() {
+    _heroVisibleNotifier?.removeListener(_syncPlayback);
     _normalizedTilt.dispose();
     _orbitController.dispose();
     super.dispose();
@@ -174,6 +195,7 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
                             StaticUtils.profileCasual,
                             fit: BoxFit.cover,
                             alignment: Alignment.topCenter,
+                            cacheWidth: 720,
                             semanticLabel:
                                 'Portrait of Md. Kabir Hossain, Mobile Architect & Senior Flutter Developer',
                           ),
@@ -380,6 +402,7 @@ class _PulsingBeacon extends StatefulWidget {
 class _PulsingBeaconState extends State<_PulsingBeacon>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
+  ValueNotifier<bool>? _heroVisibleNotifier;
 
   @override
   void initState() {
@@ -393,7 +416,24 @@ class _PulsingBeaconState extends State<_PulsingBeacon>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (MediaQuery.disableAnimationsOf(context)) {
+    ValueNotifier<bool>? notifier;
+    try {
+      notifier = Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
+    } on ProviderNotFoundException {
+      notifier = null;
+    }
+    if (notifier != _heroVisibleNotifier) {
+      _heroVisibleNotifier?.removeListener(_syncPlayback);
+      _heroVisibleNotifier = notifier;
+      _heroVisibleNotifier?.addListener(_syncPlayback);
+    }
+    _syncPlayback();
+  }
+
+  void _syncPlayback() {
+    if (!mounted) return;
+    final visible = _heroVisibleNotifier?.value ?? true;
+    if (MediaQuery.disableAnimationsOf(context) || !visible) {
       _controller.stop();
     } else if (!_controller.isAnimating) {
       _controller.repeat(reverse: true);
@@ -402,6 +442,7 @@ class _PulsingBeaconState extends State<_PulsingBeacon>
 
   @override
   void dispose() {
+    _heroVisibleNotifier?.removeListener(_syncPlayback);
     _controller.dispose();
     super.dispose();
   }

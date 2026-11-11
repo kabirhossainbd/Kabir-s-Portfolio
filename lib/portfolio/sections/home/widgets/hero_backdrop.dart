@@ -2,6 +2,8 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/design_system/design_system.dart';
+import 'package:portpolio/portfolio/provider/scroll_provider.dart';
+import 'package:provider/provider.dart';
 
 /// Non-blocking animated gradient, architectural grid, and subtle particle
 /// backdrop for the Hero section. Repaints via [CustomPaint.repaint] with zero
@@ -24,6 +26,7 @@ class _HeroFuturisticBackdropState extends State<HeroFuturisticBackdrop>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final List<_Particle> _particles;
+  ValueNotifier<bool>? _heroVisibleNotifier;
 
   @override
   void initState() {
@@ -33,14 +36,14 @@ class _HeroFuturisticBackdropState extends State<HeroFuturisticBackdrop>
       duration: const Duration(seconds: 18),
     );
     final rng = math.Random(42);
-    _particles = List.generate(26, (index) {
+    _particles = List.generate(14, (index) {
       return _Particle(
         x: rng.nextDouble(),
         y: rng.nextDouble(),
-        radius: 1.2 + rng.nextDouble() * 2.2,
+        radius: 1.3 + rng.nextDouble() * 2.0,
         speedX: (rng.nextDouble() - 0.5) * 0.06,
         speedY: -0.02 - rng.nextDouble() * 0.04,
-        alpha: 0.20 + rng.nextDouble() * 0.45,
+        alpha: 0.22 + rng.nextDouble() * 0.42,
         isAccent: index % 3 == 0,
       );
     });
@@ -49,7 +52,25 @@ class _HeroFuturisticBackdropState extends State<HeroFuturisticBackdrop>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (MediaQuery.disableAnimationsOf(context)) {
+    ValueNotifier<bool>? notifier;
+    try {
+      notifier = Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
+    } on ProviderNotFoundException {
+      notifier = null;
+    }
+    if (notifier != _heroVisibleNotifier) {
+      _heroVisibleNotifier?.removeListener(_syncPlayback);
+      _heroVisibleNotifier = notifier;
+      _heroVisibleNotifier?.addListener(_syncPlayback);
+    }
+    _syncPlayback();
+  }
+
+  void _syncPlayback() {
+    if (!mounted) return;
+    final disable = MediaQuery.disableAnimationsOf(context);
+    final visible = _heroVisibleNotifier?.value ?? true;
+    if (disable || !visible) {
       _controller.stop();
     } else if (!_controller.isAnimating) {
       _controller.repeat();
@@ -58,6 +79,7 @@ class _HeroFuturisticBackdropState extends State<HeroFuturisticBackdrop>
 
   @override
   void dispose() {
+    _heroVisibleNotifier?.removeListener(_syncPlayback);
     _controller.dispose();
     super.dispose();
   }
@@ -208,50 +230,34 @@ class _HeroBackdropPainter extends CustomPainter {
       );
     }
 
-    // 2. Subtle architectural grid
-    const gridSpacing = 48.0;
+    // 2. Subtle architectural grid via single Path (faster GPU draw)
+    const gridSpacing = 56.0;
     final gridPaint = Paint()
-      ..color = (isDark ? Colors.white : primaryColor).withValues(alpha: isDark ? 0.038 : 0.045)
+      ..color = (isDark ? Colors.white : primaryColor).withValues(alpha: isDark ? 0.036 : 0.045)
+      ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
+    final gridPath = Path();
     for (double x = 0; x < size.width; x += gridSpacing) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), gridPaint);
+      gridPath.moveTo(x, 0);
+      gridPath.lineTo(x, size.height);
     }
     for (double y = 0; y < size.height; y += gridSpacing) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), gridPaint);
+      gridPath.moveTo(0, y);
+      gridPath.lineTo(size.width, y);
     }
+    canvas.drawPath(gridPath, gridPaint);
 
-    final dotPaint = Paint()
-      ..color = primaryColor.withValues(alpha: isDark ? 0.14 : 0.12);
-    for (double x = 0; x < size.width; x += gridSpacing * 2) {
-      for (double y = 0; y < size.height; y += gridSpacing * 2) {
-        canvas.drawCircle(Offset(x, y), 1.3, dotPaint);
-      }
-    }
-
-    // 3. Subtle floating particles & faint constellation lines
-    final resolvedPoints = <Offset>[];
+    // 3. Subtle floating particles
+    final particlePaint = Paint();
     for (final p in particles) {
       final px = ((p.x + p.speedX * progress * 4) % 1.0) * size.width;
       final py = ((p.y + p.speedY * progress * 4) % 1.0) * size.height;
       final point = Offset(px < 0 ? px + size.width : px, py < 0 ? py + size.height : py);
-      resolvedPoints.add(point);
 
-      final color = (p.isAccent ? accentColor : primaryColor)
+      particlePaint.color = (p.isAccent ? accentColor : primaryColor)
           .withValues(alpha: isDark ? p.alpha : p.alpha * 0.65);
-      canvas.drawCircle(point, p.radius, Paint()..color = color);
-    }
-
-    final linkPaint = Paint()..strokeWidth = 0.7;
-    for (int i = 0; i < resolvedPoints.length; i++) {
-      for (int j = i + 1; j < resolvedPoints.length; j++) {
-        final dist = (resolvedPoints[i] - resolvedPoints[j]).distance;
-        if (dist < 115) {
-          final opacity = (1.0 - (dist / 115)) * (isDark ? 0.12 : 0.08);
-          linkPaint.color = primaryColor.withValues(alpha: opacity);
-          canvas.drawLine(resolvedPoints[i], resolvedPoints[j], linkPaint);
-        }
-      }
+      canvas.drawCircle(point, p.radius, particlePaint);
     }
 
     // Soft bottom edge blend into next section
