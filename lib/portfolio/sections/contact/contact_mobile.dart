@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/animations/scroll_reveal.dart';
-import 'package:portpolio/portfolio/configs/app_theme.dart';
-import 'package:portpolio/portfolio/configs/space.dart';
 import 'package:portpolio/portfolio/constants.dart';
-import 'package:portpolio/portfolio/provider/app_provider.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 import 'package:portpolio/portfolio/utils/contact_utils.dart';
-import 'package:portpolio/portfolio/widget/custom_text_heading.dart';
-import 'package:provider/provider.dart';
 
 class ContactMobileTab extends StatefulWidget {
   const ContactMobileTab({Key? key}) : super(key: key);
@@ -43,7 +39,8 @@ class _ContactMobileTabState extends State<ContactMobileTab> {
     }
 
     final bodyText = "Hi Kabir,\n\nName: $name\n\nMessage:\n$message";
-    final url = "mailto:kabirhossenbd1971@gmail.com?subject=${Uri.encodeComponent("Portfolio Inquiry from $name")}&body=${Uri.encodeComponent(bodyText)}";
+    final url =
+        "mailto:kabirhossenbd1971@gmail.com?subject=${Uri.encodeComponent("Portfolio Inquiry from $name")}&body=${Uri.encodeComponent(bodyText)}";
     openURL(url);
   }
 
@@ -70,59 +67,43 @@ class _ContactMobileTabState extends State<ContactMobileTab> {
 
   @override
   Widget build(BuildContext context) {
-    final appProvider = Provider.of<AppProvider>(context);
-    final isDark = appProvider.isDark;
+    final colors = context.colors;
+    final typography = context.typography;
 
     return Container(
-      padding: Space.all(1, 1),
+      padding: AppSpacing.sectionPadding(context),
       child: Column(
         children: [
-          const CustomSectionHeading(
-            text: '\nGet In Touch',
+          const SectionHeader(
+            eyebrow: 'GET IN TOUCH',
+            title: "LET'S BUILD TOGETHER",
+            subtitle: "Reach out directly via email, WhatsApp, or quick form.",
           ),
-          Text(
-            "Let's work together! Reach out directly below:",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
-              fontSize: 13,
-            ),
-          ),
-          Space.y1!,
+          const SizedBox(height: AppSpacing.lg),
 
           // Touchpoint cards
           ScrollReveal(
             offset: const Offset(0, 20),
             duration: const Duration(milliseconds: 480),
             child: Column(
-              children: ContactUtils.titles.asMap().entries.map((e) {
-              return Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                child: InkWell(
-                  onTap: () => openURL(ContactUtils.links[e.key]),
-                  borderRadius: BorderRadius.circular(14),
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF1E293B) : Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                        color: isDark
-                            ? Colors.white.withValues(alpha: 0.1)
-                            : Colors.black.withValues(alpha: 0.08),
-                      ),
-                    ),
+              children: ContactUtils.items.map((item) {
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  child: FuturisticGlassCard(
+                    padding: const EdgeInsets.all(14),
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () => openURL(item.link),
                     child: Row(
                       children: [
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: AppTheme.c!.primary!.withValues(alpha: 0.15),
+                            color: colors.primary.withValues(alpha: 0.15),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
-                            ContactUtils.contactIcon[e.key],
-                            color: AppTheme.c!.primary,
+                            item.icon,
+                            color: colors.primary,
                             size: 20,
                           ),
                         ),
@@ -132,18 +113,18 @@ class _ContactMobileTabState extends State<ContactMobileTab> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                ContactUtils.titles[e.key],
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
+                                item.title.toUpperCase(),
+                                style: typography.monoBadge.copyWith(
+                                  fontSize: 10,
+                                  letterSpacing: 0.8,
+                                  color: colors.textMuted,
                                 ),
                               ),
                               Text(
-                                ContactUtils.details[e.key],
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                  color: isDark ? Colors.white : const Color(0xFF0F172A),
+                                item.detail,
+                                style: typography.titleMedium.copyWith(
+                                  fontSize: 13.5,
+                                  color: colors.textPrimary,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -154,110 +135,107 @@ class _ContactMobileTabState extends State<ContactMobileTab> {
                       ],
                     ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              }).toList(),
             ),
           ),
-          Space.y1!,
+          const SizedBox(height: AppSpacing.md),
 
           // Form Card
           ScrollReveal(
             offset: const Offset(0, 22),
             delay: const Duration(milliseconds: 70),
             duration: const Duration(milliseconds: 500),
-            child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF1E293B) : Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: isDark
-                    ? Colors.white.withValues(alpha: 0.1)
-                    : Colors.black.withValues(alpha: 0.08),
+            child: FuturisticGlassCard(
+              padding: const EdgeInsets.all(18),
+              borderRadius: BorderRadius.circular(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Send Message',
+                    style: typography.titleMedium.copyWith(
+                      fontSize: 17,
+                      color: colors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _nameController,
+                    style: typography.bodyMedium.copyWith(
+                      color: colors.textPrimary,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Your Name',
+                      hintStyle: typography.bodyMedium.copyWith(
+                        color: colors.textMuted,
+                      ),
+                      filled: true,
+                      fillColor: colors.background.withValues(alpha: 0.72),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: colors.border),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: _messageController,
+                    maxLines: 3,
+                    style: typography.bodyMedium.copyWith(
+                      color: colors.textPrimary,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Message...',
+                      hintStyle: typography.bodyMedium.copyWith(
+                        color: colors.textMuted,
+                      ),
+                      filled: true,
+                      fillColor: colors.background.withValues(alpha: 0.72),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: colors.border),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: FuturisticButton(
+                          label: 'Email',
+                          icon: Icons.email_rounded,
+                          borderRadius: 12,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          onPressed: _sendEmail,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: _sendWhatsApp,
+                          icon: const Icon(Icons.chat_rounded, size: 15),
+                          label: Text(
+                            'WhatsApp',
+                            style: typography.labelButton.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF25D366),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Send Message 🚀',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : const Color(0xFF0F172A),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _nameController,
-                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
-                  decoration: InputDecoration(
-                    hintText: 'Your Name',
-                    hintStyle: TextStyle(color: isDark ? Colors.white38 : Colors.black38),
-                    filled: true,
-                    fillColor: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: _messageController,
-                  maxLines: 3,
-                  style: TextStyle(color: isDark ? Colors.white : Colors.black),
-                  decoration: InputDecoration(
-                    hintText: 'Message...',
-                    hintStyle: TextStyle(color: isDark ? Colors.white38 : Colors.black38),
-                    filled: true,
-                    fillColor: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: _sendEmail,
-                        icon: const Icon(Icons.email_rounded, size: 15),
-                        label: const Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme.c!.primary,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: _sendWhatsApp,
-                        icon: const Icon(Icons.chat_rounded, size: 15),
-                        label: const Text('WhatsApp', style: TextStyle(fontWeight: FontWeight.bold)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF25D366),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
           ),
         ],
       ),

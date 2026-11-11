@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:portpolio/portfolio/configs/app_theme.dart';
 import 'package:portpolio/portfolio/constants.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 import 'package:portpolio/portfolio/provider/app_provider.dart';
 import 'package:portpolio/portfolio/provider/scroll_provider.dart';
 import 'package:portpolio/portfolio/utils/navbar_utils.dart';
@@ -19,11 +19,11 @@ class MobileDrawer extends StatelessWidget {
     final isDark = appProvider.isDark;
 
     final itemGradients = [
-      [const Color(0xFF00D2FF), const Color(0xFF0066FF)], // Home
-      [const Color(0xFFA855F7), const Color(0xFF6366F1)], // About Me
-      [const Color(0xFF10B981), const Color(0xFF059669)], // Services
-      [const Color(0xFFF59E0B), const Color(0xFFD97706)], // Projects
-      [const Color(0xFFEC4899), const Color(0xFFE11D48)], // Contact
+      [AppColors.electricBlue, AppColors.cyanHighlight], // Home
+      [AppColors.purpleAccent, AppColors.electricBlue], // About Me
+      [AppColors.successEmerald, AppColors.cyanHighlight], // Services
+      [AppColors.electricBlue, AppColors.purpleAccent], // Projects
+      [AppColors.purpleAccent, const Color(0xFFEC4899)], // Contact
     ];
 
     return Drawer(
@@ -31,11 +31,9 @@ class MobileDrawer extends StatelessWidget {
       elevation: 0,
       child: ClipRRect(
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
           child: Container(
-            color: isDark
-                ? const Color(0xFF0B0F19).withValues(alpha: 0.92)
-                : Colors.white.withValues(alpha: 0.95),
+            color: context.colors.background.withValues(alpha: 0.94),
             padding: const EdgeInsets.fromLTRB(20, 50, 20, 24),
             child: SafeArea(
               child: Column(
@@ -87,22 +85,22 @@ class MobileDrawer extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: isDark
                                     ? const Color(0xFFFBBF24).withValues(alpha: 0.15)
-                                    : AppTheme.c!.primary!.withValues(alpha: 0.15),
+                                    : context.colors.primary.withValues(alpha: 0.15),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
                                 isDark ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
-                                color: isDark ? const Color(0xFFFBBF24) : AppTheme.c!.primary,
+                                color: isDark
+                                    ? const Color(0xFFFBBF24)
+                                    : context.colors.primary,
                                 size: 18,
                               ),
                             ),
                             const SizedBox(width: 12),
                             Text(
                               isDark ? "Dark Theme" : "Light Theme",
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700,
-                                color: isDark ? Colors.white : const Color(0xFF0F172A),
+                              style: context.typography.labelButton.copyWith(
+                                color: context.colors.textPrimary,
                               ),
                             ),
                           ],
@@ -112,8 +110,9 @@ class MobileDrawer extends StatelessWidget {
                           onChanged: (value) {
                             appProvider.setTheme(value ? ThemeMode.dark : ThemeMode.light);
                           },
-                          activeThumbColor: const Color(0xFF00D2FF),
-                          activeTrackColor: const Color(0xFF00D2FF).withValues(alpha: 0.3),
+                          activeThumbColor: context.colors.primary,
+                          activeTrackColor:
+                              context.colors.primary.withValues(alpha: 0.35),
                         ),
                       ],
                     ),
@@ -142,44 +141,13 @@ class MobileDrawer extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   // Resume Download Button
-                  Container(
+                  SizedBox(
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color(0xFF0066FF),
-                          Color(0xFF00D2FF),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF0066FF).withValues(alpha: 0.35),
-                          blurRadius: 16,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                    ),
-                    child: ElevatedButton.icon(
+                    child: FuturisticButton(
+                      label: 'DOWNLOAD RESUME',
+                      icon: Icons.download_rounded,
+                      borderRadius: 16,
                       onPressed: () => openURL(StaticUtils.resume),
-                      icon: const Icon(Icons.download_rounded, color: Colors.white, size: 18),
-                      label: const Text(
-                        'DOWNLOAD RESUME',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                          letterSpacing: 1.1,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
                     ),
                   ),
                 ],
