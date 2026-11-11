@@ -32,7 +32,7 @@ class StaticUtils {
   static const List<String> socialLinks = [
     "https://www.linkedin.com/in/mdkabirhossainbd/",
     "https://github.com/kabirhossainbd",
-    "https://wa.me/+8801787816047",
+    "https://wa.me/8801787816047",
     "mailto:kabirhossenbd1971@gmail.com",
   ];
 

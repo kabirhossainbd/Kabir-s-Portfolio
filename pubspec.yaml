@@ -16,42 +16,12 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
-  get: ^4.6.5
-  flutter_feather_icons: ^2.0.0+1
-  flutter_screenutil: ^5.8.4
   animated_text_kit: ^4.2.2
   shared_preferences: ^2.1.2
-  google_fonts: ^5.1.0
   url_launcher: ^6.1.11
-  flutter_inappwebview: ^5.7.2+3
-  html: ^0.15.4
-  animated_dashed_circle: ^0.0.4
-  percent_indicator: ^4.2.3
-  firebase_core: ^2.15.0
-  overlapped_carousel: ^1.0.2
-
-
-  # github
-  github: ^9.2.0
-
-  # web related
-  flutter_html: any
-  url_strategy: ^0.2.0
-  universal_html: ^2.0.4
-
-  # http
-  http: ^1.0.0
-
-  # utils
-  mailto: ^2.0.0
   flip_card: ^0.6.0
   carousel_slider: ^5.0.0
-
-
-  # state management
   provider: ^6.0.1
-  rive: ^0.14.11
-  iconsax: ^0.0.8
 
 
 

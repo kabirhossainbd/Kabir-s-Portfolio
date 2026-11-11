@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class SmartIcon extends StatefulWidget {
   final IconData? iconData;
@@ -78,7 +77,7 @@ class _SmartIconState extends State<SmartIcon> {
               ],
             ),
             child: Icon(
-              widget.iconData ?? Iconsax.code,
+              widget.iconData ?? Icons.code_rounded,
               size: widget.size,
               color: primaryColor,
             ),

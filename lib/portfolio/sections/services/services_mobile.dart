@@ -5,35 +5,42 @@ class ServiceMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CustomSectionHeading(
-          text: '\nWhat do I do?',
-        ),
-        
-        Space.y!,
-        CarouselSlider.builder(
-          itemCount: ServicesUtils.servicesTitles.length,
-          itemBuilder: (BuildContext context, int itemIndex, int i) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: ServiceCard(
-              serviceIcon: ServicesUtils.servicesIcons[i],
-              serviceTitle: ServicesUtils.servicesTitles[i],
-              serviceDescription: ServicesUtils.servicesDescription[i],
+    return Container(
+      padding: AppSpacing.sectionPadding(context),
+      child: Column(
+        children: [
+          const SectionHeader(
+            eyebrow: 'CAPABILITIES',
+            title: 'WHAT I BUILD',
+            subtitle: 'End-to-end mobile architecture & UI engineering.',
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          CarouselSlider.builder(
+            itemCount: ServicesUtils.services.length,
+            itemBuilder: (BuildContext context, int itemIndex, int i) {
+              final service = ServicesUtils.services[i];
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: ServiceCard(
+                  serviceIcon: service.iconAsset,
+                  serviceTitle: service.title,
+                  serviceDescription: service.description,
+                ),
+              );
+            },
+            options: CarouselOptions(
+              viewportFraction: 0.72,
+              height: 290,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 5),
+              enlargeCenterPage: true,
+              autoPlayCurve: Curves.fastOutSlowIn,
+              autoPlayAnimationDuration: const Duration(milliseconds: 800),
+              enableInfiniteScroll: false,
             ),
           ),
-          options: CarouselOptions(
-            viewportFraction: 0.65,
-            height: 300,
-            autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 5),
-            enlargeCenterPage: true,
-            autoPlayCurve: Curves.fastOutSlowIn,
-            autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            enableInfiniteScroll: false,
-          ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }

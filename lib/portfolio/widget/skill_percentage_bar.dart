@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:portpolio/portfolio/animations/entrance_fader.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 
-class SkillPercentageBar extends StatelessWidget {
+class SkillPercentageBar extends StatefulWidget {
   final String title;
   final String? subtitle;
   final double percentage; // e.g. 0.90 for 90%
@@ -15,8 +18,85 @@ class SkillPercentageBar extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<SkillPercentageBar> createState() => _SkillPercentageBarState();
+}
+
+class _SkillPercentageBarState extends State<SkillPercentageBar>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _fillAnim;
+  ScrollPosition? _scrollPosition;
+  Timer? _fallbackTimer;
+  bool _hasTriggered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 950),
+    );
+    _fillAnim = Tween<double>(begin: 0.0, end: widget.percentage).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    RevealScope.isRevealedOf(context);
+    if (MediaQuery.disableAnimationsOf(context)) {
+      _hasTriggered = true;
+      _controller.value = 1.0;
+      return;
+    }
+    _attachScrollListener();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkVisibility());
+  }
+
+  void _attachScrollListener() {
+    if (_hasTriggered) return;
+    final newPosition = Scrollable.maybeOf(context)?.position;
+    if (newPosition == _scrollPosition) return;
+    _scrollPosition?.removeListener(_checkVisibility);
+    _scrollPosition = newPosition;
+    _scrollPosition?.addListener(_checkVisibility);
+  }
+
+  void _checkVisibility() {
+    if (!mounted || _hasTriggered) return;
+    if (!RevealScope.isRevealedOf(context)) return;
+
+    final renderObject = context.findRenderObject();
+    if (renderObject is! RenderBox ||
+        !renderObject.hasSize ||
+        !renderObject.attached) {
+      return;
+    }
+
+    final viewportHeight = MediaQuery.sizeOf(context).height;
+    final topY = renderObject.localToGlobal(Offset.zero).dy;
+    final bottomY = topY + renderObject.size.height;
+    if (_scrollPosition == null || (topY <= viewportHeight * 0.95 && bottomY >= 0)) {
+      _hasTriggered = true;
+      _scrollPosition?.removeListener(_checkVisibility);
+      _controller.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollPosition?.removeListener(_checkVisibility);
+    _fallbackTimer?.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final int percentInt = (percentage * 100).round();
+    final colors = context.colors;
+    final typography = context.typography;
+    final int percentInt = (widget.percentage * 100).round();
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -31,24 +111,18 @@ class SkillPercentageBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
+                      widget.title,
+                      style: typography.titleMedium.copyWith(
                         fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : const Color(0xFF0F172A),
+                        color: colors.textPrimary,
                       ),
                     ),
-                    if (subtitle != null && subtitle!.isNotEmpty) ...[
+                    if (widget.subtitle != null && widget.subtitle!.isNotEmpty) ...[
                       const SizedBox(height: 2),
                       Text(
-                        subtitle!,
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 11,
-                          color: isDark
-                              ? Colors.white.withValues(alpha: 0.6)
-                              : const Color(0xFF64748B),
+                        widget.subtitle!,
+                        style: typography.bodySmall.copyWith(
+                          color: colors.textSecondary,
                         ),
                       ),
                     ],
@@ -59,80 +133,52 @@ class SkillPercentageBar extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: isDark
-                        ? [const Color(0xFF00D2FF), const Color(0xFFA855F7)]
-                        : [const Color(0xFF0066FF), const Color(0xFF8B5CF6)],
-                  ),
+                  gradient: AppGradients.brandHorizontal,
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: (isDark ? const Color(0xFF00D2FF) : const Color(0xFF0066FF))
-                          .withValues(alpha: 0.3),
-                      blurRadius: 8,
+                      color: colors.primary.withValues(alpha: 0.32),
+                      blurRadius: 10,
                       offset: const Offset(0, 2),
                     ),
                   ],
                 ),
                 child: Text(
                   '$percentInt%',
-                  style: const TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
+                  style: typography.monoBadge.copyWith(
+                    fontSize: 11.5,
                     color: Colors.white,
+                    letterSpacing: 0.4,
                   ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          // Animated Bar Track
           Container(
-            height: 10,
+            height: 9,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.08)
-                  : Colors.black.withValues(alpha: 0.06),
+              color: colors.textPrimary.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(6),
               border: Border.all(
-                color: isDark
-                    ? Colors.white.withValues(alpha: 0.05)
-                    : Colors.black.withValues(alpha: 0.04),
+                color: colors.border,
               ),
             ),
-            child: TweenAnimationBuilder<double>(
-              duration: const Duration(milliseconds: 1200),
-              curve: Curves.easeOutCubic,
-              tween: Tween<double>(begin: 0.0, end: percentage),
-              builder: (context, value, child) {
+            child: AnimatedBuilder(
+              animation: _fillAnim,
+              builder: (context, _) {
                 return FractionallySizedBox(
                   alignment: Alignment.centerLeft,
-                  widthFactor: value,
+                  widthFactor: _fillAnim.value.clamp(0.0, 1.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: isDark
-                            ? [
-                                const Color(0xFF00D2FF),
-                                const Color(0xFF3B82F6),
-                                const Color(0xFFA855F7),
-                              ]
-                            : [
-                                const Color(0xFF0066FF),
-                                const Color(0xFF2563EB),
-                                const Color(0xFF8B5CF6),
-                              ],
-                      ),
+                      gradient: AppGradients.brandTriTone,
                       borderRadius: BorderRadius.circular(6),
                       boxShadow: [
                         BoxShadow(
-                          color: (isDark
-                                  ? const Color(0xFF00D2FF)
-                                  : const Color(0xFF0066FF))
-                              .withValues(alpha: 0.4),
-                          blurRadius: 6,
+                          color: colors.primary.withValues(alpha: 0.4),
+                          blurRadius: 8,
                           offset: const Offset(0, 1),
                         ),
                       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 import 'package:portpolio/portfolio/utils/utils.dart';
 
 class NavBarLogo extends StatelessWidget {
@@ -6,7 +7,8 @@ class NavBarLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final colors = context.colors;
+    final typography = context.typography;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -15,17 +17,12 @@ class NavBarLogo extends StatelessWidget {
           padding: const EdgeInsets.all(2),
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF00D2FF),
-                Color(0xFFA855F7),
-              ],
-            ),
+            gradient: AppGradients.brandPrimary,
           ),
-          child: const CircleAvatar(
+          child: CircleAvatar(
             radius: 18,
-            backgroundColor: Color(0xFF070A12),
-            backgroundImage: AssetImage(StaticUtils.profileCasual),
+            backgroundColor: colors.background,
+            backgroundImage: const AssetImage(StaticUtils.profileCasual),
           ),
         ),
         const SizedBox(width: 10),
@@ -34,20 +31,18 @@ class NavBarLogo extends StatelessWidget {
             children: [
               TextSpan(
                 text: "Kabir",
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
+                style: typography.headingMedium.copyWith(
                   fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                  color: isDark ? Colors.white : const Color(0xFF0F172A),
+                  fontWeight: FontWeight.w800,
+                  color: colors.textPrimary,
                 ),
               ),
-              const TextSpan(
+              TextSpan(
                 text: ".dev",
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
+                style: typography.headingMedium.copyWith(
                   fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                  color: Color(0xFF0066FF),
+                  fontWeight: FontWeight.w800,
+                  color: colors.primary,
                 ),
               ),
             ],
@@ -57,4 +52,3 @@ class NavBarLogo extends StatelessWidget {
     );
   }
 }
-

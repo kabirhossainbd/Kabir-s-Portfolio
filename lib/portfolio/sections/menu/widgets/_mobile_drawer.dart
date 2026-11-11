@@ -15,7 +15,7 @@ class MobileDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context);
-    final scrollProvider = Provider.of<ScrollProvider>(context);
+    final scrollProvider = Provider.of<ScrollProvider>(context, listen: false);
     final isDark = appProvider.isDark;
 
     final itemGradients = [

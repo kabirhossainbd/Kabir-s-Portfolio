@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portpolio/portfolio/animations/scroll_reveal.dart';
 import 'package:portpolio/portfolio/configs/app_theme.dart';
 import 'package:portpolio/portfolio/configs/space.dart';
 import 'package:portpolio/portfolio/constants.dart';
@@ -17,6 +18,13 @@ class ContactMobileTab extends StatefulWidget {
 class _ContactMobileTabState extends State<ContactMobileTab> {
   final _nameController = TextEditingController();
   final _messageController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
 
   void _sendEmail() {
     final name = _nameController.text.trim();
@@ -83,8 +91,11 @@ class _ContactMobileTabState extends State<ContactMobileTab> {
           Space.y1!,
 
           // Touchpoint cards
-          Column(
-            children: ContactUtils.titles.asMap().entries.map((e) {
+          ScrollReveal(
+            offset: const Offset(0, 20),
+            duration: const Duration(milliseconds: 480),
+            child: Column(
+              children: ContactUtils.titles.asMap().entries.map((e) {
               return Container(
                 margin: const EdgeInsets.only(bottom: 12),
                 child: InkWell(
@@ -146,11 +157,16 @@ class _ContactMobileTabState extends State<ContactMobileTab> {
                 ),
               );
             }).toList(),
+            ),
           ),
           Space.y1!,
 
           // Form Card
-          Container(
+          ScrollReveal(
+            offset: const Offset(0, 22),
+            delay: const Duration(milliseconds: 70),
+            duration: const Duration(milliseconds: 500),
+            child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: isDark ? const Color(0xFF1E293B) : Colors.white,
@@ -241,6 +257,7 @@ class _ContactMobileTabState extends State<ContactMobileTab> {
                 ),
               ],
             ),
+          ),
           ),
         ],
       ),

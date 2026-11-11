@@ -70,6 +70,9 @@ class _MaterialChildState extends State<MaterialChild> {
       routes: {
         "/": (context) => const MainPage(),
       },
+      onUnknownRoute: (_) => MaterialPageRoute(
+        builder: (_) => const MainPage(),
+      ),
     );
   }
 }

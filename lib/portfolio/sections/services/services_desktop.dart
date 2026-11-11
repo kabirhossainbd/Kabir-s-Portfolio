@@ -12,38 +12,47 @@ class ServiceDesktopState extends State<ServiceDesktop> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
     return Container(
-      margin: const EdgeInsets.only(top: 60, bottom: 40),
-      padding: Space.hf(4),
-      child: Column(
-        children: [
-          const CustomSectionHeading(
-            text: '\nWhat do I do?',
-          ),
-         
-          Space.y!,
-          Wrap(
-            spacing: width * 0.05,
-            runSpacing: height * 0.05,
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: ServicesUtils.servicesIcons
-                .asMap()
-                .entries
-                .map(
-                  (e) => ServiceCard(
-                    serviceIcon: ServicesUtils.servicesIcons[e.key],
-                    serviceTitle: ServicesUtils.servicesTitles[e.key],
-                    serviceDescription:
-                        ServicesUtils.servicesDescription[e.key],
-                  ),
-                )
-                .toList(),
-          )
-        ],
+      margin: const EdgeInsets.only(top: 40, bottom: 40),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.horizontalPagePadding(context),
+      ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
+        child: Column(
+          children: [
+            const SectionHeader(
+              eyebrow: 'CAPABILITIES',
+              title: 'WHAT I BUILD',
+              subtitle:
+                  'End-to-end mobile architecture, clean UI engineering, and scalable delivery.',
+            ),
+            const SizedBox(height: AppSpacing.xl),
+            Wrap(
+              spacing: 24,
+              runSpacing: 24,
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: ServicesUtils.services
+                  .asMap()
+                  .entries
+                  .map(
+                    (e) => ScrollReveal(
+                      offset: const Offset(0, 24),
+                      delay: Duration(milliseconds: (e.key % 3) * 75),
+                      duration: const Duration(milliseconds: 480),
+                      beginScale: 0.96,
+                      child: ServiceCard(
+                        serviceIcon: e.value.iconAsset,
+                        serviceTitle: e.value.title,
+                        serviceDescription: e.value.description,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
+        ),
       ),
     );
   }

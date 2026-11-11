@@ -1,9 +1,16 @@
 import 'package:url_launcher/url_launcher.dart';
 
 // URL Launcher
-void openURL(String url) => launchUrl(
-      Uri.parse(url),
-    );
+Future<void> openURL(String url) async {
+  final uri = Uri.tryParse(url);
+  if (uri == null) return;
+  final isWebHttp = uri.scheme == 'http' || uri.scheme == 'https';
+  await launchUrl(
+    uri,
+    mode: LaunchMode.platformDefault,
+    webOnlyWindowName: isWebHttp ? '_blank' : '_self',
+  );
+}
 
 final kTools = [
   "Flutter & Dart",

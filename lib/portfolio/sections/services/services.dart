@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:portpolio/portfolio/configs/space.dart';
+import 'package:portpolio/portfolio/animations/scroll_reveal.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 import 'package:portpolio/portfolio/responsive/responsive.dart';
 import 'package:portpolio/portfolio/sections/services/widgets/_services_card.dart';
 import 'package:portpolio/portfolio/utils/services_utils.dart';
-import 'package:portpolio/portfolio/widget/custom_text_heading.dart';
 
 part 'services_desktop.dart';
 part 'services_mobile.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:portpolio/portfolio/constants.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 import 'package:portpolio/portfolio/provider/app_provider.dart';
+import 'package:portpolio/portfolio/responsive/responsive.dart';
 import 'package:portpolio/portfolio/utils/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -14,10 +15,10 @@ class SocialLinks extends StatelessWidget {
     final isDark = appProvider.isDark;
 
     final icons = [
-      Iconsax.link_2,
-      Iconsax.code,
-      Iconsax.messages_2,
-      Iconsax.sms,
+      Icons.link_rounded,
+      Icons.code_rounded,
+      Icons.chat_bubble_outline_rounded,
+      Icons.mail_outline_rounded,
     ];
 
     final brandColors = [
@@ -27,9 +28,11 @@ class SocialLinks extends StatelessWidget {
       const Color(0xFFEA4335), // Email Red
     ];
 
+    final isMobile = Responsive.isMobile(context);
     final labels = ['LinkedIn', 'GitHub', 'WhatsApp', 'Email'];
 
     return Wrap(
+      alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
       spacing: 12,
       runSpacing: 10,
       children: StaticUtils.socialLinks.asMap().entries.map((e) {
@@ -77,20 +80,18 @@ class _SocialButtonState extends State<_SocialButton> {
         borderRadius: BorderRadius.circular(24),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOutCubic,
+          transform: Matrix4.translationValues(0, isHovered ? -2.0 : 0.0, 0),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           decoration: BoxDecoration(
             color: isHovered
                 ? widget.brandColor
-                : (widget.isDark
-                    ? const Color(0xFF1E293B)
-                    : Colors.white),
+                : context.colors.surface,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
               color: isHovered
                   ? widget.brandColor
-                  : (widget.isDark
-                      ? Colors.white.withValues(alpha: 0.12)
-                      : Colors.black.withValues(alpha: 0.12)),
+                  : context.colors.border,
               width: 1.2,
             ),
             boxShadow: isHovered

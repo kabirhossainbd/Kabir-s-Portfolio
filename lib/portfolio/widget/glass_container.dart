@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:portpolio/portfolio/design_system/app_colors.dart';
 
 class GlassContainer extends StatelessWidget {
   final Widget child;
@@ -37,12 +38,12 @@ class GlassContainer extends StatelessWidget {
     final defaultRadius = borderRadius ?? BorderRadius.circular(24);
     final defaultColor = color ??
         (isDark
-            ? const Color(0xFF111827).withValues(alpha: 0.85)
-            : Colors.white.withValues(alpha: 0.85));
+            ? AppColors.surfaceDark.withValues(alpha: 0.86)
+            : Colors.white.withValues(alpha: 0.88));
     final defaultBorderColor = borderColor ??
         (isDark
-            ? Colors.white.withValues(alpha: 0.15)
-            : const Color(0xFF0066FF).withValues(alpha: 0.15));
+            ? Colors.white.withValues(alpha: 0.12)
+            : AppColors.electricBlue.withValues(alpha: 0.16));
 
     if (borderGradient != null) {
       const borderWidth = 1.5;
@@ -64,9 +65,9 @@ class GlassContainer extends StatelessWidget {
               [
                 BoxShadow(
                   color: isDark
-                      ? const Color(0xFF00D2FF).withValues(alpha: 0.15)
-                      : const Color(0xFF0066FF).withValues(alpha: 0.08),
-                  blurRadius: 20,
+                      ? AppColors.electricBlue.withValues(alpha: 0.16)
+                      : AppColors.electricBlue.withValues(alpha: 0.08),
+                  blurRadius: 22,
                   offset: const Offset(0, 6),
                 ),
               ],

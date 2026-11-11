@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:portpolio/portfolio/animations/entrance_fader.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 import 'package:portpolio/portfolio/provider/app_provider.dart';
+import 'package:portpolio/portfolio/responsive/responsive.dart';
 import 'package:provider/provider.dart';
 
 class QuickStats extends StatelessWidget {
@@ -10,23 +12,32 @@ class QuickStats extends StatelessWidget {
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context);
     final isDark = appProvider.isDark;
+    final isMobile = Responsive.isMobile(context);
 
     final stats = [
-      {'value': '5+', 'label': 'Years Experience', 'icon': Iconsax.briefcase},
-      {'value': '20+', 'label': 'Projects Delivered', 'icon': Iconsax.chart_square},
-      {'value': '100%', 'label': 'Satisfaction Rate', 'icon': Iconsax.verify},
-      {'value': '15k+', 'label': 'App Downloads', 'icon': Iconsax.direct_down},
+      {'value': '5+', 'label': 'Years Experience', 'icon': Icons.work_outline_rounded},
+      {'value': '20+', 'label': 'Projects Delivered', 'icon': Icons.rocket_launch_outlined},
+      {'value': '100%', 'label': 'Satisfaction Rate', 'icon': Icons.verified_outlined},
+      {'value': '15k+', 'label': 'App Downloads', 'icon': Icons.download_for_offline_outlined},
     ];
 
     return Wrap(
-      spacing: 16,
-      runSpacing: 16,
-      children: stats.map((stat) {
-        return _StatCard(
-          value: stat['value'] as String,
-          label: stat['label'] as String,
-          icon: stat['icon'] as IconData,
-          isDark: isDark,
+      alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
+      spacing: 14,
+      runSpacing: 14,
+      children: stats.asMap().entries.map((entry) {
+        final stat = entry.value;
+        return EntranceFader(
+          offset: const Offset(0, 18),
+          delay: Duration(milliseconds: 340 + (entry.key * 55)),
+          duration: const Duration(milliseconds: 450),
+          beginScale: 0.96,
+          child: _StatCard(
+            value: stat['value'] as String,
+            label: stat['label'] as String,
+            icon: stat['icon'] as IconData,
+            isDark: isDark,
+          ),
         );
       }).toList(),
     );
@@ -55,44 +66,40 @@ class _StatCardState extends State<_StatCard> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+    final typography = context.typography;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        duration: const Duration(milliseconds: 220),
+        curve: Curves.easeOutCubic,
+        transform: Matrix4.translationValues(0, isHovered ? -4 : 0, 0),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         decoration: BoxDecoration(
           color: isHovered
-              ? (isDark
-                  ? const Color(0xFF111827).withValues(alpha: 0.9)
-                  : Colors.white)
-              : (isDark
-                  ? const Color(0xFF0B0F19).withValues(alpha: 0.75)
-                  : Colors.white.withValues(alpha: 0.9)),
-          borderRadius: BorderRadius.circular(22),
+              ? colors.surfaceElevated.withValues(alpha: isDark ? 0.94 : 1.0)
+              : colors.surface.withValues(alpha: isDark ? 0.84 : 0.94),
+          borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isHovered
-                ? (isDark ? const Color(0xFF00D2FF) : const Color(0xFF0066FF))
-                : (isDark
-                    ? const Color(0xFF00D2FF).withValues(alpha: 0.3)
-                    : const Color(0xFF0066FF).withValues(alpha: 0.25)),
-            width: 1.8,
+                ? colors.primary
+                : colors.primary.withValues(alpha: 0.28),
+            width: 1.4,
           ),
           boxShadow: isHovered
               ? [
                   BoxShadow(
-                    color: isDark
-                        ? const Color(0xFF00D2FF).withValues(alpha: 0.4)
-                        : const Color(0xFF0066FF).withValues(alpha: 0.25),
+                    color: colors.glowPrimary,
                     blurRadius: 22,
                     offset: const Offset(0, 6),
                   ),
                 ]
               : [
                   BoxShadow(
-                    color: isDark ? Colors.black.withValues(alpha: 0.2) : Colors.black.withValues(alpha: 0.04),
+                    color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -102,53 +109,36 @@ class _StatCardState extends State<_StatCard> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: isDark
-                      ? [
-                          const Color(0xFF00D2FF).withValues(alpha: 0.25),
-                          const Color(0xFFA855F7).withValues(alpha: 0.25),
-                        ]
-                      : [
-                          const Color(0xFF0066FF).withValues(alpha: 0.15),
-                          const Color(0xFF8B5CF6).withValues(alpha: 0.15),
-                        ],
+                  colors: [
+                    colors.primary.withValues(alpha: 0.20),
+                    colors.accent.withValues(alpha: 0.20),
+                  ],
                 ),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 widget.icon,
-                color: isDark ? const Color(0xFF00D2FF) : const Color(0xFF0066FF),
-                size: 24,
+                color: colors.primary,
+                size: 20,
               ),
             ),
-            const SizedBox(width: 14),
+            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                ShaderMask(
-                  shaderCallback: (bounds) => LinearGradient(
-                    colors: isDark
-                        ? [Colors.white, const Color(0xFF00D2FF)]
-                        : [const Color(0xFF0F172A), const Color(0xFF0066FF)],
-                  ).createShader(bounds),
-                  child: Text(
-                    widget.value,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white,
-                    ),
-                  ),
+                GradientGlowText(
+                  widget.value,
+                  gradient: AppGradients.brandHorizontal,
+                  style: typography.monoMetric.copyWith(fontSize: 21),
                 ),
                 Text(
                   widget.label,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B),
+                  style: typography.bodySmall.copyWith(
+                    color: colors.textSecondary,
                   ),
                 ),
               ],
@@ -159,4 +149,3 @@ class _StatCardState extends State<_StatCard> {
     );
   }
 }
-

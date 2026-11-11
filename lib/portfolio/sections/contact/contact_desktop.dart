@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portpolio/portfolio/animations/scroll_reveal.dart';
 import 'package:portpolio/portfolio/configs/space.dart';
 import 'package:portpolio/portfolio/constants.dart';
 import 'package:portpolio/portfolio/provider/app_provider.dart';
@@ -18,6 +19,14 @@ class _ContactDesktopState extends State<ContactDesktop> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _messageController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
 
   void _sendEmail() {
     final name = _nameController.text.trim();
@@ -96,8 +105,11 @@ class _ContactDesktopState extends State<ContactDesktop> {
                 // Left Column: Contact Cards Hub
                 Expanded(
                   flex: 2,
-                  child: Column(
-                    children: ContactUtils.titles.asMap().entries.map((e) {
+                  child: ScrollReveal(
+                    offset: const Offset(-20, 16),
+                    duration: const Duration(milliseconds: 520),
+                    child: Column(
+                      children: ContactUtils.titles.asMap().entries.map((e) {
                       return Container(
                         margin: const EdgeInsets.only(bottom: 16),
                         child: InkWell(
@@ -180,6 +192,7 @@ class _ContactDesktopState extends State<ContactDesktop> {
                         ),
                       );
                     }).toList(),
+                    ),
                   ),
                 ),
 
@@ -188,7 +201,11 @@ class _ContactDesktopState extends State<ContactDesktop> {
                 // Right Column: Smart Message Form Card
                 Expanded(
                   flex: 3,
-                  child: GlassContainer(
+                  child: ScrollReveal(
+                    offset: const Offset(20, 16),
+                    delay: const Duration(milliseconds: 90),
+                    duration: const Duration(milliseconds: 540),
+                    child: GlassContainer(
                     padding: const EdgeInsets.all(32),
                     borderRadius: BorderRadius.circular(28),
                     borderColor: isDark
@@ -459,6 +476,7 @@ class _ContactDesktopState extends State<ContactDesktop> {
                         ),
                       ],
                     ),
+                  ),
                   ),
                 ),
               ],

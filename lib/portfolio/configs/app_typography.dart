@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/configs/app_dimensions.dart';
-import 'package:portpolio/portfolio/configs/core_theme.dart';
+import 'package:portpolio/portfolio/design_system/app_typography_tokens.dart';
 
 class AppText {
   static TextStyle? btn;
@@ -29,15 +29,22 @@ class AppText {
 
   static init() {
     const b = FontWeight.bold;
-    const baseStyle = TextStyle(fontFamily: fontFamily);
+    const headingStyle = TextStyle(
+      fontFamily: AppFontFamilies.display,
+      fontFamilyFallback: [AppFontFamilies.body, 'sans-serif'],
+    );
+    const baseStyle = TextStyle(
+      fontFamily: AppFontFamilies.body,
+      fontFamilyFallback: ['system-ui', 'sans-serif'],
+    );
 
-    h1 = baseStyle.copyWith(fontSize: AppDimensions.font(22));
+    h1 = headingStyle.copyWith(fontSize: AppDimensions.font(22));
     h1b = h1!.copyWith(fontWeight: b);
 
-    h2 = baseStyle.copyWith(fontSize: AppDimensions.font(18));
+    h2 = headingStyle.copyWith(fontSize: AppDimensions.font(18));
     h2b = h2!.copyWith(fontWeight: b);
 
-    h3 = baseStyle.copyWith(fontSize: AppDimensions.font(15));
+    h3 = headingStyle.copyWith(fontSize: AppDimensions.font(15));
     h3b = h3!.copyWith(fontWeight: b);
 
     b1 = baseStyle.copyWith(fontSize: AppDimensions.font(10));

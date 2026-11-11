@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/animations/entrance_fader.dart';
-import 'package:portpolio/portfolio/configs/app_theme.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 import 'package:portpolio/portfolio/provider/scroll_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -14,15 +14,24 @@ class ArrowOnTop extends StatefulWidget {
 class ArrowOnTopState extends State<ArrowOnTop> {
   bool isHover = false;
   bool showArrow = false;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final scrollProvider = Provider.of<ScrollProvider>(context, listen: false);
-      scrollProvider.scrollController.addListener(_onScroll);
+      if (!mounted) return;
+      _scrollController =
+          Provider.of<ScrollProvider>(context, listen: false).scrollController;
+      _scrollController?.addListener(_onScroll);
       _onScroll();
     });
+  }
+
+  @override
+  void dispose() {
+    _scrollController?.removeListener(_onScroll);
+    super.dispose();
   }
 
   void _onScroll() {
@@ -39,7 +48,7 @@ class ArrowOnTopState extends State<ArrowOnTop> {
 
   @override
   Widget build(BuildContext context) {
-    final scrollProvider = Provider.of<ScrollProvider>(context);
+    final scrollProvider = Provider.of<ScrollProvider>(context, listen: false);
 
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 350),
@@ -51,38 +60,42 @@ class ArrowOnTopState extends State<ArrowOnTop> {
         opacity: showArrow ? 1.0 : 0.0,
         child: EntranceFader(
           offset: const Offset(0, 20),
-          child: MouseRegion(
-            onEnter: (_) => setState(() => isHover = true),
-            onExit: (_) => setState(() => isHover = false),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    AppTheme.c!.primary!,
-                    const Color(0xFF06B6D4),
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppTheme.c!.primary!.withValues(alpha: isHover ? 0.6 : 0.3),
-                    blurRadius: isHover ? 20 : 12,
-                    offset: const Offset(0, 6),
+          child: Semantics(
+            button: true,
+            label: 'Scroll to top',
+            child: Tooltip(
+              message: 'Back to top',
+              child: MouseRegion(
+                onEnter: (_) => setState(() => isHover = true),
+                onExit: (_) => setState(() => isHover = false),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  decoration: BoxDecoration(
+                    gradient: AppGradients.brandPrimary,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: context.colors.primary.withValues(
+                          alpha: isHover ? 0.55 : 0.3,
+                        ),
+                        blurRadius: isHover ? 20 : 12,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(16),
-                  onTap: () => scrollProvider.scroll(0),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Icon(
-                      Icons.keyboard_arrow_up_rounded,
-                      color: Colors.white,
-                      size: 26,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () => scrollProvider.scroll(0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(12),
+                        child: Icon(
+                          Icons.keyboard_arrow_up_rounded,
+                          color: Colors.white,
+                          size: 26,
+                        ),
+                      ),
                     ),
                   ),
                 ),

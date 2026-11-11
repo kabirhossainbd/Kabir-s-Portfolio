@@ -1,32 +1,47 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:portpolio/portfolio/configs/app_typography.dart';
-import 'package:portpolio/portfolio/provider/app_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:portpolio/portfolio/design_system/design_system.dart';
 
 class ServiceCardBackWidget extends StatelessWidget {
-  const ServiceCardBackWidget(
-      {Key? key, required this.serviceDesc, required this.serviceTitle})
-      : super(key: key);
+  const ServiceCardBackWidget({
+    Key? key,
+    required this.serviceDesc,
+    required this.serviceTitle,
+  }) : super(key: key);
 
   final String serviceDesc;
   final String serviceTitle;
 
   @override
   Widget build(BuildContext context) {
-    final appProvider = Provider.of<AppProvider>(context);
+    final colors = context.colors;
+    final typography = context.typography;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
+          serviceTitle,
+          style: typography.titleMedium.copyWith(
+            fontSize: 14.5,
+            color: colors.primary,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: 8),
+        Text(
           serviceDesc,
-          style: AppText.l1!.copyWith( color: appProvider.isDark ? Colors.white : Colors.black),
+          style: typography.bodySmall.copyWith(
+            fontSize: 12,
+            height: 1.45,
+            color: colors.textSecondary,
+          ),
+          maxLines: 7,
+          overflow: TextOverflow.ellipsis,
         ),
-        Divider(
-          color: appProvider.isDark ? Colors.white : Colors.black38,
-        ),
-      
+        const SizedBox(height: 10),
+        Divider(color: colors.border),
       ],
     );
   }
