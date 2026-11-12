@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 
-/// Core color tokens for the futuristic portfolio design system.
+/// Core color tokens for the polite, ultra-luxurious portfolio design system.
 abstract final class AppColors {
-  // Primary dark surfaces
-  static const Color backgroundDark = Color(0xFF080D19);
-  static const Color surfaceDark = Color(0xFF0E1629);
-  static const Color surfaceElevatedDark = Color(0xFF131D35);
-  static const Color surfaceGlassDark = Color(0xCC0E1629);
+  // Primary dark obsidian-slate surfaces (Polite & non-glaring)
+  static const Color backgroundDark = Color(0xFF0A0F1D);
+  static const Color surfaceDark = Color(0xFF121B2D);
+  static const Color surfaceElevatedDark = Color(0xFF18233A);
+  static const Color surfaceGlassDark = Color(0xCC121B2D);
 
-  // Light surfaces (when user explicitly toggles light theme)
+  // Light surfaces
   static const Color backgroundLight = Color(0xFFF8FAFC);
   static const Color surfaceLight = Color(0xFFFFFFFF);
   static const Color surfaceElevatedLight = Color(0xFFF1F5F9);
   static const Color surfaceGlassLight = Color(0xE6FFFFFF);
 
-  // Brand accents
-  static const Color electricBlue = Color(0xFF1677FF);
-  static const Color electricBlueSoft = Color(0xFF4D9AFF);
-  static const Color cyanHighlight = Color(0xFF38BDF8);
-  static const Color purpleAccent = Color(0xFF9B72FF);
-  static const Color purpleDeep = Color(0xFF7C4DFF);
+  // Soft, polite brand accents (Non-eye-straining)
+  static const Color electricBlue = Color(0xFF3B82F6); // Soft Royal Indigo
+  static const Color electricBlueSoft = Color(0xFF60A5FA);
+  static const Color cyanHighlight = Color(0xFF38BDF8); // Polite Sky Cyan
+  static const Color purpleAccent = Color(0xFF6366F1); // Soft Slate Violet
+  static const Color purpleDeep = Color(0xFF4F46E5);
 
   // Semantic accents
   static const Color successEmerald = Color(0xFF10B981);
   static const Color warningAmber = Color(0xFFF59E0B);
   static const Color errorRose = Color(0xFFF43F5E);
 
-  // Text tokens
+  // Text tokens (Soft high-contrast)
   static const Color textPrimaryDark = Color(0xFFF8FAFC);
   static const Color textSecondaryDark = Color(0xFF94A3B8);
   static const Color textMutedDark = Color(0xFF64748B);
@@ -36,10 +36,10 @@ abstract final class AppColors {
   static const Color textMutedLight = Color(0xFF64748B);
 
   // Borders
-  static const Color borderDark = Color(0x1FFFFFFF);
-  static const Color borderBlueDark = Color(0x4D1677FF);
-  static const Color borderPurpleDark = Color(0x4D9B72FF);
-  static const Color borderLight = Color(0x1F1677FF);
+  static const Color borderDark = Color(0x18FFFFFF);
+  static const Color borderBlueDark = Color(0x383B82F6);
+  static const Color borderPurpleDark = Color(0x386366F1);
+  static const Color borderLight = Color(0x1F3B82F6);
 }
 
 /// Reusable gradients for surfaces, borders, text, and ambient glows.
@@ -69,10 +69,13 @@ abstract final class AppGradients {
   static LinearGradient glassBorder({bool isHovered = false}) {
     return LinearGradient(
       colors: isHovered
-          ? [AppColors.electricBlue, AppColors.purpleAccent]
+          ? [
+              AppColors.electricBlue.withValues(alpha: 0.85),
+              AppColors.purpleAccent.withValues(alpha: 0.75),
+            ]
           : [
-              AppColors.electricBlue.withValues(alpha: 0.35),
-              AppColors.purpleAccent.withValues(alpha: 0.25),
+              AppColors.electricBlue.withValues(alpha: 0.28),
+              AppColors.purpleAccent.withValues(alpha: 0.18),
             ],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -125,8 +128,8 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
     textMuted: AppColors.textMutedDark,
     border: AppColors.borderDark,
     borderAccent: AppColors.borderBlueDark,
-    glowPrimary: Color(0x4D1677FF),
-    glowAccent: Color(0x409B72FF),
+    glowPrimary: Color(0x283B82F6),
+    glowAccent: Color(0x226366F1),
   );
 
   static const AppColorTokens light = AppColorTokens(
@@ -141,8 +144,8 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
     textMuted: AppColors.textMutedLight,
     border: AppColors.borderLight,
     borderAccent: AppColors.borderBlueDark,
-    glowPrimary: Color(0x331677FF),
-    glowAccent: Color(0x2B9B72FF),
+    glowPrimary: Color(0x203B82F6),
+    glowAccent: Color(0x1B6366F1),
   );
 
   @override
@@ -198,4 +201,3 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
     );
   }
 }
-

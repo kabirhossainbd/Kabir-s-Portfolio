@@ -273,7 +273,7 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
                   phaseOffset: 1.1,
                   child: _HudPill(
                     icon: Icons.layers_rounded,
-                    label: 'CLEAN ARCH • BLOC',
+                    label: 'PROVIDER • GETX',
                     accentColor: colors.primary,
                   ),
                 ),

@@ -24,6 +24,7 @@ class ServiceCard extends StatefulWidget {
 class _ServiceCardState extends State<ServiceCard> {
   GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
   bool isHover = false;
+  bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,124 +34,140 @@ class _ServiceCardState extends State<ServiceCard> {
     const double cardWidth = 300;
     const double cardHeight = 258;
 
-    return MouseRegion(
-      onEnter: (_) => setState(() => isHover = true),
-      onExit: (_) => setState(() => isHover = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 220),
-        curve: Curves.easeOutCubic,
-        transform: Matrix4.translationValues(0, isHover ? -4 : 0, 0),
-        child: InkWell(
-          hoverColor: Colors.transparent,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          borderRadius: BorderRadius.circular(24),
-          onTap: () {
-            cardKey.currentState?.toggleCard();
-          },
-          child: FlipCard(
-            flipOnTouch: kIsWeb ? false : true,
-            key: cardKey,
-            back: GlassContainer(
-              width: cardWidth,
-              height: cardHeight,
-              padding: const EdgeInsets.all(22.0),
+    final double cardScale = isPressed
+        ? 0.96
+        : isHover
+            ? 1.02
+            : 1.0;
+
+    return GestureDetector(
+      onTapDown: (_) => setState(() => isPressed = true),
+      onTapUp: (_) => setState(() => isPressed = false),
+      onTapCancel: () => setState(() => isPressed = false),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => isHover = true),
+        onExit: (_) => setState(() => isHover = false),
+        child: AnimatedScale(
+          scale: cardScale,
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOutCubic,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            transform: Matrix4.translationValues(0, isHover ? -4.0 : 0.0, 0.0),
+            child: InkWell(
+              hoverColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               borderRadius: BorderRadius.circular(24),
-              borderGradient: AppGradients.glassBorder(isHovered: isHover),
-              boxShadow: [
-                BoxShadow(
-                  color: isHover
-                      ? colors.glowPrimary
-                      : Colors.black.withValues(alpha: 0.18),
-                  blurRadius: isHover ? 26 : 12,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-              child: ServiceCardBackWidget(
-                serviceDesc: widget.serviceDescription,
-                serviceTitle: widget.serviceTitle,
-              ),
-            ),
-            front: GlassContainer(
-              width: cardWidth,
-              height: cardHeight,
-              padding: const EdgeInsets.all(22.0),
-              borderRadius: BorderRadius.circular(24),
-              borderGradient: AppGradients.glassBorder(isHovered: isHover),
-              boxShadow: [
-                BoxShadow(
-                  color: isHover
-                      ? colors.glowPrimary
-                      : Colors.black.withValues(alpha: 0.18),
-                  blurRadius: isHover ? 26 : 12,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          colors.primary.withValues(alpha: 0.2),
-                          colors.accent.withValues(alpha: 0.2),
-                        ],
-                      ),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: colors.primary.withValues(alpha: 0.35),
-                      ),
-                      boxShadow: isHover
-                          ? [
-                              BoxShadow(
-                                color: colors.glowPrimary,
-                                blurRadius: 18,
-                              ),
-                            ]
-                          : [],
+              onTap: () {
+                cardKey.currentState?.toggleCard();
+              },
+              child: FlipCard(
+                flipOnTouch: kIsWeb ? false : true,
+                key: cardKey,
+                back: GlassContainer(
+                  width: cardWidth,
+                  height: cardHeight,
+                  padding: const EdgeInsets.all(22.0),
+                  borderRadius: BorderRadius.circular(24),
+                  borderGradient: AppGradients.glassBorder(isHovered: isHover),
+                  boxShadow: [
+                    BoxShadow(
+                      color: isHover
+                          ? colors.glowPrimary
+                          : Colors.black.withValues(alpha: 0.18),
+                      blurRadius: isHover ? 26 : 12,
+                      offset: const Offset(0, 8),
                     ),
-                    child: Image.asset(
-                      widget.serviceIcon,
-                      height: 36,
-                      width: 36,
-                      cacheWidth: 96,
-                    ),
+                  ],
+                  child: ServiceCardBackWidget(
+                    serviceDesc: widget.serviceDescription,
+                    serviceTitle: widget.serviceTitle,
                   ),
-                  const SizedBox(height: AppSpacing.md),
-                  Text(
-                    widget.serviceTitle,
-                    textAlign: TextAlign.center,
-                    style: typography.titleMedium.copyWith(
-                      fontSize: 16.5,
-                      color: colors.textPrimary,
+                ),
+                front: GlassContainer(
+                  width: cardWidth,
+                  height: cardHeight,
+                  padding: const EdgeInsets.all(22.0),
+                  borderRadius: BorderRadius.circular(24),
+                  borderGradient: AppGradients.glassBorder(isHovered: isHover),
+                  boxShadow: [
+                    BoxShadow(
+                      color: isHover
+                          ? colors.glowPrimary
+                          : Colors.black.withValues(alpha: 0.18),
+                      blurRadius: isHover ? 26 : 12,
+                      offset: const Offset(0, 8),
                     ),
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'TAP TO SEE DETAILS',
-                          style: typography.monoBadge.copyWith(
-                            fontSize: 10.5,
-                            letterSpacing: 0.8,
-                            color: colors.primary,
+                  ],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              colors.primary.withValues(alpha: 0.2),
+                              colors.accent.withValues(alpha: 0.2),
+                            ],
                           ),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: colors.primary.withValues(alpha: 0.35),
+                          ),
+                          boxShadow: isHover
+                              ? [
+                                  BoxShadow(
+                                    color: colors.glowPrimary,
+                                    blurRadius: 18,
+                                  ),
+                                ]
+                              : [],
                         ),
-                        const SizedBox(width: 4),
-                        Icon(
-                          Icons.arrow_forward_rounded,
-                          size: 14,
-                          color: colors.primary,
+                        child: Image.asset(
+                          widget.serviceIcon,
+                          height: 36,
+                          width: 36,
+                          cacheWidth: 96,
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      Text(
+                        widget.serviceTitle,
+                        textAlign: TextAlign.center,
+                        style: typography.titleMedium.copyWith(
+                          fontSize: 16.5,
+                          color: colors.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.sm),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'TAP TO SEE DETAILS',
+                              style: typography.monoBadge.copyWith(
+                                fontSize: 10.5,
+                                letterSpacing: 0.8,
+                                color: colors.primary,
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            Icon(
+                              Icons.arrow_forward_rounded,
+                              size: 14,
+                              color: colors.primary,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

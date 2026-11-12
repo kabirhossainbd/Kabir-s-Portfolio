@@ -8,6 +8,9 @@ class ScrollProvider extends ChangeNotifier {
   /// so off-screen continuous tickers pause during scrolling.
   final ValueNotifier<bool> isHeroVisible = ValueNotifier<bool>(true);
 
+  /// Exposes current normalized scroll progress (0.0 to 1.0) for live navbar progress bar.
+  final ValueNotifier<double> scrollProgress = ValueNotifier<double>(0.0);
+
   int _activeIndex = 0;
   int get activeIndex => _activeIndex;
   double _lastCheckedOffset = -100;
@@ -21,6 +24,14 @@ class ScrollProvider extends ChangeNotifier {
   void _onScroll() {
     if (!scrollController.hasClients) return;
     final offset = scrollController.offset;
+    final maxExtent = scrollController.position.maxScrollExtent;
+
+    if (maxExtent > 0) {
+      final progress = (offset / maxExtent).clamp(0.0, 1.0);
+      if ((scrollProgress.value - progress).abs() > 0.002) {
+        scrollProgress.value = progress;
+      }
+    }
 
     final heroVisible = offset < 720;
     if (isHeroVisible.value != heroVisible) {
@@ -56,7 +67,7 @@ class ScrollProvider extends ChangeNotifier {
     }
   }
 
-  void scroll(int index, {int delayMs = 20}) {
+  void scroll(int index, {int delayMs = 0}) {
     if (!scrollController.hasClients) return;
     if (index < 0 || index >= sectionKeys.length) return;
 
@@ -79,7 +90,7 @@ class ScrollProvider extends ChangeNotifier {
       }
     }
 
-    Future.delayed(Duration(milliseconds: delayMs), () {
+    void executeScroll() {
       if (!scrollController.hasClients) return;
 
       if (targetOffset != null) {
@@ -89,23 +100,32 @@ class ScrollProvider extends ChangeNotifier {
           finalTarget = scrollController.position.maxScrollExtent;
         }
 
+        final distance = (finalTarget - scrollController.offset).abs();
+        final durationMs = (150 + (distance * 0.04)).clamp(180.0, 320.0).toInt();
+
         scrollController.animateTo(
           finalTarget,
-          duration: const Duration(milliseconds: 380),
-          curve: Curves.easeOutCubic,
+          duration: Duration(milliseconds: durationMs),
+          curve: Curves.fastOutSlowIn,
         );
       } else if (keyContext != null && keyContext.mounted) {
         Scrollable.ensureVisible(
           keyContext,
-          duration: const Duration(milliseconds: 380),
-          curve: Curves.easeOutCubic,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.fastOutSlowIn,
         );
       }
-    });
+    }
+
+    if (delayMs <= 0) {
+      executeScroll();
+    } else {
+      Future.delayed(Duration(milliseconds: delayMs), executeScroll);
+    }
   }
 
   void scrollMobile(int index) {
-    scroll(index, delayMs: 140);
+    scroll(index, delayMs: 40);
   }
 
   @override
@@ -113,6 +133,7 @@ class ScrollProvider extends ChangeNotifier {
     scrollController.removeListener(_onScroll);
     scrollController.dispose();
     isHeroVisible.dispose();
+    scrollProgress.dispose();
     super.dispose();
   }
 }

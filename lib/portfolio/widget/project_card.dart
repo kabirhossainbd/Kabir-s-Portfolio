@@ -32,6 +32,7 @@ class ProjectCard extends StatefulWidget {
 
 class _ProjectCardState extends State<ProjectCard> {
   bool isHover = false;
+  bool isPressed = false;
 
   void _openDetailsDialog() {
     showDialog<void>(
@@ -205,63 +206,77 @@ class _ProjectCardState extends State<ProjectCard> {
   Widget build(BuildContext context) {
     final colors = context.colors;
     final typography = context.typography;
+    final double cardScale = isPressed
+        ? 0.97
+        : isHover
+            ? 1.025
+            : 1.0;
 
-    return MouseRegion(
-      onEnter: (_) => setState(() => isHover = true),
-      onExit: (_) => setState(() => isHover = false),
-      child: AnimatedScale(
-        scale: isHover ? 1.02 : 1.0,
-        duration: const Duration(milliseconds: 220),
-        curve: Curves.easeOutCubic,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 220),
+    return GestureDetector(
+      onTapDown: (_) => setState(() => isPressed = true),
+      onTapUp: (_) => setState(() => isPressed = false),
+      onTapCancel: () => setState(() => isPressed = false),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => isHover = true),
+        onExit: (_) => setState(() => isHover = false),
+        child: AnimatedScale(
+          scale: cardScale,
+          duration: const Duration(milliseconds: 200),
           curve: Curves.easeOutCubic,
-          transform: Matrix4.translationValues(0, isHover ? -4 : 0, 0),
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          width: 320,
-          child: InkWell(
-            onTap: _openDetailsDialog,
-            borderRadius: BorderRadius.circular(24),
-            child: GlassContainer(
-              padding: EdgeInsets.zero,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            transform: Matrix4.translationValues(0, isHover ? -4 : 0, 0),
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            width: 320,
+            child: InkWell(
+              onTap: _openDetailsDialog,
               borderRadius: BorderRadius.circular(24),
-              borderGradient: AppGradients.glassBorder(isHovered: isHover),
-              boxShadow: [
-                BoxShadow(
-                  color: isHover
-                      ? colors.glowPrimary
-                      : Colors.black.withValues(alpha: 0.16),
-                  blurRadius: isHover ? 26 : 12,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Project Banner Header with Prominent Circular Logo Badge
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(22),
-                          ),
-                          child: SizedBox(
-                            height: widget.banner != null ? 130 : 90,
-                            width: double.infinity,
-                            child: widget.banner != null
-                                ? Stack(
-                                    children: [
-                                      Positioned.fill(
-                                        child: Image.asset(
-                                          widget.banner!,
-                                          fit: BoxFit.cover,
-                                          cacheWidth: 640,
+              child: GlassContainer(
+                padding: EdgeInsets.zero,
+                borderRadius: BorderRadius.circular(24),
+                borderGradient: AppGradients.glassBorder(isHovered: isHover),
+                boxShadow: [
+                  BoxShadow(
+                    color: isHover
+                        ? colors.glowPrimary
+                        : Colors.black.withValues(alpha: 0.16),
+                    blurRadius: isHover ? 26 : 12,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Project Banner Header with Prominent Circular Logo Badge
+                      Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(22),
+                            ),
+                            child: SizedBox(
+                              height: widget.banner != null ? 130 : 90,
+                              width: double.infinity,
+                              child: widget.banner != null
+                                  ? Stack(
+                                      children: [
+                                        Positioned.fill(
+                                          child: AnimatedScale(
+                                            scale: isHover ? 1.08 : 1.0,
+                                            duration: const Duration(milliseconds: 280),
+                                            curve: Curves.easeOutCubic,
+                                            child: Image.asset(
+                                              widget.banner!,
+                                              fit: BoxFit.cover,
+                                              cacheWidth: 640,
+                                            ),
+                                          ),
                                         ),
-                                      ),
                                       Container(
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
@@ -302,29 +317,32 @@ class _ProjectCardState extends State<ProjectCard> {
                             child: Container(
                               width: 50,
                               height: 50,
-                              padding: const EdgeInsets.all(3),
+                              padding: const EdgeInsets.all(2.5),
                               decoration: BoxDecoration(
-                                color: colors.surfaceElevated,
+                                gradient: AppGradients.brandPrimary,
                                 shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: colors.primary,
-                                  width: 2.0,
-                                ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.35),
+                                    color: colors.primary.withValues(alpha: 0.25),
                                     blurRadius: 10,
                                     offset: const Offset(0, 4),
                                   ),
                                 ],
                               ),
-                              child: ClipOval(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
-                                  child: Image.asset(
-                                    widget.projectIcon!,
-                                    fit: BoxFit.contain,
-                                    cacheWidth: 120,
+                              child: Container(
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  color: colors.surfaceElevated,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: ClipOval(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(3),
+                                    child: Image.asset(
+                                      widget.projectIcon!,
+                                      fit: BoxFit.contain,
+                                      cacheWidth: 120,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -443,6 +461,7 @@ class _ProjectCardState extends State<ProjectCard> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

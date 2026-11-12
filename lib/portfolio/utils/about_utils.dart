@@ -47,9 +47,9 @@ class AboutUtils {
     SkillCategoryItem(
       category: 'State Management & Architecture',
       items: [
-        'BLoC / Cubit',
         'Provider',
         'GetX',
+        'BLoC / Cubit',
         'Clean Architecture',
         'SOLID Principles',
         'Repository Pattern',
@@ -101,8 +101,8 @@ class AboutUtils {
       subtitle: 'Shared Business Logic across Mobile & Web',
     ),
     SkillProficiencyItem(
-      title: 'BLoC & Clean Architecture',
-      percentage: 0.92,
+      title: 'Provider & GetX Architecture',
+      percentage: 0.95,
       subtitle: 'Scalable State Management & Layered Design',
     ),
     SkillProficiencyItem(

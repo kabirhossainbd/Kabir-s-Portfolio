@@ -69,72 +69,83 @@ class _SocialButton extends StatefulWidget {
 
 class _SocialButtonState extends State<_SocialButton> {
   bool isHovered = false;
+  bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => isHovered = true),
-      onExit: (_) => setState(() => isHovered = false),
-      child: InkWell(
-        onTap: () => openURL(widget.url),
-        borderRadius: BorderRadius.circular(24),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeOutCubic,
-          transform: Matrix4.translationValues(0, isHovered ? -2.0 : 0.0, 0),
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          decoration: BoxDecoration(
-            color: isHovered
-                ? widget.brandColor
-                : context.colors.surface,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
+    return GestureDetector(
+      onTapDown: (_) => setState(() => isPressed = true),
+      onTapUp: (_) => setState(() => isPressed = false),
+      onTapCancel: () => setState(() => isPressed = false),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => isHovered = true),
+        onExit: (_) => setState(() => isHovered = false),
+        child: InkWell(
+          onTap: () => openURL(widget.url),
+          borderRadius: BorderRadius.circular(24),
+          child: AnimatedScale(
+            scale: isPressed ? 0.93 : (isHovered ? 1.04 : 1.0),
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOutCubic,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              curve: Curves.easeOutCubic,
+              transform: Matrix4.translationValues(0.0, isHovered ? -2.5 : 0.0, 0.0),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
               color: isHovered
                   ? widget.brandColor
-                  : context.colors.border,
-              width: 1.2,
-            ),
-            boxShadow: isHovered
-                ? [
-                    BoxShadow(
-                      color: widget.brandColor.withValues(alpha: 0.35),
-                      blurRadius: 14,
-                      offset: const Offset(0, 4),
-                    ),
-                  ]
-                : [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.04),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                widget.icon,
-                size: 16,
+                  : context.colors.surface,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
                 color: isHovered
-                    ? Colors.white
-                    : widget.brandColor,
+                    ? widget.brandColor
+                    : context.colors.border,
+                width: 1.2,
               ),
-              const SizedBox(width: 8),
-              Text(
-                widget.label,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
+              boxShadow: isHovered
+                  ? [
+                      BoxShadow(
+                        color: widget.brandColor.withValues(alpha: 0.38),
+                        blurRadius: 16,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.04),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  widget.icon,
+                  size: 16,
                   color: isHovered
                       ? Colors.white
-                      : (widget.isDark ? Colors.white : const Color(0xFF0F172A)),
+                      : widget.brandColor,
                 ),
-              ),
-            ],
+                const SizedBox(width: 8),
+                Text(
+                  widget.label,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: isHovered
+                        ? Colors.white
+                        : (widget.isDark ? Colors.white : const Color(0xFF0F172A)),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

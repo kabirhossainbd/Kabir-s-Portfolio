@@ -190,8 +190,8 @@ class _HeroBackdropPainter extends CustomPainter {
       Paint()
         ..shader = RadialGradient(
           colors: [
-            primaryColor.withValues(alpha: isDark ? 0.20 : 0.11),
-            primaryColor.withValues(alpha: isDark ? 0.05 : 0.03),
+            primaryColor.withValues(alpha: isDark ? 0.15 : 0.08),
+            primaryColor.withValues(alpha: isDark ? 0.04 : 0.02),
             Colors.transparent,
           ],
           stops: const [0.0, 0.5, 1.0],
@@ -204,8 +204,8 @@ class _HeroBackdropPainter extends CustomPainter {
       Paint()
         ..shader = RadialGradient(
           colors: [
-            accentColor.withValues(alpha: isDark ? 0.18 : 0.10),
-            accentColor.withValues(alpha: isDark ? 0.05 : 0.03),
+            accentColor.withValues(alpha: isDark ? 0.13 : 0.07),
+            accentColor.withValues(alpha: isDark ? 0.04 : 0.02),
             Colors.transparent,
           ],
           stops: const [0.0, 0.5, 1.0],

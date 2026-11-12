@@ -7,17 +7,17 @@ import 'package:portpolio/portfolio/responsive/responsive.dart';
 
 void main() {
   test('Dark theme tokens match required futuristic palette and fonts', () {
-    expect(theme.themeDark.scaffoldBackgroundColor, const Color(0xFF080D19));
-    expect(theme.themeDark.primaryColor, const Color(0xFF1677FF));
-    expect(theme.themeDark.colorScheme.secondary, const Color(0xFF9B72FF));
+    expect(theme.themeDark.scaffoldBackgroundColor, AppColors.backgroundDark);
+    expect(theme.themeDark.primaryColor, AppColors.electricBlue);
+    expect(theme.themeDark.colorScheme.secondary, AppColors.purpleAccent);
 
     final colors = theme.themeDark.extension<AppColorTokens>();
     final typography = theme.themeDark.extension<AppTypographyTokens>();
     expect(colors, isNotNull);
     expect(typography, isNotNull);
-    expect(colors!.background, const Color(0xFF080D19));
-    expect(colors.primary, const Color(0xFF1677FF));
-    expect(colors.accent, const Color(0xFF9B72FF));
+    expect(colors!.background, AppColors.backgroundDark);
+    expect(colors.primary, AppColors.electricBlue);
+    expect(colors.accent, AppColors.purpleAccent);
     expect(typography!.displayLarge.fontFamily, AppFontFamilies.display);
     expect(typography.bodyLarge.fontFamily, AppFontFamilies.body);
     expect(typography.monoBadge.fontFamily, AppFontFamilies.mono);

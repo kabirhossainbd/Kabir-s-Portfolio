@@ -14,17 +14,31 @@ class NavBarLogo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.all(2),
-          decoration: const BoxDecoration(
+          padding: const EdgeInsets.all(2.5),
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: AppGradients.brandPrimary,
+            boxShadow: [
+              BoxShadow(
+                color: colors.primary.withValues(alpha: 0.25),
+                blurRadius: 12,
+                spreadRadius: 0,
+              ),
+            ],
           ),
-          child: CircleAvatar(
-            radius: 18,
-            backgroundColor: colors.background,
-            backgroundImage: const ResizeImage(
-              AssetImage(StaticUtils.profileCasual),
-              width: 96,
+          child: Container(
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: colors.surface,
+            ),
+            child: CircleAvatar(
+              radius: 17,
+              backgroundColor: colors.background,
+              backgroundImage: const ResizeImage(
+                AssetImage(StaticUtils.profileCasual),
+                width: 96,
+              ),
             ),
           ),
         ),

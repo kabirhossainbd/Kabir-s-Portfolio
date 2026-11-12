@@ -53,16 +53,16 @@ class GlowBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
-        color: tone.withValues(alpha: 0.12),
+        color: tone.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(999),
         border: Border.all(
-          color: tone.withValues(alpha: 0.35),
+          color: tone.withValues(alpha: 0.30),
           width: 1.0,
         ),
         boxShadow: [
           BoxShadow(
-            color: tone.withValues(alpha: 0.18),
-            blurRadius: 14,
+            color: tone.withValues(alpha: 0.12),
+            blurRadius: 10,
             spreadRadius: 0,
           ),
         ],

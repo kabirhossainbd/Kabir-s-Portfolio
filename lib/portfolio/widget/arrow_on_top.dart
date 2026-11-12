@@ -13,6 +13,7 @@ class ArrowOnTop extends StatefulWidget {
 
 class ArrowOnTopState extends State<ArrowOnTop> {
   bool isHover = false;
+  bool isPressed = false;
   bool showArrow = false;
   ScrollController? _scrollController;
 
@@ -65,35 +66,46 @@ class ArrowOnTopState extends State<ArrowOnTop> {
             label: 'Scroll to top',
             child: Tooltip(
               message: 'Back to top',
-              child: MouseRegion(
-                onEnter: (_) => setState(() => isHover = true),
-                onExit: (_) => setState(() => isHover = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  decoration: BoxDecoration(
-                    gradient: AppGradients.brandPrimary,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: context.colors.primary.withValues(
-                          alpha: isHover ? 0.55 : 0.3,
-                        ),
-                        blurRadius: isHover ? 20 : 12,
-                        offset: const Offset(0, 6),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
+              child: GestureDetector(
+                onTapDown: (_) => setState(() => isPressed = true),
+                onTapUp: (_) => setState(() => isPressed = false),
+                onTapCancel: () => setState(() => isPressed = false),
+                child: MouseRegion(
+                  onEnter: (_) => setState(() => isHover = true),
+                  onExit: (_) => setState(() => isHover = false),
+                  child: AnimatedScale(
+                    scale: isPressed ? 0.90 : (isHover ? 1.08 : 1.0),
+                    duration: const Duration(milliseconds: 180),
+                    curve: Curves.easeOutCubic,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 180),
+                      curve: Curves.easeOutCubic,
+                      transform: Matrix4.translationValues(0.0, isHover ? -3.0 : 0.0, 0.0),
+                      decoration: BoxDecoration(
+                      gradient: AppGradients.brandPrimary,
                       borderRadius: BorderRadius.circular(16),
-                      onTap: () => scrollProvider.scroll(0),
-                      child: const Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Icon(
-                          Icons.keyboard_arrow_up_rounded,
-                          color: Colors.white,
-                          size: 26,
+                      boxShadow: [
+                        BoxShadow(
+                          color: context.colors.primary.withValues(
+                            alpha: isHover ? 0.60 : 0.3,
+                          ),
+                          blurRadius: isHover ? 22 : 12,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: () => scrollProvider.scroll(0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Icon(
+                            Icons.keyboard_arrow_up_rounded,
+                            color: Colors.white,
+                            size: 26,
+                          ),
                         ),
                       ),
                     ),
@@ -104,7 +116,8 @@ class ArrowOnTopState extends State<ArrowOnTop> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 

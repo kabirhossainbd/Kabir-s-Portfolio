@@ -227,7 +227,7 @@ class _HeroIntroContentState extends State<HeroIntroContent>
                         ),
                       ),
                       TyperAnimatedText(
-                        'BLoC & Clean Architecture Specialist',
+                        'Provider & GetX Specialist',
                         speed: const Duration(milliseconds: 48),
                         textStyle: typography.titleMedium.copyWith(
                           color: colors.accent,

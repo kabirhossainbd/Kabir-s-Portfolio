@@ -60,7 +60,7 @@ void main() {
     expect(find.text('Explore Projects'), findsOneWidget);
     expect(find.text('Download CV'), findsOneWidget);
     expect(find.text('Years Experience'), findsOneWidget);
-    expect(find.text('CLEAN ARCH • BLOC'), findsOneWidget);
+    expect(find.text('PROVIDER • GETX'), findsOneWidget);
   });
 
   testWidgets('Hero renders single-column layout on mobile cleanly',
