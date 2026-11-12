@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ScrollProvider extends ChangeNotifier {
   final scrollController = ScrollController();
-  final List<GlobalKey> sectionKeys = List.generate(6, (_) => GlobalKey());
+  final List<GlobalKey> sectionKeys = List.generate(9, (_) => GlobalKey());
 
   /// Notifies hero animations whether the top section is still near the viewport
   /// so off-screen continuous tickers pause during scrolling.
@@ -48,7 +48,7 @@ class ScrollProvider extends ChangeNotifier {
     int bestIndex = 0;
     double bestDistance = double.infinity;
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < sectionKeys.length; i++) {
       final ctx = sectionKeys[i].currentContext;
       if (ctx == null) continue;
       final box = ctx.findRenderObject() as RenderBox?;
@@ -71,7 +71,7 @@ class ScrollProvider extends ChangeNotifier {
     if (!scrollController.hasClients) return;
     if (index < 0 || index >= sectionKeys.length) return;
 
-    if (index < 5 && _activeIndex != index) {
+    if (_activeIndex != index) {
       _activeIndex = index;
       notifyListeners();
     }

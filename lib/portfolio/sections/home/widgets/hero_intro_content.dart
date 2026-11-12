@@ -112,7 +112,7 @@ class _HeroIntroContentState extends State<HeroIntroContent>
             ],
           ),
         ),
-        SizedBox(height: widget.isMobile ? AppSpacing.md : AppSpacing.lg),
+        SizedBox(height: widget.isMobile ? AppSpacing.xs : AppSpacing.lg),
 
         // 2. Large Animated Headline
         EntranceFader(
@@ -154,7 +154,7 @@ class _HeroIntroContentState extends State<HeroIntroContent>
                   );
                 },
                 child: Text(
-                  'Md. Kabir Hossain',
+                  'Engineering Digital Experiences.\nBuilding What\'s Next.',
                   textAlign: widget.isMobile ? TextAlign.center : TextAlign.start,
                   style: typography.displayLarge.copyWith(
                     fontSize: headlineSize,
@@ -177,8 +177,7 @@ class _HeroIntroContentState extends State<HeroIntroContent>
             mainAxisAlignment: widget.isMobile
                 ? MainAxisAlignment.center
                 : MainAxisAlignment.start,
-            mainAxisSize:
-                widget.isMobile ? MainAxisSize.min : MainAxisSize.max,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Container(
                 padding: const EdgeInsets.all(6),
@@ -249,20 +248,21 @@ class _HeroIntroContentState extends State<HeroIntroContent>
           delay: const Duration(milliseconds: 210),
           duration: const Duration(milliseconds: 460),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 560),
+            constraints: const BoxConstraints(maxWidth: 580),
             child: Text(
-              'Engineering high-performance, scalable cross-platform mobile and web products with Flutter, Clean Architecture, and futuristic interactive user experiences.',
+              "I'm Md. Kabir Hossain, a Flutter Developer with 5+ years of experience building scalable mobile applications, real-time communication systems, and modern digital experiences.",
               textAlign: widget.isMobile ? TextAlign.center : TextAlign.start,
               style: typography.bodyLarge.copyWith(
                 fontSize: widget.isMobile ? 14 : 15.5,
                 color: colors.textSecondary,
+                height: 1.5,
               ),
             ),
           ),
         ),
-        const SizedBox(height: AppSpacing.lg),
+        SizedBox(height: widget.isMobile ? AppSpacing.sm : AppSpacing.lg),
 
-        // 5. Explore Projects & Download CV Buttons
+        // 5. Explore Projects, Download CV & Let's Connect Buttons
         EntranceFader(
           offset: const Offset(0, 18),
           delay: const Duration(milliseconds: 265),
@@ -271,13 +271,16 @@ class _HeroIntroContentState extends State<HeroIntroContent>
           child: Wrap(
             alignment:
                 widget.isMobile ? WrapAlignment.center : WrapAlignment.start,
-            spacing: AppSpacing.sm,
-            runSpacing: AppSpacing.sm,
+            spacing: AppSpacing.xs,
+            runSpacing: AppSpacing.xs,
             children: [
               FuturisticButton(
-                label: 'Explore Projects',
+                label: 'Explore My Work',
                 icon: Icons.rocket_launch_rounded,
                 variant: FuturisticButtonVariant.primary,
+                padding: widget.isMobile
+                    ? const EdgeInsets.symmetric(horizontal: 16, vertical: 11)
+                    : null,
                 onPressed: () => widget.isMobile
                     ? scrollProvider.scrollMobile(3)
                     : scrollProvider.scroll(3),
@@ -286,7 +289,21 @@ class _HeroIntroContentState extends State<HeroIntroContent>
                 label: 'Download CV',
                 icon: Icons.download_rounded,
                 variant: FuturisticButtonVariant.outlined,
+                padding: widget.isMobile
+                    ? const EdgeInsets.symmetric(horizontal: 16, vertical: 11)
+                    : null,
                 onPressed: () => openURL(StaticUtils.resume),
+              ),
+              FuturisticButton(
+                label: "Let's Connect",
+                icon: Icons.mark_email_unread_rounded,
+                variant: FuturisticButtonVariant.ghost,
+                padding: widget.isMobile
+                    ? const EdgeInsets.symmetric(horizontal: 16, vertical: 11)
+                    : null,
+                onPressed: () => widget.isMobile
+                    ? scrollProvider.scrollMobile(7)
+                    : scrollProvider.scroll(7),
               ),
             ],
           ),

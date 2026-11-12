@@ -4,33 +4,51 @@ import 'package:portpolio/portfolio/utils/utils.dart';
 class ServicesUtils {
   static const List<ServiceItem> services = [
     ServiceItem(
-      title: "Mobile Application Development",
+      title: "Flutter Mobile Application Development",
       description:
-          "Mobile Development with Flutter\nResponsive Design\n- Splash Screen\n- Firebase Auth/Cloud\n- REST APIs\n- Maps integration and more...!",
+          "End-to-end cross-platform app engineering for iOS and Android with Clean Architecture, responsive UI, state management, and high-performance Dart code.",
       iconAsset: StaticUtils.appDev,
     ),
     ServiceItem(
-      title: "UI/UX Design",
+      title: "Live Streaming & Agora RTC Implementation",
       description:
-          "UI/UX Design\n- Adobe XD & Figma\n- Mobile & Web design\n- Interactive UI designs\n- Responsiveness\n- Prototyping and more..!",
-      iconAsset: StaticUtils.uiux,
-    ),
-    ServiceItem(
-      title: "Application Prototyping",
-      description:
-          "Prototyping with Flutter\n- Working with MVP\n- Fast and functional prototype",
+          "Integrating ultra-low latency live video broadcasting, voice channels, co-hosting streams, PK battles, and virtual gifting workflows.",
       iconAsset: StaticUtils.rapid,
     ),
     ServiceItem(
-      title: "Blog",
+      title: "Real-Time Communication & Chat Solutions",
       description:
-          "Blog Digital Platform\n- Post and Share\n- Create new content",
+          "Building instant messaging, group chat, voice notes, media exchange, and offline messaging queues with Socket.IO and WebSockets.",
       iconAsset: StaticUtils.blog,
     ),
     ServiceItem(
-      title: "Open Source - GitHub",
+      title: "REST API & Backend Integration",
       description:
-          "Open Source Projects on Github\n- README.md Structure\n- Good documentation\n- Open projects and more...!",
+          "Designing robust repository layers, Dio client interceptors, JWT/OAuth2 token refresh queues, and seamless communication with Laravel/Node backends.",
+      iconAsset: StaticUtils.uiux,
+    ),
+    ServiceItem(
+      title: "Firebase & Cloud Infrastructure",
+      description:
+          "Setting up Firebase Authentication, Firestore databases, Cloud Messaging (FCM), Crashlytics analytics, and real-time cloud data pipelines.",
+      iconAsset: StaticUtils.openSource,
+    ),
+    ServiceItem(
+      title: "Mobile App Maintenance & Code Refactoring",
+      description:
+          "Upgrading legacy codebase architectures to Clean Architecture, fixing memory leaks, updating packages, and boosting application speed.",
+      iconAsset: StaticUtils.appDev,
+    ),
+    ServiceItem(
+      title: "Application Performance Optimization",
+      description:
+          "Eliminating frame drops, offloading heavy processing to Dart isolates, optimizing image asset caching, and maintaining smooth 60/120fps UI.",
+      iconAsset: StaticUtils.rapid,
+    ),
+    ServiceItem(
+      title: "App Store & Google Play Store Deployment",
+      description:
+          "Managing release builds, keystore signing, App Store Connect metadata, Google Play Store publishing, and automated CI/CD pipeline setup.",
       iconAsset: StaticUtils.openSource,
     ),
   ];

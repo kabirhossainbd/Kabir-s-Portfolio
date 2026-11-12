@@ -11,18 +11,19 @@ class HomeMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
-    final visualSize = (width * 0.62).clamp(210.0, 265.0);
+    final visualSize = (width * 0.58).clamp(190.0, 240.0);
 
     return HeroFuturisticBackdrop(
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.fromLTRB(
           AppSpacing.horizontalPagePadding(context),
-          96,
+          48,
           AppSpacing.horizontalPagePadding(context),
-          40,
+          20,
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             EntranceFader(
@@ -35,7 +36,7 @@ class HomeMobile extends StatelessWidget {
                 showHudPills: false,
               ),
             ),
-            const SizedBox(height: AppSpacing.xl),
+            const SizedBox(height: AppSpacing.lg),
             const HeroIntroContent(
               isCompact: true,
               isMobile: true,

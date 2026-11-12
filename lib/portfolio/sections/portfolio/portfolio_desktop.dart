@@ -88,6 +88,7 @@ class _PortfolioDesktopState extends State<PortfolioDesktop> {
                     projectDescription: project.description,
                     category: project.category,
                     tags: project.tags,
+                    caseStudy: project.caseStudy,
                   ),
                 );
               }),

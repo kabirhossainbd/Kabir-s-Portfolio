@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/sections/about/about.dart';
 import 'package:portpolio/portfolio/sections/contact/contact.dart';
+import 'package:portpolio/portfolio/sections/education/education_section.dart';
+import 'package:portpolio/portfolio/sections/experience/experience_section.dart';
+import 'package:portpolio/portfolio/sections/expertise/expertise_section.dart';
 import 'package:portpolio/portfolio/sections/home/home.dart';
 import 'package:portpolio/portfolio/sections/portfolio/portfolio.dart';
 import 'package:portpolio/portfolio/sections/services/services.dart';
@@ -35,8 +38,11 @@ class BodyUtils {
   static const List<Widget> views = [
     HomePage(),
     About(),
-    Services(),
+    ExperienceSection(),
     Portfolio(),
+    ExpertiseSection(),
+    Services(),
+    EducationSection(),
     Contact(),
     Footer(),
   ];

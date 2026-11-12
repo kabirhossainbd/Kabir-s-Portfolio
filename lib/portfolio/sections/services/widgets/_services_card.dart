@@ -137,8 +137,10 @@ class _ServiceCardState extends State<ServiceCard> {
                       Text(
                         widget.serviceTitle,
                         textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: typography.titleMedium.copyWith(
-                          fontSize: 16.5,
+                          fontSize: 15.5,
                           color: colors.textPrimary,
                         ),
                       ),

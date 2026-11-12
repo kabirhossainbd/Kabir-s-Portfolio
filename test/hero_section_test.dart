@@ -54,10 +54,13 @@ void main() {
 
     expect(find.byType(HomeDesktop), findsOneWidget);
     expect(find.byType(HeroFuturisticVisual), findsOneWidget);
-    expect(find.text('Md. Kabir Hossain'), findsOneWidget);
+    expect(
+      find.text("Engineering Digital Experiences.\nBuilding What's Next."),
+      findsOneWidget,
+    );
     expect(find.text('FLUTTER DEVELOPER • 5+ YEARS EXP'), findsOneWidget);
     expect(find.text('Available for Opportunities'), findsOneWidget);
-    expect(find.text('Explore Projects'), findsOneWidget);
+    expect(find.text('Explore My Work'), findsOneWidget);
     expect(find.text('Download CV'), findsOneWidget);
     expect(find.text('Years Experience'), findsOneWidget);
     expect(find.text('PROVIDER • GETX'), findsOneWidget);
@@ -77,8 +80,11 @@ void main() {
 
     expect(find.byType(HomeMobile), findsOneWidget);
     expect(find.byType(HeroFuturisticVisual), findsOneWidget);
-    expect(find.text('Md. Kabir Hossain'), findsOneWidget);
-    expect(find.text('Explore Projects'), findsOneWidget);
+    expect(
+      find.text("Engineering Digital Experiences.\nBuilding What's Next."),
+      findsOneWidget,
+    );
+    expect(find.text('Explore My Work'), findsOneWidget);
     expect(find.text('Download CV'), findsOneWidget);
   });
 

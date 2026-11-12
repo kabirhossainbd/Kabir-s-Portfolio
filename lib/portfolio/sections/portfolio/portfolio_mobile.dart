@@ -101,6 +101,7 @@ class _PortfolioMobileTabState extends State<PortfolioMobileTab> {
                   projectDescription: project.description,
                   category: project.category,
                   tags: project.tags,
+                  caseStudy: project.caseStudy,
                 ),
               );
             },

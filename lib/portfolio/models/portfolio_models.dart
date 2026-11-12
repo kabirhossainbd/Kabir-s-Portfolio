@@ -11,6 +11,27 @@ enum ProjectCategory {
 }
 
 @immutable
+class ProjectCaseStudy {
+  final String overview;
+  final String problemStatement;
+  final String solution;
+  final String myRole;
+  final String technicalArchitecture;
+  final List<String> technologiesUsed;
+  final List<String> keyChallengesAndSolutions;
+
+  const ProjectCaseStudy({
+    required this.overview,
+    required this.problemStatement,
+    required this.solution,
+    required this.myRole,
+    required this.technicalArchitecture,
+    required this.technologiesUsed,
+    required this.keyChallengesAndSolutions,
+  });
+}
+
+@immutable
 class ProjectItem {
   final String title;
   final String description;
@@ -19,6 +40,7 @@ class ProjectItem {
   final String? icon;
   final ProjectCategory category;
   final List<String> tags;
+  final ProjectCaseStudy? caseStudy;
 
   const ProjectItem({
     required this.title,
@@ -28,6 +50,7 @@ class ProjectItem {
     this.icon,
     required this.category,
     this.tags = const ['Flutter', 'Dart'],
+    this.caseStudy,
   });
 }
 
@@ -50,11 +73,47 @@ class ExperienceItem {
   final String company;
   final String period;
   final String description;
+  final List<String> responsibilities;
+  final List<String> technologies;
 
   const ExperienceItem({
     required this.role,
     required this.company,
     required this.period,
+    required this.description,
+    this.responsibilities = const [],
+    this.technologies = const [],
+  });
+}
+
+@immutable
+class EngineeringCapabilityItem {
+  final String title;
+  final String description;
+  final IconData icon;
+  final List<String> highlights;
+
+  const EngineeringCapabilityItem({
+    required this.title,
+    required this.description,
+    required this.icon,
+    this.highlights = const [],
+  });
+}
+
+@immutable
+class EducationItem {
+  final String institution;
+  final String degree;
+  final String period;
+  final String location;
+  final String description;
+
+  const EducationItem({
+    required this.institution,
+    required this.degree,
+    required this.period,
+    required this.location,
     required this.description,
   });
 }

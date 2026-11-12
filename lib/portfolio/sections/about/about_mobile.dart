@@ -195,11 +195,19 @@ class AboutMobile extends StatelessWidget {
                           ),
                           const SizedBox(height: 3),
                           Text(
-                            '${exp.company} • ${exp.period}',
+                            exp.company,
+                            style: typography.bodySmall.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: colors.cyan,
+                            ),
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            exp.period,
                             style: typography.monoBadge.copyWith(
                               fontSize: 9.5,
                               letterSpacing: 0.3,
-                              color: colors.cyan,
+                              color: colors.primary,
                             ),
                           ),
                           const SizedBox(height: 6),

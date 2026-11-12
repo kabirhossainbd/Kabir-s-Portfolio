@@ -13,6 +13,7 @@ class ProjectCard extends StatefulWidget {
   final IconData? projectIconData;
   final ProjectCategory category;
   final List<String> tags;
+  final ProjectCaseStudy? caseStudy;
 
   const ProjectCard({
     Key? key,
@@ -24,6 +25,7 @@ class ProjectCard extends StatefulWidget {
     required this.projectDescription,
     this.category = ProjectCategory.consumer,
     this.tags = const ['Flutter'],
+    this.caseStudy,
   }) : super(key: key);
 
   @override
@@ -154,6 +156,72 @@ class _ProjectCardState extends State<ProjectCard> {
                               color: colors.textSecondary,
                             ),
                           ),
+                          if (widget.caseStudy != null) ...[
+                            const SizedBox(height: 16),
+                            _buildCaseSection(
+                              context,
+                              title: 'PROBLEM STATEMENT',
+                              body: widget.caseStudy!.problemStatement,
+                            ),
+                            const SizedBox(height: 12),
+                            _buildCaseSection(
+                              context,
+                              title: 'SOLUTION',
+                              body: widget.caseStudy!.solution,
+                            ),
+                            const SizedBox(height: 12),
+                            _buildCaseSection(
+                              context,
+                              title: 'MY ROLE',
+                              body: widget.caseStudy!.myRole,
+                            ),
+                            const SizedBox(height: 12),
+                            _buildCaseSection(
+                              context,
+                              title: 'TECHNICAL ARCHITECTURE',
+                              body: widget.caseStudy!.technicalArchitecture,
+                            ),
+                            if (widget.caseStudy!.keyChallengesAndSolutions.isNotEmpty) ...[
+                              const SizedBox(height: 12),
+                              Text(
+                                'ENGINEERING CHALLENGES & SOLUTIONS',
+                                style: typography.monoBadge.copyWith(
+                                  fontSize: 10.5,
+                                  color: colors.cyan,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              ...widget.caseStudy!.keyChallengesAndSolutions.map(
+                                (c) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 4),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 2),
+                                        child: Icon(
+                                          Icons.bolt_rounded,
+                                          size: 14,
+                                          color: colors.primary,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        child: Text(
+                                          c,
+                                          style: typography.bodySmall.copyWith(
+                                            fontSize: 12,
+                                            color: colors.textSecondary,
+                                            height: 1.4,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ],
                           const SizedBox(height: 16),
                           Wrap(
                             spacing: 8,
@@ -199,6 +267,37 @@ class _ProjectCardState extends State<ProjectCard> {
           ),
         );
       },
+    );
+  }
+
+  static Widget _buildCaseSection(
+    BuildContext context, {
+    required String title,
+    required String body,
+  }) {
+    final colors = context.colors;
+    final typography = context.typography;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: typography.monoBadge.copyWith(
+            fontSize: 10.5,
+            color: colors.primary,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          body,
+          style: typography.bodySmall.copyWith(
+            fontSize: 12.5,
+            color: colors.textSecondary,
+            height: 1.45,
+          ),
+        ),
+      ],
     );
   }
 
