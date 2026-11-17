@@ -93,23 +93,14 @@ class _HeroIntroContentState extends State<HeroIntroContent>
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // 1. Designation + Experience + Availability Pill Row
-        EntranceFader(
-          offset: const Offset(0, 14),
-          delay: const Duration(milliseconds: 40),
-          duration: const Duration(milliseconds: 420),
-          child: Wrap(
-            alignment:
-                widget.isMobile ? WrapAlignment.center : WrapAlignment.start,
-            spacing: AppSpacing.xs,
-            runSpacing: AppSpacing.xs,
-            children: const [
-              GlowBadge(
-                label: 'FLUTTER DEVELOPER • 5+ YEARS EXP',
-                icon: Icons.auto_awesome_rounded,
-              ),
-              _AvailabilityChip(),
-            ],
+        // 1. Designation + Experience Badge Row
+        const EntranceFader(
+          offset: Offset(0, 14),
+          delay: Duration(milliseconds: 40),
+          duration: Duration(milliseconds: 420),
+          child: GlowBadge(
+            label: 'FLUTTER DEVELOPER • 5+ YEARS EXP',
+            icon: Icons.auto_awesome_rounded,
           ),
         ),
         SizedBox(height: widget.isMobile ? AppSpacing.xs : AppSpacing.lg),
@@ -154,12 +145,13 @@ class _HeroIntroContentState extends State<HeroIntroContent>
                   );
                 },
                 child: Text(
-                  'Engineering Digital Experiences.\nBuilding What\'s Next.',
+                  'Md. Kabir Hossain\nEngineering Digital Experiences.',
                   textAlign: widget.isMobile ? TextAlign.center : TextAlign.start,
                   style: typography.displayLarge.copyWith(
                     fontSize: headlineSize,
+                    fontWeight: FontWeight.w800,
                     color: Colors.white,
-                    height: 1.12,
+                    height: 1.10,
                   ),
                 ),
               ),
@@ -226,7 +218,7 @@ class _HeroIntroContentState extends State<HeroIntroContent>
                         ),
                       ),
                       TyperAnimatedText(
-                        'Provider & GetX Specialist',
+                        'Live Streaming & RTC Specialist',
                         speed: const Duration(milliseconds: 48),
                         textStyle: typography.titleMedium.copyWith(
                           color: colors.accent,
@@ -329,48 +321,6 @@ class _HeroIntroContentState extends State<HeroIntroContent>
           child: const QuickStats(),
         ),
       ],
-    );
-  }
-}
-
-class _AvailabilityChip extends StatelessWidget {
-  const _AvailabilityChip();
-
-  @override
-  Widget build(BuildContext context) {
-    final typography = context.typography;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: AppColors.successEmerald.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: AppColors.successEmerald.withValues(alpha: 0.4),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 7,
-            height: 7,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.successEmerald,
-            ),
-          ),
-          const SizedBox(width: 6),
-          Text(
-            'OPEN TO ROLES',
-            style: typography.monoBadge.copyWith(
-              fontSize: 10.5,
-              letterSpacing: 1.0,
-              color: AppColors.successEmerald,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

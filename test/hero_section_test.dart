@@ -55,7 +55,7 @@ void main() {
     expect(find.byType(HomeDesktop), findsOneWidget);
     expect(find.byType(HeroFuturisticVisual), findsOneWidget);
     expect(
-      find.text("Engineering Digital Experiences.\nBuilding What's Next."),
+      find.text("Md. Kabir Hossain\nEngineering Digital Experiences."),
       findsOneWidget,
     );
     expect(find.text('FLUTTER DEVELOPER • 5+ YEARS EXP'), findsOneWidget);
@@ -63,7 +63,6 @@ void main() {
     expect(find.text('Explore My Work'), findsOneWidget);
     expect(find.text('Download CV'), findsOneWidget);
     expect(find.text('Years Experience'), findsOneWidget);
-    expect(find.text('PROVIDER • GETX'), findsOneWidget);
   });
 
   testWidgets('Hero renders single-column layout on mobile cleanly',
@@ -81,7 +80,7 @@ void main() {
     expect(find.byType(HomeMobile), findsOneWidget);
     expect(find.byType(HeroFuturisticVisual), findsOneWidget);
     expect(
-      find.text("Engineering Digital Experiences.\nBuilding What's Next."),
+      find.text("Md. Kabir Hossain\nEngineering Digital Experiences."),
       findsOneWidget,
     );
     expect(find.text('Explore My Work'), findsOneWidget);

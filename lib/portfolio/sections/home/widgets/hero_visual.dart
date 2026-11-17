@@ -262,28 +262,11 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
               ),
             ),
 
-            // Top-left floating HUD chip
-            if (widget.showHudPills)
-              Positioned(
-                top: 12,
-                left: 0,
-                child: FloatingMotion(
-                  verticalAmplitude: 4,
-                  period: const Duration(seconds: 4),
-                  phaseOffset: 1.1,
-                  child: _HudPill(
-                    icon: Icons.layers_rounded,
-                    label: 'PROVIDER • GETX',
-                    accentColor: colors.primary,
-                  ),
-                ),
-              ),
-
             // Top-right floating HUD chip
             if (widget.showHudPills)
               Positioned(
-                top: 44,
-                right: -6,
+                top: 24,
+                right: -4,
                 child: FloatingMotion(
                   verticalAmplitude: 4,
                   period: const Duration(seconds: 5),
