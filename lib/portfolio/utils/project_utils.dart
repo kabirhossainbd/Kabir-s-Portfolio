@@ -3,9 +3,9 @@ import 'package:portpolio/portfolio/models/portfolio_models.dart';
 class ProjectUtils {
   static const List<ProjectItem> projects = [
     ProjectItem(
-      title: "Mingo — Live Streaming",
+      title: "Gypsy World",
       description:
-          "High-performance live streaming platform built with Agora RTC SDK, WebRTC, real-time co-hosting, audience interaction, and interactive gifting workflows.",
+          "Watch amazing live broadcasts, take advantage of live battle streaming, engage in live conversation with people across the world, or go live to gain social media impact throughout GYPSY WORLD.",
       link: "https://github.com/kabirhossainbd/Gypsy-world-iOS",
       banner: "assets/projects/gypsyBanner.png",
       icon: "assets/projects/gypsy.png",
@@ -13,7 +13,7 @@ class ProjectUtils {
       tags: ['Flutter', 'Agora RTC', 'Live Stream', 'WebRTC'],
       caseStudy: ProjectCaseStudy(
         overview:
-            "Mingo is a feature-packed live broadcasting and real-time social platform designed for interactive live streams, live battles, global co-hosting, and virtual gifting.",
+            "Gypsy World is a feature-packed live broadcasting and real-time social platform designed for interactive live streams, live battles, global co-hosting, and virtual gifting.",
         problemStatement:
             "Managing ultra-low latency audio/video feeds, active session lifecycle, network reconnection, and instant co-host slot transitions across heterogeneous mobile networks.",
         solution:
@@ -36,9 +36,9 @@ class ProjectUtils {
       ),
     ),
     ProjectItem(
-      title: "Ziira — Real-Time Chat",
+      title: "FnF Online",
       description:
-          "Ultra-fast real-time messaging application supporting voice notes, media sharing, group chats, typing indicators, and message delivery receipts.",
+          "FnF Online is an innovative application designed to revolutionize the internet user experience by providing users with exclusive offers, real-time communication, and a plethora of facilities with a user-friendly interface.",
       link: "https://play.google.com/store/apps/details?id=com.fnf.connect&hl=en",
       banner: "assets/projects/fnfBanner.png",
       icon: "assets/projects/fnfLogo.png",
@@ -46,7 +46,7 @@ class ProjectUtils {
       tags: ['Flutter', 'Socket.IO', 'Real-Time', 'Clean Arch'],
       caseStudy: ProjectCaseStudy(
         overview:
-            "Ziira is a secure communication suite engineered for instant peer-to-peer and group messaging with media attachments and voice notes.",
+            "FnF Online is a secure communication and service portal engineered for instant peer-to-peer messaging, group chat, and exclusive digital internet offers.",
         problemStatement:
             "Ensuring zero message loss and instant delivery status synchronization during poor connectivity intervals.",
         solution:
@@ -67,17 +67,17 @@ class ProjectUtils {
       ),
     ),
     ProjectItem(
-      title: "Beestera — Sports Suite",
+      title: "Beestera Soccer",
       description:
-          "Modern sports community management app featuring player account registration, Clerk authentication, OAuth single sign-on, and Laravel backend integration.",
+          "Modern sports community and soccer training management app featuring player account registration, Clerk authentication, OAuth single sign-on, and Laravel backend integration.",
       link: "https://github.com/kabirhossainbd/ISP-Management",
-      banner: "assets/projects/ispBanner.png",
-      icon: "assets/projects/ispLogo.png",
+      banner: "assets/projects/beestera_banner.jpg",
+      icon: "assets/projects/beestera_icon.png",
       category: ProjectCategory.consumer,
       tags: ['Flutter', 'Clerk Auth', 'Laravel API', 'OAuth'],
       caseStudy: ProjectCaseStudy(
         overview:
-            "Beestera connects sports enthusiasts with team schedules, match statistics, player profiles, and instant match bookings.",
+            "Beestera Soccer connects sports enthusiasts and training players with team schedules, match statistics, player profiles, and instant match bookings.",
         problemStatement:
             "Seamless multi-provider authentication (Google, Apple, Clerk) synchronized with custom Laravel API token exchange.",
         solution:
