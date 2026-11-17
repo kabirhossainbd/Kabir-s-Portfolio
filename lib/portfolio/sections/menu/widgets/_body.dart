@@ -13,9 +13,6 @@ class Body extends StatelessWidget {
     final scrollProvider = Provider.of<ScrollProvider>(context, listen: false);
 
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(
-        parent: AlwaysScrollableScrollPhysics(),
-      ),
       controller: scrollProvider.controller,
       child: Column(
         children: BodyUtils.views

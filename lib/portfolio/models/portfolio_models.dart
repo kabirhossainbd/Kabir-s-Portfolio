@@ -58,12 +58,14 @@ class ProjectItem {
 class ServiceItem {
   final String title;
   final String description;
-  final String iconAsset;
+  final IconData icon;
+  final List<String> highlights;
 
   const ServiceItem({
     required this.title,
     required this.description,
-    required this.iconAsset,
+    required this.icon,
+    this.highlights = const [],
   });
 }
 

@@ -114,28 +114,12 @@ class _ScrollRevealState extends State<ScrollReveal>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _curved,
+    return RevealTransition(
+      opacity: _curved,
+      dx: _dx,
+      dy: _dy,
+      scale: _scale,
       child: widget.child,
-      builder: (context, child) {
-        if (_controller.isCompleted) {
-          return child!;
-        }
-        Widget result = Transform.translate(
-          offset: Offset(_dx.value, _dy.value),
-          child: child,
-        );
-        if (widget.beginScale != 1.0) {
-          result = Transform.scale(
-            scale: _scale.value,
-            child: result,
-          );
-        }
-        return Opacity(
-          opacity: _curved.value.clamp(0.0, 1.0),
-          child: result,
-        );
-      },
     );
   }
 }

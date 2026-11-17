@@ -3,12 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:portpolio/portfolio/animations/entrance_fader.dart';
 import 'package:portpolio/portfolio/configs/core_theme.dart' as theme;
 import 'package:portpolio/portfolio/provider/app_provider.dart';
-import 'package:portpolio/portfolio/sections/portfolio/portfolio_desktop.dart';
+import 'package:portpolio/portfolio/sections/portfolio/portfolio.dart';
 import 'package:portpolio/portfolio/widget/project_card.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  testWidgets('PortfolioDesktop filters projects by category and opens detail modal',
+  testWidgets('Portfolio filters projects by category and opens detail modal',
       (tester) async {
     addTearDown(() {
       tester.view.resetPhysicalSize();
@@ -26,7 +26,7 @@ void main() {
             body: SingleChildScrollView(
               child: RevealScope(
                 isRevealed: true,
-                child: PortfolioDesktop(),
+                child: Portfolio(),
               ),
             ),
           ),
@@ -36,16 +36,21 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Initially shows up to 8 cards under 'ALL'
-    expect(find.byType(ProjectCard), findsNWidgets(8));
+    // Two full rows of three under 'ALL', with the rest behind "View All".
+    expect(find.byType(ProjectCard), findsNWidgets(6));
+    expect(find.text('OPEN SOURCE'), findsNothing);
 
-    // Filter to ENTERPRISE (3 enterprise apps)
+    await tester.ensureVisible(find.text('View All 9 Projects'));
+    await tester.tap(find.text('View All 9 Projects'));
+    await tester.pumpAndSettle();
+    expect(find.byType(ProjectCard), findsNWidgets(9));
+
+    await tester.ensureVisible(find.text('ENTERPRISE').first);
     await tester.tap(find.text('ENTERPRISE').first);
     await tester.pumpAndSettle();
     expect(find.byType(ProjectCard), findsNWidgets(3));
     expect(find.text('Lens Guard'), findsOneWidget);
 
-    // Tap a project card to open the detail modal
     await tester.ensureVisible(find.text('Lens Guard'));
     await tester.tap(find.text('Lens Guard'));
     await tester.pumpAndSettle();
@@ -56,4 +61,3 @@ void main() {
     expect(find.text('Open Live Project'), findsNothing);
   });
 }
-

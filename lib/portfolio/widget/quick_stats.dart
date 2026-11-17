@@ -1,45 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/animations/entrance_fader.dart';
 import 'package:portpolio/portfolio/design_system/design_system.dart';
-import 'package:portpolio/portfolio/provider/app_provider.dart';
-import 'package:portpolio/portfolio/responsive/responsive.dart';
-import 'package:provider/provider.dart';
 
 class QuickStats extends StatelessWidget {
   const QuickStats({Key? key}) : super(key: key);
 
+  static const _stats = [
+    ('5+', 'Years Experience'),
+    ('20+', 'Projects Delivered'),
+    ('15k+', 'App Downloads'),
+    ('3', 'Countries Served'),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final appProvider = Provider.of<AppProvider>(context);
-    final isDark = appProvider.isDark;
-    final isMobile = Responsive.isMobile(context);
-
-    final stats = [
-      {'value': '5+', 'label': 'Years Experience', 'icon': Icons.work_outline_rounded},
-      {'value': '20+', 'label': 'Projects Delivered', 'icon': Icons.rocket_launch_outlined},
-      {'value': '100%', 'label': 'Satisfaction Rate', 'icon': Icons.verified_outlined},
-      {'value': '15k+', 'label': 'App Downloads', 'icon': Icons.download_for_offline_outlined},
-    ];
-
-    return Wrap(
-      alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
+    return ResponsiveGrid(
       spacing: 10,
       runSpacing: 10,
-      children: stats.asMap().entries.map((entry) {
-        final stat = entry.value;
-        return EntranceFader(
-          offset: const Offset(0, 18),
-          delay: Duration(milliseconds: 340 + (entry.key * 55)),
-          duration: const Duration(milliseconds: 450),
-          beginScale: 0.96,
-          child: _StatCard(
-            value: stat['value'] as String,
-            label: stat['label'] as String,
-            icon: stat['icon'] as IconData,
-            isDark: isDark,
+      columnsForWidth: (width) => width >= 500 ? 4 : 2,
+      children: [
+        for (int i = 0; i < _stats.length; i++)
+          EntranceFader(
+            offset: const Offset(0, 18),
+            delay: Duration(milliseconds: 340 + (i * 55)),
+            duration: const Duration(milliseconds: 450),
+            beginScale: 0.96,
+            child: _StatCard(value: _stats[i].$1, label: _stats[i].$2),
           ),
-        );
-      }).toList(),
+      ],
     );
   }
 }
@@ -47,15 +35,8 @@ class QuickStats extends StatelessWidget {
 class _StatCard extends StatefulWidget {
   final String value;
   final String label;
-  final IconData icon;
-  final bool isDark;
 
-  const _StatCard({
-    required this.value,
-    required this.label,
-    required this.icon,
-    required this.isDark,
-  });
+  const _StatCard({required this.value, required this.label});
 
   @override
   State<_StatCard> createState() => _StatCardState();
@@ -76,72 +57,47 @@ class _StatCardState extends State<_StatCard> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 220),
         curve: Curves.easeOutCubic,
-        transform: Matrix4.translationValues(0, isHovered ? -4 : 0, 0),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        transform: Matrix4.translationValues(0, isHovered ? -3 : 0, 0),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
           color: isHovered
               ? colors.surfaceElevated.withValues(alpha: isDark ? 0.94 : 1.0)
               : colors.surface.withValues(alpha: isDark ? 0.84 : 0.94),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isHovered
-                ? colors.primary
-                : colors.primary.withValues(alpha: 0.28),
-            width: 1.4,
+                ? colors.primary.withValues(alpha: 0.8)
+                : colors.primary.withValues(alpha: 0.22),
+            width: 1.2,
           ),
-          boxShadow: isHovered
-              ? [
-                  BoxShadow(
-                    color: colors.glowPrimary,
-                    blurRadius: 22,
-                    offset: const Offset(0, 6),
-                  ),
-                ]
-              : [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
+          boxShadow: [
+            BoxShadow(
+              color: isHovered
+                  ? colors.glowPrimary
+                  : Colors.black.withValues(alpha: isDark ? 0.22 : 0.05),
+              blurRadius: isHovered ? 20 : 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    colors.primary.withValues(alpha: 0.20),
-                    colors.accent.withValues(alpha: 0.20),
-                  ],
-                ),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                widget.icon,
-                color: colors.primary,
-                size: 20,
-              ),
+            GradientGlowText(
+              widget.value,
+              gradient: AppGradients.brandHorizontal,
+              style: typography.monoMetric.copyWith(fontSize: 22, height: 1.1),
             ),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GradientGlowText(
-                  widget.value,
-                  gradient: AppGradients.brandHorizontal,
-                  style: typography.monoMetric.copyWith(fontSize: 21),
-                ),
-                Text(
-                  widget.label,
-                  style: typography.bodySmall.copyWith(
-                    color: colors.textSecondary,
-                  ),
-                ),
-              ],
+            const SizedBox(height: 4),
+            Text(
+              widget.label,
+              style: typography.bodySmall.copyWith(
+                fontSize: 11.5,
+                color: colors.textSecondary,
+                height: 1.3,
+              ),
             ),
           ],
         ),

@@ -11,16 +11,17 @@ class HomeMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
-    final visualSize = (width * 0.58).clamp(190.0, 240.0);
+    final visualSize = (width * 0.55).clamp(180.0, 230.0);
 
     return HeroFuturisticBackdrop(
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.fromLTRB(
           AppSpacing.horizontalPagePadding(context),
-          48,
+          // Clears the floating navbar (~90px tall).
+          108,
           AppSpacing.horizontalPagePadding(context),
-          20,
+          24,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

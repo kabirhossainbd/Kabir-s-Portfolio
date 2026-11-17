@@ -15,6 +15,9 @@ class FuturisticButton extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
   final double borderRadius;
 
+  /// Solid fill that replaces the brand gradient for the primary variant.
+  final Color? color;
+
   const FuturisticButton({
     Key? key,
     required this.label,
@@ -23,6 +26,7 @@ class FuturisticButton extends StatefulWidget {
     this.variant = FuturisticButtonVariant.primary,
     this.padding,
     this.borderRadius = AppSpacing.radiusXl,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -35,7 +39,8 @@ class _FuturisticButtonState extends State<FuturisticButton> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorTokens>() ?? AppColorTokens.dark;
+    final colors =
+        Theme.of(context).extension<AppColorTokens>() ?? AppColorTokens.dark;
     final typography = Theme.of(context).extension<AppTypographyTokens>() ??
         AppTypographyTokens.fromColors(colors);
 
@@ -47,19 +52,23 @@ class _FuturisticButtonState extends State<FuturisticButton> {
     final bool isOutlined = widget.variant == FuturisticButtonVariant.outlined;
 
     final Color fgColor = isPrimary ? Colors.white : colors.textPrimary;
+    final Color glowColor = widget.color ?? colors.primary;
     final double scale = _isPressed
-        ? 0.94
+        ? 0.96
         : _isHovered
-            ? 1.03
+            ? 1.02
             : 1.0;
 
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) => setState(() => _isPressed = false),
-      onTapCancel: () => setState(() => _isPressed = false),
+    return Listener(
+      onPointerDown: (_) => setState(() => _isPressed = true),
+      onPointerUp: (_) => setState(() => _isPressed = false),
+      onPointerCancel: (_) => setState(() => _isPressed = false),
       child: MouseRegion(
         onEnter: (_) => setState(() => _isHovered = true),
-        onExit: (_) => setState(() => _isHovered = false),
+        onExit: (_) => setState(() {
+          _isHovered = false;
+          _isPressed = false;
+        }),
         child: AnimatedScale(
           scale: scale,
           duration: const Duration(milliseconds: 180),
@@ -67,73 +76,76 @@ class _FuturisticButtonState extends State<FuturisticButton> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 180),
             curve: Curves.easeOutCubic,
-            transform: Matrix4.translationValues(0.0, _isHovered ? -2.5 : 0.0, 0.0),
+            transform:
+                Matrix4.translationValues(0.0, _isHovered ? -2.0 : 0.0, 0.0),
             decoration: BoxDecoration(
-            borderRadius: radius,
-            gradient: isPrimary ? AppGradients.brandHorizontal : null,
-            color: isPrimary
-                ? null
-                : isOutlined
-                    ? (_isHovered
-                        ? colors.primary.withValues(alpha: 0.16)
-                        : colors.surface.withValues(alpha: 0.55))
-                    : (_isHovered
-                        ? colors.primary.withValues(alpha: 0.14)
-                        : Colors.transparent),
-            border: isOutlined
-                ? Border.all(
-                    color: _isHovered
-                        ? colors.accent
-                        : colors.primary.withValues(alpha: 0.75),
-                    width: 1.4,
-                  )
-                : null,
-            boxShadow: isPrimary
-                ? [
-                    BoxShadow(
-                      color: colors.primary.withValues(alpha: _isHovered ? 0.52 : 0.3),
-                      blurRadius: _isHovered ? 24 : 14,
-                      offset: const Offset(0, 4),
-                    ),
-                  ]
-                : _isHovered && isOutlined
-                    ? [
-                        BoxShadow(
-                          color: colors.glowPrimary,
-                          blurRadius: 18,
-                          offset: const Offset(0, 4),
-                        ),
-                      ]
-                    : null,
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: widget.onPressed,
               borderRadius: radius,
-              child: Padding(
-                padding: effectivePadding,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (widget.icon != null) ...[
-                      Icon(widget.icon, size: 17, color: fgColor),
-                      const SizedBox(width: AppSpacing.xs),
+              gradient: isPrimary && widget.color == null
+                  ? AppGradients.brandHorizontal
+                  : null,
+              color: isPrimary
+                  ? widget.color
+                  : isOutlined
+                      ? (_isHovered
+                          ? colors.primary.withValues(alpha: 0.16)
+                          : colors.surface.withValues(alpha: 0.55))
+                      : (_isHovered
+                          ? colors.primary.withValues(alpha: 0.14)
+                          : Colors.transparent),
+              border: isOutlined
+                  ? Border.all(
+                      color: _isHovered
+                          ? colors.accent
+                          : colors.primary.withValues(alpha: 0.75),
+                      width: 1.4,
+                    )
+                  : null,
+              boxShadow: isPrimary
+                  ? [
+                      BoxShadow(
+                        color: glowColor.withValues(
+                            alpha: _isHovered ? 0.45 : 0.26),
+                        blurRadius: _isHovered ? 24 : 14,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : _isHovered && isOutlined
+                      ? [
+                          BoxShadow(
+                            color: colors.glowPrimary,
+                            blurRadius: 18,
+                            offset: const Offset(0, 4),
+                          ),
+                        ]
+                      : null,
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: widget.onPressed,
+                borderRadius: radius,
+                child: Padding(
+                  padding: effectivePadding,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (widget.icon != null) ...[
+                        Icon(widget.icon, size: 17, color: fgColor),
+                        const SizedBox(width: AppSpacing.xs),
+                      ],
+                      Text(
+                        widget.label,
+                        style: typography.labelButton.copyWith(color: fgColor),
+                      ),
                     ],
-                    Text(
-                      widget.label,
-                      style: typography.labelButton.copyWith(color: fgColor),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
-}
-

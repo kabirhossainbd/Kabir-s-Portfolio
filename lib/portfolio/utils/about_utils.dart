@@ -3,7 +3,7 @@ import 'package:portpolio/portfolio/models/portfolio_models.dart';
 
 class AboutUtils {
   static const String aboutMeHeadline =
-      "I'm Md. Kabir Hossain, a Senior Flutter Developer with 5+ years of experience building scalable mobile applications, real-time communication systems, and modern digital experiences.";
+      "I turn complex product ideas into fast, reliable mobile apps — and I care as much about the architecture underneath as the experience on screen.";
 
   static const String aboutMeDetail =
       "My expertise includes developing production-ready applications, implementing real-time communication systems (Agora RTC, WebRTC, Socket.IO), integrating complex RESTful APIs, and creating smooth, user-focused mobile experiences with Clean Architecture, Provider, GetX, and BLoC. Throughout my professional journey, I've worked on diverse software products including live streaming platforms, Islamic utilities, enterprise expense trackers, and workforce management tools.";

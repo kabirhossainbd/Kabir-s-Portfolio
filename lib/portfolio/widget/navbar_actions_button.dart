@@ -7,10 +7,13 @@ import 'package:provider/provider.dart';
 class NavBarActionButton extends StatefulWidget {
   final String label;
   final int index;
+  final bool compact;
+
   const NavBarActionButton({
     Key? key,
     required this.label,
     required this.index,
+    this.compact = false,
   }) : super(key: key);
 
   @override
@@ -19,7 +22,6 @@ class NavBarActionButton extends StatefulWidget {
 
 class _NavBarActionButtonState extends State<NavBarActionButton> {
   bool isHovered = false;
-  bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,65 +36,55 @@ class _NavBarActionButtonState extends State<NavBarActionButton> {
       offset: const Offset(0, -10),
       delay: Duration(milliseconds: 60 + (widget.index * 35)),
       duration: const Duration(milliseconds: 360),
-      curve: Curves.easeOutCubic,
-      child: GestureDetector(
-        onTapDown: (_) => setState(() => isPressed = true),
-        onTapUp: (_) => setState(() => isPressed = false),
-        onTapCancel: () => setState(() => isPressed = false),
-        child: MouseRegion(
-          onEnter: (_) => setState(() => isHovered = true),
-          onExit: (_) => setState(() => isHovered = false),
-          child: InkWell(
-            onTap: () => context.read<ScrollProvider>().scroll(widget.index),
-            borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-            child: AnimatedScale(
-              scale: isPressed ? 0.94 : (isHovered ? 1.02 : 1.0),
-              duration: const Duration(milliseconds: 180),
-              curve: Curves.easeOutCubic,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 180),
-                curve: Curves.easeOutCubic,
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: BoxDecoration(
-                color: highlighted
-                    ? colors.primary.withValues(alpha: isActive ? 0.16 : 0.1)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-                border: Border.all(
-                  color: isActive
-                      ? colors.primary.withValues(alpha: 0.45)
+      child: MouseRegion(
+        onEnter: (_) => setState(() => isHovered = true),
+        onExit: (_) => setState(() => isHovered = false),
+        child: InkWell(
+          onTap: () => context.read<ScrollProvider>().scroll(widget.index),
+          borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOutCubic,
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.compact ? 9 : 13,
+              vertical: 8,
+            ),
+            decoration: BoxDecoration(
+              color: isActive
+                  ? colors.primary.withValues(alpha: 0.12)
+                  : isHovered
+                      ? colors.primary.withValues(alpha: 0.07)
                       : Colors.transparent,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  widget.label,
+                  style: typography.monoBadge.copyWith(
+                    fontSize: widget.compact ? 11 : 11.5,
+                    letterSpacing: widget.compact ? 0.6 : 1.0,
+                    fontWeight: FontWeight.w700,
+                    color: highlighted ? colors.primary : colors.textSecondary,
+                  ),
                 ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    widget.label,
-                    style: typography.monoBadge.copyWith(
-                      fontSize: 11.5,
-                      letterSpacing: 1.1,
-                      fontWeight: FontWeight.w700,
-                      color: highlighted ? colors.primary : colors.textSecondary,
-                    ),
+                const SizedBox(height: 3),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 220),
+                  curve: Curves.easeOutCubic,
+                  height: 2,
+                  width: isActive ? 18 : (isHovered ? 10 : 0),
+                  decoration: BoxDecoration(
+                    gradient: AppGradients.brandHorizontal,
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  const SizedBox(height: 2),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    height: 2.2,
-                    width: highlighted ? 20 : (isActive ? 18 : 0),
-                    decoration: BoxDecoration(
-                      gradient: AppGradients.brandHorizontal,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }

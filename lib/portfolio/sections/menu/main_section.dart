@@ -11,7 +11,6 @@ import 'package:portpolio/portfolio/widget/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -41,7 +40,6 @@ class _MainPageState extends State<MainPage> {
       key: drawerProvider.key,
       extendBodyBehindAppBar: true,
       drawer: !Responsive.isDesktop(context) ? const MobileDrawer() : null,
-
       body: SafeArea(
         child: Stack(
           children: [

@@ -70,7 +70,7 @@ class ProjectUtils {
       title: "Beestera Soccer",
       description:
           "Modern sports community and soccer training management app featuring player account registration, Clerk authentication, OAuth single sign-on, and Laravel backend integration.",
-      link: "https://github.com/kabirhossainbd/ISP-Management",
+      link: "https://play.google.com/store/apps/details?id=kc.app.socor&hl=en",
       banner: "assets/projects/beestera_banner.jpg",
       icon: "assets/projects/beestera_icon.png",
       category: ProjectCategory.consumer,

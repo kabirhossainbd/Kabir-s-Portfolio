@@ -11,9 +11,13 @@ class ScrollProvider extends ChangeNotifier {
   /// Exposes current normalized scroll progress (0.0 to 1.0) for live navbar progress bar.
   final ValueNotifier<double> scrollProgress = ValueNotifier<double>(0.0);
 
+  /// Number of sections reachable from the navigation (the footer is not).
+  static const int navigableSections = 8;
+
   int _activeIndex = 0;
   int get activeIndex => _activeIndex;
   double _lastCheckedOffset = -100;
+  bool _isNavigating = false;
 
   ScrollProvider() {
     scrollController.addListener(_onScroll);
@@ -38,6 +42,9 @@ class ScrollProvider extends ChangeNotifier {
       isHeroVisible.value = heroVisible;
     }
 
+    // Keep the clicked item highlighted while the jump animates.
+    if (_isNavigating) return;
+
     // Throttle active-section RenderBox lookups to >=28px scroll increments
     if ((offset - _lastCheckedOffset).abs() < 28) return;
     _lastCheckedOffset = offset;
@@ -45,19 +52,21 @@ class ScrollProvider extends ChangeNotifier {
   }
 
   void _updateActiveSection() {
-    int bestIndex = 0;
-    double bestDistance = double.infinity;
+    if (!scrollController.hasClients) return;
+    final position = scrollController.position;
 
-    for (int i = 0; i < sectionKeys.length; i++) {
-      final ctx = sectionKeys[i].currentContext;
-      if (ctx == null) continue;
-      final box = ctx.findRenderObject() as RenderBox?;
-      if (box == null || !box.attached) continue;
-      final topY = box.localToGlobal(Offset.zero).dy;
-      final distance = (topY - 140).abs();
-      if (topY <= 220 && distance < bestDistance) {
-        bestDistance = distance;
-        bestIndex = i;
+    int bestIndex = 0;
+    if (position.pixels >= position.maxScrollExtent - 4) {
+      // Short trailing sections never reach the top of the viewport.
+      bestIndex = navigableSections - 1;
+    } else {
+      final activationLine = position.viewportDimension * 0.4;
+      for (int i = 0; i < navigableSections && i < sectionKeys.length; i++) {
+        final ctx = sectionKeys[i].currentContext;
+        if (ctx == null) continue;
+        final box = ctx.findRenderObject() as RenderBox?;
+        if (box == null || !box.attached) continue;
+        if (box.localToGlobal(Offset.zero).dy <= activationLine) bestIndex = i;
       }
     }
 
@@ -101,19 +110,24 @@ class ScrollProvider extends ChangeNotifier {
         }
 
         final distance = (finalTarget - scrollController.offset).abs();
-        final durationMs = (150 + (distance * 0.04)).clamp(180.0, 320.0).toInt();
+        final durationMs =
+            (320 + (distance * 0.08)).clamp(360.0, 820.0).toInt();
 
-        scrollController.animateTo(
-          finalTarget,
-          duration: Duration(milliseconds: durationMs),
-          curve: Curves.fastOutSlowIn,
-        );
+        _isNavigating = true;
+        scrollController
+            .animateTo(
+              finalTarget,
+              duration: Duration(milliseconds: durationMs),
+              curve: Curves.easeInOutCubic,
+            )
+            .whenComplete(_finishNavigation);
       } else if (keyContext != null && keyContext.mounted) {
+        _isNavigating = true;
         Scrollable.ensureVisible(
           keyContext,
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.fastOutSlowIn,
-        );
+          duration: const Duration(milliseconds: 450),
+          curve: Curves.easeInOutCubic,
+        ).whenComplete(_finishNavigation);
       }
     }
 
@@ -122,6 +136,13 @@ class ScrollProvider extends ChangeNotifier {
     } else {
       Future.delayed(Duration(milliseconds: delayMs), executeScroll);
     }
+  }
+
+  void _finishNavigation() {
+    _isNavigating = false;
+    if (!scrollController.hasClients) return;
+    _lastCheckedOffset = scrollController.offset;
+    _updateActiveSection();
   }
 
   void scrollMobile(int index) {

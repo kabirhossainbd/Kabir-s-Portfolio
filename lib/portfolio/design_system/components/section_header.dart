@@ -23,7 +23,8 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorTokens>() ?? AppColorTokens.dark;
+    final colors =
+        Theme.of(context).extension<AppColorTokens>() ?? AppColorTokens.dark;
     final typography = Theme.of(context).extension<AppTypographyTokens>() ??
         AppTypographyTokens.fromColors(colors);
     final textAlign = alignment == CrossAxisAlignment.center
@@ -79,4 +80,3 @@ class SectionHeader extends StatelessWidget {
     );
   }
 }
-

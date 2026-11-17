@@ -13,135 +13,108 @@ class ExpertiseSection extends StatelessWidget {
     final colors = context.colors;
     final typography = context.typography;
 
-    return Container(
-      margin: const EdgeInsets.only(top: 40, bottom: 48),
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSpacing.horizontalPagePadding(context),
-      ),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
-        child: Column(
-          children: [
-            const SectionHeader(
-              eyebrow: 'CORE CAPABILITIES',
-              title: 'ENGINEERING EXPERTISE',
-              subtitle:
-                  'Specialized engineering skills across cross-platform architecture, live streaming, real-time engines, and performance optimization.',
-            ),
-            const SizedBox(height: AppSpacing.xl),
+    return PortfolioSection(
+      child: Column(
+        children: [
+          const SectionHeader(
+            eyebrow: 'CORE CAPABILITIES',
+            title: 'ENGINEERING EXPERTISE',
+            subtitle:
+                'Specialized engineering skills across cross-platform architecture, live streaming, real-time engines, and performance optimization.',
+          ),
+          const SizedBox(height: AppSpacing.xl),
+          ResponsiveGrid(
+            columnsForWidth: (w) => w >= 1100 ? 4 : (w >= 620 ? 2 : 1),
+            children:
+                AboutUtils.engineeringCapabilities.asMap().entries.map((entry) {
+              final index = entry.key;
+              final cap = entry.value;
 
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final crossAxisCount = constraints.maxWidth > 960
-                    ? 3
-                    : constraints.maxWidth > 640
-                        ? 2
-                        : 1;
-                final cardWidth =
-                    (constraints.maxWidth - ((crossAxisCount - 1) * 18)) /
-                        crossAxisCount;
-
-                return Wrap(
-                  spacing: 18,
-                  runSpacing: 18,
-                  children: AboutUtils.engineeringCapabilities
-                      .asMap()
-                      .entries
-                      .map((entry) {
-                    final index = entry.key;
-                    final cap = entry.value;
-
-                    return ScrollReveal(
-                      offset: const Offset(0, 24),
-                      delay: Duration(milliseconds: (index % 3) * 75),
-                      duration: const Duration(milliseconds: 480),
-                      child: SizedBox(
-                        width: cardWidth,
-                        child: FuturisticGlassCard(
-                          padding: const EdgeInsets.all(22),
-                          borderRadius: BorderRadius.circular(22),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      colors.primary.withValues(alpha: 0.20),
-                                      colors.accent.withValues(alpha: 0.20),
-                                    ],
-                                  ),
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: colors.primary.withValues(alpha: 0.35),
-                                  ),
-                                ),
-                                child: Icon(
-                                  cap.icon,
-                                  color: colors.primary,
-                                  size: 22,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              Text(
-                                cap.title,
-                                style: typography.titleMedium.copyWith(
-                                  fontSize: 15.5,
-                                  color: colors.textPrimary,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                cap.description,
-                                style: typography.bodySmall.copyWith(
-                                  fontSize: 12.5,
-                                  color: colors.textSecondary,
-                                  height: 1.48,
-                                ),
-                              ),
-                              if (cap.highlights.isNotEmpty) ...[
-                                const SizedBox(height: 14),
-                                Wrap(
-                                  spacing: 6,
-                                  runSpacing: 6,
-                                  children: cap.highlights.map((h) {
-                                    return Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 3,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: colors.primary.withValues(alpha: 0.1),
-                                        borderRadius: BorderRadius.circular(6),
-                                        border: Border.all(
-                                          color: colors.primary.withValues(alpha: 0.25),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        h,
-                                        style: typography.monoBadge.copyWith(
-                                          fontSize: 9.5,
-                                          color: colors.cyan,
-                                          letterSpacing: 0.3,
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ],
+              return ScrollReveal(
+                offset: const Offset(0, 24),
+                delay: Duration(milliseconds: (index % 4) * 70),
+                duration: const Duration(milliseconds: 480),
+                child: FuturisticGlassCard(
+                  padding: const EdgeInsets.all(22),
+                  borderRadius: BorderRadius.circular(22),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              colors.primary.withValues(alpha: 0.20),
+                              colors.accent.withValues(alpha: 0.20),
                             ],
                           ),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: colors.primary.withValues(alpha: 0.35),
+                          ),
+                        ),
+                        child: Icon(
+                          cap.icon,
+                          color: colors.primary,
+                          size: 22,
                         ),
                       ),
-                    );
-                  }).toList(),
-                );
-              },
-            ),
-          ],
-        ),
+                      const SizedBox(height: 16),
+                      Text(
+                        cap.title,
+                        style: typography.titleMedium.copyWith(
+                          fontSize: 15.5,
+                          color: colors.textPrimary,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        cap.description,
+                        style: typography.bodySmall.copyWith(
+                          fontSize: 12.5,
+                          color: colors.textSecondary,
+                          height: 1.48,
+                        ),
+                      ),
+                      if (cap.highlights.isNotEmpty) ...[
+                        const SizedBox(height: 14),
+                        Wrap(
+                          spacing: 6,
+                          runSpacing: 6,
+                          children: cap.highlights.map((h) {
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: colors.primary.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(
+                                  color: colors.primary.withValues(alpha: 0.25),
+                                ),
+                              ),
+                              child: Text(
+                                h,
+                                style: typography.monoBadge.copyWith(
+                                  fontSize: 9.5,
+                                  color: colors.cyan,
+                                  letterSpacing: 0.3,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
     );
   }

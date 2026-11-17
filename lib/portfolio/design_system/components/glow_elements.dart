@@ -45,7 +45,8 @@ class GlowBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorTokens>() ?? AppColorTokens.dark;
+    final colors =
+        Theme.of(context).extension<AppColorTokens>() ?? AppColorTokens.dark;
     final typography = Theme.of(context).extension<AppTypographyTokens>() ??
         AppTypographyTokens.fromColors(colors);
     final tone = accentColor ?? colors.primary;
@@ -118,4 +119,3 @@ class AmbientGlowOrb extends StatelessWidget {
     );
   }
 }
-

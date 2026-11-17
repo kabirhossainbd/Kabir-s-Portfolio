@@ -41,8 +41,8 @@ class _HeroFuturisticBackdropState extends State<HeroFuturisticBackdrop>
         x: rng.nextDouble(),
         y: rng.nextDouble(),
         radius: 1.3 + rng.nextDouble() * 2.0,
-        speedX: (rng.nextDouble() - 0.5) * 0.06,
-        speedY: -0.02 - rng.nextDouble() * 0.04,
+        speedX: 0.015 + rng.nextDouble() * 0.025,
+        speedY: 0.02 + rng.nextDouble() * 0.035,
         alpha: 0.22 + rng.nextDouble() * 0.42,
         isAccent: index % 3 == 0,
       );
@@ -54,7 +54,8 @@ class _HeroFuturisticBackdropState extends State<HeroFuturisticBackdrop>
     super.didChangeDependencies();
     ValueNotifier<bool>? notifier;
     try {
-      notifier = Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
+      notifier =
+          Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
     } on ProviderNotFoundException {
       notifier = null;
     }
@@ -195,7 +196,8 @@ class _HeroBackdropPainter extends CustomPainter {
             Colors.transparent,
           ],
           stops: const [0.0, 0.5, 1.0],
-        ).createShader(Rect.fromCircle(center: primaryCenter, radius: primaryRadius)),
+        ).createShader(
+            Rect.fromCircle(center: primaryCenter, radius: primaryRadius)),
     );
 
     canvas.drawCircle(
@@ -209,7 +211,8 @@ class _HeroBackdropPainter extends CustomPainter {
             Colors.transparent,
           ],
           stops: const [0.0, 0.5, 1.0],
-        ).createShader(Rect.fromCircle(center: accentCenter, radius: accentRadius)),
+        ).createShader(
+            Rect.fromCircle(center: accentCenter, radius: accentRadius)),
     );
 
     // Optional subtle pointer spotlight
@@ -233,7 +236,8 @@ class _HeroBackdropPainter extends CustomPainter {
     // 2. Subtle architectural grid via single Path (faster GPU draw)
     const gridSpacing = 56.0;
     final gridPaint = Paint()
-      ..color = (isDark ? Colors.white : primaryColor).withValues(alpha: isDark ? 0.036 : 0.045)
+      ..color = (isDark ? Colors.white : primaryColor)
+          .withValues(alpha: isDark ? 0.036 : 0.045)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
@@ -251,9 +255,11 @@ class _HeroBackdropPainter extends CustomPainter {
     // 3. Subtle floating particles
     final particlePaint = Paint();
     for (final p in particles) {
-      final px = ((p.x + p.speedX * progress * 4) % 1.0) * size.width;
-      final py = ((p.y + p.speedY * progress * 4) % 1.0) * size.height;
-      final point = Offset(px < 0 ? px + size.width : px, py < 0 ? py + size.height : py);
+      // Periodic drift so the 0→1 loop restart is seamless.
+      final phase = angle + p.x * 2 * math.pi;
+      final px = (p.x + p.speedX * math.sin(phase)) * size.width;
+      final py = (p.y + p.speedY * math.cos(phase)) * size.height;
+      final point = Offset(px, py);
 
       particlePaint.color = (p.isAccent ? accentColor : primaryColor)
           .withValues(alpha: isDark ? p.alpha : p.alpha * 0.65);

@@ -41,8 +41,7 @@ void main() {
     );
 
     await tester.pump(const Duration(milliseconds: 400));
-    final hiddenOpacity = tester.widget<Opacity>(find.byType(Opacity));
-    expect(hiddenOpacity.opacity, 0.0);
+    expect(_revealOpacity(tester, 'Hero Content'), 0.0);
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -58,7 +57,7 @@ void main() {
 
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
-    expect(find.byType(Opacity), findsNothing);
+    expect(_revealOpacity(tester, 'Hero Content'), 1.0);
     expect(find.text('Hero Content'), findsOneWidget);
   });
 
@@ -76,8 +75,17 @@ void main() {
 
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
-    expect(find.byType(Opacity), findsNothing);
+    expect(_revealOpacity(tester, 'Section Card'), 1.0);
     expect(find.text('Section Card'), findsOneWidget);
   });
+}
+
+double _revealOpacity(WidgetTester tester, String text) {
+  final fade = tester.widget<FadeTransition>(
+    find
+        .ancestor(of: find.text(text), matching: find.byType(FadeTransition))
+        .first,
+  );
+  return fade.opacity.value;
 }
 

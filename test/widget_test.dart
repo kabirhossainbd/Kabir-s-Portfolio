@@ -34,9 +34,19 @@ void main() {
     await pumpFullAppAtWidth(tester, 1440);
   });
 
+  testWidgets('Full app renders cleanly without overflow on small desktop',
+      (tester) async {
+    await pumpFullAppAtWidth(tester, 1100);
+  });
+
   testWidgets('Full app renders cleanly without overflow on tablet',
       (tester) async {
     await pumpFullAppAtWidth(tester, 900);
+  });
+
+  testWidgets('Full app renders cleanly without overflow on small tablet',
+      (tester) async {
+    await pumpFullAppAtWidth(tester, 768);
   });
 
   testWidgets('Full app renders cleanly without overflow on mobile',

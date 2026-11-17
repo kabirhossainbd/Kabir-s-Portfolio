@@ -77,7 +77,11 @@ class GlassContainer extends StatelessWidget {
           child: Container(
             padding: padding,
             decoration: BoxDecoration(
-              color: defaultColor,
+              // Opaque so the gradient rim doesn't tint the whole surface.
+              color: Color.alphaBlend(
+                defaultColor,
+                isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
+              ),
               borderRadius: innerRadius,
             ),
             child: child,

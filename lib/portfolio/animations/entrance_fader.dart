@@ -127,29 +127,51 @@ class EntranceFaderState extends State<EntranceFader>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _curvedAnimation,
+    return RevealTransition(
+      opacity: _curvedAnimation,
+      dx: _dxAnimation,
+      dy: _dyAnimation,
+      scale: _scaleAnimation,
       child: widget.child,
-      builder: (context, child) {
-        if (_controller.isCompleted) {
-          return child!;
-        }
-        final double opacity = _curvedAnimation.value.clamp(0.0, 1.0);
-        Widget content = Transform.translate(
-          offset: Offset(_dxAnimation.value, _dyAnimation.value),
-          child: child,
-        );
-        if (widget.beginScale != 1.0) {
-          content = Transform.scale(
-            scale: _scaleAnimation.value,
-            child: content,
+    );
+  }
+}
+
+/// Fade + glide + scale wrapper whose widget structure never changes between
+/// the animating and settled states, so the child subtree keeps its state.
+class RevealTransition extends StatelessWidget {
+  final Animation<double> opacity;
+  final Animation<double> dx;
+  final Animation<double> dy;
+  final Animation<double> scale;
+  final Widget child;
+
+  const RevealTransition({
+    Key? key,
+    required this.opacity,
+    required this.dx,
+    required this.dy,
+    required this.scale,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: opacity,
+      child: AnimatedBuilder(
+        animation: opacity,
+        child: child,
+        builder: (context, child) {
+          final s = scale.value;
+          return Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.diagonal3Values(s, s, 1.0)
+              ..setTranslationRaw(dx.value, dy.value, 0.0),
+            child: child,
           );
-        }
-        return Opacity(
-          opacity: opacity,
-          child: content,
-        );
-      },
+        },
+      ),
     );
   }
 }

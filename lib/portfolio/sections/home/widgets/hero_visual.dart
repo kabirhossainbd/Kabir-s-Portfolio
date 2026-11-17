@@ -25,7 +25,8 @@ class HeroFuturisticVisual extends StatefulWidget {
 class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
     with SingleTickerProviderStateMixin {
   late final AnimationController _orbitController;
-  final ValueNotifier<Offset> _normalizedTilt = ValueNotifier<Offset>(Offset.zero);
+  final ValueNotifier<Offset> _normalizedTilt =
+      ValueNotifier<Offset>(Offset.zero);
   ValueNotifier<bool>? _heroVisibleNotifier;
   bool _isHovered = false;
 
@@ -43,7 +44,8 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
     super.didChangeDependencies();
     ValueNotifier<bool>? notifier;
     try {
-      notifier = Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
+      notifier =
+          Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
     } on ProviderNotFoundException {
       notifier = null;
     }
@@ -170,12 +172,14 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
                     gradient: AppGradients.brandTriTone,
                     boxShadow: [
                       BoxShadow(
-                        color: colors.primary.withValues(alpha: _isHovered ? 0.45 : 0.28),
+                        color: colors.primary
+                            .withValues(alpha: _isHovered ? 0.45 : 0.28),
                         blurRadius: _isHovered ? 34 : 24,
                         spreadRadius: _isHovered ? 2 : 0,
                       ),
                       BoxShadow(
-                        color: colors.accent.withValues(alpha: _isHovered ? 0.30 : 0.16),
+                        color: colors.accent
+                            .withValues(alpha: _isHovered ? 0.30 : 0.16),
                         blurRadius: 28,
                         offset: const Offset(6, 8),
                       ),
@@ -209,49 +213,12 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
                                   colors: [
                                     Colors.transparent,
                                     Colors.transparent,
-                                    AppColors.backgroundDark.withValues(alpha: 0.72),
+                                    AppColors.backgroundDark
+                                        .withValues(alpha: 0.45),
                                   ],
-                                  stops: const [0.0, 0.58, 1.0],
+                                  stops: const [0.0, 0.7, 1.0],
                                 ),
                               ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 14,
-                            right: 14,
-                            bottom: 14,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'KABIR.DEV',
-                                  style: typography.monoBadge.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 10.5,
-                                    letterSpacing: 1.5,
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 3,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: colors.primary.withValues(alpha: 0.25),
-                                    borderRadius: BorderRadius.circular(999),
-                                    border: Border.all(
-                                      color: colors.primary.withValues(alpha: 0.6),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    '5+ YRS',
-                                    style: typography.monoBadge.copyWith(
-                                      color: Colors.white,
-                                      fontSize: 9.5,
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
                         ],
@@ -283,7 +250,8 @@ class _HeroFuturisticVisualState extends State<HeroFuturisticVisual>
             Positioned(
               bottom: 0,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                 decoration: BoxDecoration(
                   color: colors.surface.withValues(alpha: 0.92),
                   borderRadius: BorderRadius.circular(999),
@@ -401,7 +369,8 @@ class _PulsingBeaconState extends State<_PulsingBeacon>
     super.didChangeDependencies();
     ValueNotifier<bool>? notifier;
     try {
-      notifier = Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
+      notifier =
+          Provider.of<ScrollProvider>(context, listen: false).isHeroVisible;
     } on ProviderNotFoundException {
       notifier = null;
     }
@@ -545,4 +514,3 @@ class _OrbitalRingsPainter extends CustomPainter {
         oldDelegate.accentColor != accentColor;
   }
 }
-

@@ -41,7 +41,8 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ),
           alignment: Alignment.center,
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
+            constraints:
+                const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,

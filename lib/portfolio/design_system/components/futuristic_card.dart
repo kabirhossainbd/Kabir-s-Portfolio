@@ -4,7 +4,7 @@ import 'package:portpolio/portfolio/design_system/app_colors.dart';
 import 'package:portpolio/portfolio/design_system/app_spacing.dart';
 
 /// Reusable futuristic glass card with optional gradient rim, hover lift,
-/// and electric-blue / purple ambient glow.
+/// and a soft cursor-following spotlight.
 class FuturisticGlassCard extends StatefulWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
@@ -38,142 +38,164 @@ class FuturisticGlassCard extends StatefulWidget {
 class _FuturisticGlassCardState extends State<FuturisticGlassCard> {
   bool _isHovered = false;
   bool _isPressed = false;
-  Offset _cursorPos = Offset.zero;
+  Alignment? _spotlight;
+
+  void _updateSpotlight(Offset localPosition) {
+    final size = context.size;
+    if (size == null || size.isEmpty) return;
+    setState(() {
+      _spotlight = Alignment(
+        (localPosition.dx / size.width) * 2 - 1,
+        (localPosition.dy / size.height) * 2 - 1,
+      );
+    });
+  }
+
+  void _setPressed(bool value) {
+    if (widget.onTap == null || _isPressed == value) return;
+    setState(() => _isPressed = value);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorTokens>() ?? AppColorTokens.dark;
-    final radius = widget.borderRadius ?? BorderRadius.circular(AppSpacing.radiusLg);
+    final colors =
+        Theme.of(context).extension<AppColorTokens>() ?? AppColorTokens.dark;
+    final radius =
+        widget.borderRadius ?? BorderRadius.circular(AppSpacing.radiusLg);
     final hovered = widget.enableHoverGlow && _isHovered;
 
-    Widget buildBackgroundDecoration({required BorderRadius bgRadius}) {
-      return Container(
-        padding: widget.padding ?? const EdgeInsets.all(AppSpacing.lg),
+    // Opaque fill: a translucent one would let the gradient rim bleed through.
+    final baseColor = Color.alphaBlend(
+      colors.surface.withValues(alpha: hovered ? 0.96 : 0.86),
+      colors.background,
+    );
+
+    Widget buildSurface(BorderRadius bgRadius) {
+      final surface = AnimatedContainer(
+        duration: const Duration(milliseconds: 220),
+        curve: Curves.easeOutCubic,
         decoration: BoxDecoration(
-          color: colors.surface.withValues(alpha: hovered ? 0.93 : 0.84),
+          color: baseColor,
           borderRadius: bgRadius,
           border: widget.useGradientBorder
               ? null
               : Border.all(
-                  color: hovered ? colors.primary.withValues(alpha: 0.55) : colors.border,
-                  width: 1.0,
+                  color: hovered
+                      ? colors.primary.withValues(alpha: 0.55)
+                      : colors.border,
                 ),
-          gradient: hovered && _cursorPos != Offset.zero
-              ? RadialGradient(
-                  center: Alignment(
-                    ((_cursorPos.dx / (widget.width ?? 300)) - 0.5) * 2.0,
-                    ((_cursorPos.dy / (widget.height ?? 240)) - 0.5) * 2.0,
-                  ),
-                  radius: 0.9,
-                  colors: [
-                    colors.primary.withValues(alpha: 0.16),
-                    colors.accent.withValues(alpha: 0.05),
-                    colors.surface.withValues(alpha: 0.93),
-                  ],
-                  stops: const [0.0, 0.45, 1.0],
-                )
-              : null,
         ),
-        child: widget.child,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: bgRadius,
+            gradient: hovered && _spotlight != null
+                ? RadialGradient(
+                    center: _spotlight!,
+                    radius: 1.1,
+                    colors: [
+                      colors.primary.withValues(alpha: 0.10),
+                      colors.accent.withValues(alpha: 0.03),
+                      Colors.transparent,
+                    ],
+                    stops: const [0.0, 0.45, 1.0],
+                  )
+                : null,
+          ),
+          child: Padding(
+            padding: widget.padding ?? const EdgeInsets.all(AppSpacing.lg),
+            child: widget.child,
+          ),
+        ),
+      );
+
+      return ClipRRect(
+        borderRadius: bgRadius,
+        child: widget.blur > 0
+            ? BackdropFilter(
+                filter:
+                    ImageFilter.blur(sigmaX: widget.blur, sigmaY: widget.blur),
+                child: surface,
+              )
+            : surface,
       );
     }
 
-    Widget cardBody = ClipRRect(
-      borderRadius: radius,
-      child: widget.blur > 0
-          ? BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: widget.blur, sigmaY: widget.blur),
-              child: buildBackgroundDecoration(bgRadius: radius),
-            )
-          : buildBackgroundDecoration(bgRadius: radius),
-    );
-
+    Widget cardBody;
     if (widget.useGradientBorder) {
-      const borderStroke = 1.3;
-      final outerRadius = radius;
+      const borderStroke = 1.2;
       final resolvedTopLeft = radius.resolve(TextDirection.ltr).topLeft.x;
       final innerRadius = BorderRadius.circular(
         (resolvedTopLeft - borderStroke).clamp(0.0, 100.0),
       );
-
       cardBody = Container(
         padding: const EdgeInsets.all(borderStroke),
         decoration: BoxDecoration(
-          borderRadius: outerRadius,
+          borderRadius: radius,
           gradient: AppGradients.glassBorder(isHovered: hovered),
         ),
-        child: ClipRRect(
-          borderRadius: innerRadius,
-          child: widget.blur > 0
-              ? BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: widget.blur, sigmaY: widget.blur),
-                  child: buildBackgroundDecoration(bgRadius: innerRadius),
-                )
-              : buildBackgroundDecoration(bgRadius: innerRadius),
+        child: buildSurface(innerRadius),
+      );
+    } else {
+      cardBody = buildSurface(radius);
+    }
+
+    if (widget.onTap != null) {
+      cardBody = Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: widget.onTap,
+          borderRadius: radius,
+          child: cardBody,
         ),
       );
     }
 
-    final double scale = _isPressed
-        ? 0.97
-        : hovered
-            ? 1.01
-            : 1.0;
-
-    final animatedContainer = AnimatedScale(
-      scale: scale,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeOutCubic,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOutCubic,
-        width: widget.width,
-        height: widget.height,
-        margin: widget.margin,
-        transform: Matrix4.translationValues(0.0, hovered ? -4.0 : 0.0, 0.0),
-        decoration: BoxDecoration(
-        borderRadius: radius,
-        boxShadow: [
-          BoxShadow(
-            color: hovered ? colors.glowPrimary : Colors.black.withValues(alpha: 0.20),
-            blurRadius: hovered ? 28 : 14,
-            offset: Offset(0, hovered ? 8 : 4),
-          ),
-          if (hovered)
-            BoxShadow(
-              color: colors.glowAccent,
-              blurRadius: 22,
-              offset: const Offset(4, 4),
+    return MouseRegion(
+      onEnter: (e) {
+        setState(() => _isHovered = true);
+        _updateSpotlight(e.localPosition);
+      },
+      onHover: (e) => _updateSpotlight(e.localPosition),
+      onExit: (_) => setState(() {
+        _isHovered = false;
+        _isPressed = false;
+      }),
+      child: Listener(
+        onPointerDown: (_) => _setPressed(true),
+        onPointerUp: (_) => _setPressed(false),
+        onPointerCancel: (_) => _setPressed(false),
+        child: AnimatedScale(
+          scale: _isPressed ? 0.985 : 1.0,
+          duration: const Duration(milliseconds: 160),
+          curve: Curves.easeOutCubic,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 220),
+            curve: Curves.easeOutCubic,
+            width: widget.width,
+            height: widget.height,
+            margin: widget.margin,
+            transform:
+                Matrix4.translationValues(0.0, hovered ? -3.0 : 0.0, 0.0),
+            decoration: BoxDecoration(
+              borderRadius: radius,
+              boxShadow: [
+                BoxShadow(
+                  color: hovered
+                      ? colors.glowPrimary
+                      : Colors.black.withValues(
+                          alpha: Theme.of(context).brightness == Brightness.dark
+                              ? 0.18
+                              : 0.06,
+                        ),
+                  blurRadius: hovered ? 26 : 14,
+                  offset: Offset(0, hovered ? 10 : 4),
+                ),
+              ],
             ),
-        ],
-      ),
-      child: widget.onTap != null
-          ? Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: widget.onTap,
-                borderRadius: radius,
-                child: cardBody,
-              ),
-            )
-          : cardBody,
-      ),
-    );
-
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) => setState(() => _isPressed = false),
-      onTapCancel: () => setState(() => _isPressed = false),
-      child: MouseRegion(
-        onEnter: (e) => setState(() {
-          _isHovered = true;
-          _cursorPos = e.localPosition;
-        }),
-        onHover: (e) => setState(() => _cursorPos = e.localPosition),
-        onExit: (_) => setState(() => _isHovered = false),
-        child: animatedContainer,
+            child: cardBody,
+          ),
+        ),
       ),
     );
   }
 }
-

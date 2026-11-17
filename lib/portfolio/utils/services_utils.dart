@@ -1,62 +1,61 @@
+import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/models/portfolio_models.dart';
-import 'package:portpolio/portfolio/utils/utils.dart';
 
 class ServicesUtils {
   static const List<ServiceItem> services = [
     ServiceItem(
-      title: "Flutter Mobile Application Development",
+      title: 'MVP to Store Launch',
       description:
-          "End-to-end cross-platform app engineering for iOS and Android with Clean Architecture, responsive UI, state management, and high-performance Dart code.",
-      iconAsset: StaticUtils.appDev,
+          'Take a product idea from wireframes to a published iOS and Android app, with an architecture that is ready to grow.',
+      icon: Icons.rocket_launch_rounded,
+      highlights: [
+        'Scoping & architecture',
+        'Cross-platform build',
+        'Store submission'
+      ],
     ),
     ServiceItem(
-      title: "Live Streaming & Agora RTC Implementation",
+      title: 'Live Streaming & Social Apps',
       description:
-          "Integrating ultra-low latency live video broadcasting, voice channels, co-hosting streams, PK battles, and virtual gifting workflows.",
-      iconAsset: StaticUtils.rapid,
+          'Video and voice rooms, co-hosting, PK battles and virtual gifting built on Agora RTC with low-latency playback.',
+      icon: Icons.live_tv_rounded,
+      highlights: ['Agora RTC', 'Co-hosting & PK battles', 'Virtual gifting'],
     ),
     ServiceItem(
-      title: "Real-Time Communication & Chat Solutions",
+      title: 'Real-Time Chat & Messaging',
       description:
-          "Building instant messaging, group chat, voice notes, media exchange, and offline messaging queues with Socket.IO and WebSockets.",
-      iconAsset: StaticUtils.blog,
+          'One-to-one and group chat with media, voice notes and delivery states that keep working on flaky networks.',
+      icon: Icons.forum_rounded,
+      highlights: [
+        'Socket.IO / WebSockets',
+        'Media & voice notes',
+        'Offline queues'
+      ],
     ),
     ServiceItem(
-      title: "REST API & Backend Integration",
+      title: 'Enterprise & Internal Tools',
       description:
-          "Designing robust repository layers, Dio client interceptors, JWT/OAuth2 token refresh queues, and seamless communication with Laravel/Node backends.",
-      iconAsset: StaticUtils.uiux,
+          'Expense, field-operations and approval apps that plug into your existing ERP or REST backend securely.',
+      icon: Icons.business_center_rounded,
+      highlights: [
+        'Role-based access',
+        'Offline-first data',
+        'ERP / REST integration'
+      ],
     ),
     ServiceItem(
-      title: "Firebase & Cloud Infrastructure",
+      title: 'App Rescue & Modernization',
       description:
-          "Setting up Firebase Authentication, Firestore databases, Cloud Messaging (FCM), Crashlytics analytics, and real-time cloud data pipelines.",
-      iconAsset: StaticUtils.openSource,
+          'Audit and refactor legacy Flutter codebases — fixing crashes, jank and outdated dependencies without a rewrite.',
+      icon: Icons.build_circle_rounded,
+      highlights: ['Code audit', 'Clean Architecture', 'Performance tuning'],
     ),
     ServiceItem(
-      title: "Mobile App Maintenance & Code Refactoring",
+      title: 'Release & Ongoing Support',
       description:
-          "Upgrading legacy codebase architectures to Clean Architecture, fixing memory leaks, updating packages, and boosting application speed.",
-      iconAsset: StaticUtils.appDev,
-    ),
-    ServiceItem(
-      title: "Application Performance Optimization",
-      description:
-          "Eliminating frame drops, offloading heavy processing to Dart isolates, optimizing image asset caching, and maintaining smooth 60/120fps UI.",
-      iconAsset: StaticUtils.rapid,
-    ),
-    ServiceItem(
-      title: "App Store & Google Play Store Deployment",
-      description:
-          "Managing release builds, keystore signing, App Store Connect metadata, Google Play Store publishing, and automated CI/CD pipeline setup.",
-      iconAsset: StaticUtils.openSource,
+          'Automated builds, signing and store releases, plus crash monitoring and iteration after launch.',
+      icon: Icons.published_with_changes_rounded,
+      highlights: ['CI/CD pipelines', 'Store releases', 'Crash monitoring'],
     ),
   ];
-
-  static List<String> get servicesIcons =>
-      services.map((s) => s.iconAsset).toList();
-  static List<String> get servicesTitles =>
-      services.map((s) => s.title).toList();
-  static List<String> get servicesDescription =>
-      services.map((s) => s.description).toList();
 }

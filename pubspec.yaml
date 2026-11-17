@@ -16,11 +16,8 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
-  animated_text_kit: ^4.2.2
   shared_preferences: ^2.1.2
   url_launcher: ^6.1.11
-  flip_card: ^0.6.0
-  carousel_slider: ^5.0.0
   provider: ^6.0.1
 
 

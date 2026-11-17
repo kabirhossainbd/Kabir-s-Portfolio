@@ -34,8 +34,8 @@ abstract final class AppSpacing {
     return Responsive.value<double>(
       context,
       mobile: 40.0,
-      tablet: 56.0,
-      desktop: 72.0,
+      tablet: 48.0,
+      desktop: 56.0,
     );
   }
 
@@ -46,4 +46,3 @@ abstract final class AppSpacing {
     );
   }
 }
-
