@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:portpolio/portfolio/design_system/app_colors.dart';
 
 import 'app_core_theme.dart';
 
 class AppTheme {
   static final _core = AppCoreTheme(
-    shadowSub: Colors.blue.withAlpha(100),
-    primary: Colors.blue,
-    primaryLight: Colors.blue.withAlpha(100),
-    textSub: const Color(0xff141414),
-    textSub2: const Color(0xff696969),
+    shadowSub: AppColors.electricBlue.withValues(alpha: 0.22),
+    primary: AppColors.electricBlue,
+    primaryLight: AppColors.cyanHighlight,
+    textSub: AppColors.textSecondaryDark,
+    textSub2: AppColors.textMutedDark,
   );
 
   static AppCoreTheme light = _core.copyWith(
-    background: Colors.white,
-    backgroundSub: const Color(0xffF0F0F0),
-    scaffold: const Color(0xfffefefe),
-    scaffoldDark: const Color(0xfffcfcfc),
-    text: const Color(0xff484848),
-    textSub2: Colors.black.withOpacity(0.25),
+    background: AppColors.surfaceLight,
+    backgroundSub: AppColors.surfaceElevatedLight,
+    scaffold: AppColors.backgroundLight,
+    scaffoldDark: const Color(0xFFE2E8F0),
+    text: AppColors.textPrimaryLight,
+    textSub2: AppColors.textSecondaryLight,
   );
 
   static AppCoreTheme dark = _core.copyWith(
-    background: Colors.grey[900],
-    backgroundSub: const Color(0xff1c1c1e),
-    scaffold: const Color(0xff0e0e0e),
-    text: Colors.white,
-    textSub2: Colors.white.withOpacity(0.25),
+    primary: AppColors.electricBlue,
+    background: AppColors.surfaceDark,
+    backgroundSub: AppColors.backgroundDark,
+    scaffold: AppColors.backgroundDark,
+    text: AppColors.textPrimaryDark,
+    textSub2: AppColors.textSecondaryDark,
   );
 
   static AppCoreTheme? c;
@@ -38,3 +40,4 @@ class AppTheme {
   static bool isDark(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark;
 }
+

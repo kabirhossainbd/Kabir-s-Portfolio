@@ -4,12 +4,12 @@ import 'package:portpolio/portfolio/provider/drawer_provider.dart';
 import 'package:portpolio/portfolio/provider/scroll_provider.dart';
 import 'package:portpolio/portfolio/sections/menu/main_section.dart';
 import 'package:provider/provider.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import '/portfolio/configs/core_theme.dart' as theme;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy();
+  usePathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -70,6 +70,9 @@ class _MaterialChildState extends State<MaterialChild> {
       routes: {
         "/": (context) => const MainPage(),
       },
+      onUnknownRoute: (_) => MaterialPageRoute(
+        builder: (_) => const MainPage(),
+      ),
     );
   }
 }

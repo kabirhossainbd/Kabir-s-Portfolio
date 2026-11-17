@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:portpolio/portfolio/provider/scroll_provider.dart';
 import 'package:portpolio/portfolio/utils/utils.dart';
@@ -12,12 +10,24 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollProvider = Provider.of<ScrollProvider>(context);
+    final scrollProvider = Provider.of<ScrollProvider>(context, listen: false);
 
-    return ListView.builder(
+    return SingleChildScrollView(
       controller: scrollProvider.controller,
-      itemCount: BodyUtils.views.length,
-      itemBuilder: (context, index) => BodyUtils.views[index],
+      child: Column(
+        children: BodyUtils.views
+            .asMap()
+            .entries
+            .map(
+              (e) => RepaintBoundary(
+                child: KeyedSubtree(
+                  key: scrollProvider.sectionKeys[e.key],
+                  child: e.value,
+                ),
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }

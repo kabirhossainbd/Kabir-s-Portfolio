@@ -1,29 +1,61 @@
-
-
-import 'package:portpolio/portfolio/utils/utils.dart';
+import 'package:flutter/material.dart';
+import 'package:portpolio/portfolio/models/portfolio_models.dart';
 
 class ServicesUtils {
-  static const List<String> servicesIcons = [
-    StaticUtils.appDev,
-    StaticUtils.uiux,
-    StaticUtils.rapid,
-    StaticUtils.blog,
-    StaticUtils.openSource,
-  ];
-
-  static const List<String> servicesTitles = [
-    "Mobile Application Development",
-    "UI/UX Design",
-    "Application Prototyping",
-    "Blog",
-    "Open Source - GitHub",
-  ];
-
-  static const List<String> servicesDescription = [
-    "Mobile Development with Flutter\nResponsive Design\n- Splash Screen\n- Firebase Auth/Cloud\n- REST APIs\n- Maps integration and more...!",
-    "UI/UX Design\n- Adobe XD\n- Mobile & Web design\n- Interactive UI designs\n- Responsiveness\n- Prototyping and more..!",
-    "Prototyping with Flutter\n- Working with MVP\n- Fast and functional prototype",
-    "Blog Digital Platform\n-Post and Share\n-Create new content",
-    "Open Source Projects on Github\n- README.md Structure\n- Good documentation\n- Open projects and more...!",
+  static const List<ServiceItem> services = [
+    ServiceItem(
+      title: 'MVP to Store Launch',
+      description:
+          'Take a product idea from wireframes to a published iOS and Android app, with an architecture that is ready to grow.',
+      icon: Icons.rocket_launch_rounded,
+      highlights: [
+        'Scoping & architecture',
+        'Cross-platform build',
+        'Store submission'
+      ],
+    ),
+    ServiceItem(
+      title: 'Live Streaming & Social Apps',
+      description:
+          'Video and voice rooms, co-hosting, PK battles and virtual gifting built on Agora RTC with low-latency playback.',
+      icon: Icons.live_tv_rounded,
+      highlights: ['Agora RTC', 'Co-hosting & PK battles', 'Virtual gifting'],
+    ),
+    ServiceItem(
+      title: 'Real-Time Chat & Messaging',
+      description:
+          'One-to-one and group chat with media, voice notes and delivery states that keep working on flaky networks.',
+      icon: Icons.forum_rounded,
+      highlights: [
+        'Socket.IO / WebSockets',
+        'Media & voice notes',
+        'Offline queues'
+      ],
+    ),
+    ServiceItem(
+      title: 'Enterprise & Internal Tools',
+      description:
+          'Expense, field-operations and approval apps that plug into your existing ERP or REST backend securely.',
+      icon: Icons.business_center_rounded,
+      highlights: [
+        'Role-based access',
+        'Offline-first data',
+        'ERP / REST integration'
+      ],
+    ),
+    ServiceItem(
+      title: 'App Rescue & Modernization',
+      description:
+          'Audit and refactor legacy Flutter codebases — fixing crashes, jank and outdated dependencies without a rewrite.',
+      icon: Icons.build_circle_rounded,
+      highlights: ['Code audit', 'Clean Architecture', 'Performance tuning'],
+    ),
+    ServiceItem(
+      title: 'Release & Ongoing Support',
+      description:
+          'Automated builds, signing and store releases, plus crash monitoring and iteration after launch.',
+      icon: Icons.published_with_changes_rounded,
+      highlights: ['CI/CD pipelines', 'Store releases', 'Crash monitoring'],
+    ),
   ];
 }

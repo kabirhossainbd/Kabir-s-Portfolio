@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-
-  <style>
-      .container {
-        width: 100vw;
-        height: 100vh;
-        display: flex; /* Default Axis is X*/
-        justify-content: center; /* Main Axis */
-        align-items: center; /* Cross Axis */
-      }
-      .indicator{
-        width: 50vw;
-      }
-  </style>
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="This is personal portfolio site.">
+  <meta name="description" content="Md. Kabir Hossain — Senior Flutter Developer & Mobile App Architect with 5+ years of experience building scalable cross-platform mobile and web products.">
+  <meta name="keywords" content="Md. Kabir Hossain, Kabir Hossain, Senior Flutter Developer, Mobile App Architect, Flutter Portfolio, Clean Architecture, BLoC, Kotlin, Dart">
+  <meta name="author" content="Md. Kabir Hossain">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#080D19">
+
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Md. Kabir Hossain | Senior Flutter Developer &amp; Mobile Architect">
+  <meta property="og:description" content="5+ years building scalable, high-performance Flutter &amp; cross-platform mobile apps with Clean Architecture and BLoC.">
+  <meta property="og:url" content="https://kabirhossainbd.github.io/Kabir-s-Portfolio/">
+  <meta property="og:image" content="icons/Icon-512.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Md. Kabir Hossain | Senior Flutter Developer &amp; Mobile Architect">
+  <meta name="twitter:description" content="5+ years building scalable, high-performance Flutter &amp; cross-platform mobile apps with Clean Architecture and BLoC.">
+  <meta name="twitter:image" content="icons/Icon-512.png">
+
+  <link rel="canonical" href="https://kabirhossainbd.github.io/Kabir-s-Portfolio/">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Md. Kabir Hossain",
+    "jobTitle": "Senior Flutter Developer & Mobile App Architect",
+    "url": "https://kabirhossainbd.github.io/Kabir-s-Portfolio/",
+    "sameAs": [
+      "https://github.com/kabirhossainbd",
+      "https://www.linkedin.com/in/mdkabirhossainbd/"
+    ],
+    "knowsAbout": ["Flutter", "Dart", "Kotlin", "Clean Architecture", "BLoC", "Firebase"]
+  }
+  </script>
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,63 +51,166 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>Kabir's Portfolio</title>
+  <title>Md. Kabir Hossain | Mobile Architect & Senior Flutter Engineer</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
-</head>
-<body>
+  <style>
+    body {
+      background-color: #080D19;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
 
-<div id="loading_indicator" class="container">
-  <img class="indicator" src="loader.gif" />
-</div>
+    #loading-container {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(22, 119, 255, 0.16) 0%, rgba(155, 114, 255, 0.08) 34%, #080D19 72%);
+      z-index: 99999;
+      transition: opacity 0.18s cubic-bezier(0.22, 1, 0.36, 1), transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
 
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
+    #loading-container.hidden {
+      opacity: 0;
+      transform: scale(1.03);
+      pointer-events: none;
+    }
+
+    .loader-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeUpIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .logo-box {
+      padding: 14px 26px;
+      border-radius: 22px;
+      background: rgba(14, 22, 41, 0.88);
+      border: 1.5px solid rgba(22, 119, 255, 0.38);
+      box-shadow: 0 0 28px rgba(22, 119, 255, 0.24), 4px 4px 24px rgba(155, 114, 255, 0.14);
+      font-family: 'Sora', 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      color: #F8FAFC;
+      letter-spacing: 0.8px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-box span {
+      color: #1677FF;
+    }
+
+
+      .progress-track {
+        width: 156px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.09);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-bar {
+        position: absolute;
+        top: 0;
+        left: -45%;
+        width: 45%;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #1677FF, #9B72FF);
+        animation: indeterminateSlide 1.05s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+
+      .loading-subtext {
+        margin-top: 16px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 600;
+        color: #94A3B8;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+      }
+
+        @keyframes fadeUpIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px) scale(0.96);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
         }
-      });
-    });
+
+        @keyframes indeterminateSlide {
+          0% {
+            left: -45%;
+          }
+
+          100% {
+            left: 105%;
+          }
+        }
+  </style>
+</head>
+
+<body>
+  <div id="loading-container">
+    <div class="loader-card">
+      <div class="logo-box">Kabir<span>.dev</span></div>
+      <div class="progress-track">
+        <div class="progress-bar"></div>
+      </div>
+      <div class="loading-subtext">Mobile Architect &bull; Flutter</div>
+    </div>
+  </div>
+  <script>
+    if (document.fonts && document.fonts.load) {
+      Promise.all([
+        document.fonts.load('700 1em Sora'),
+        document.fonts.load('400 1em Inter'),
+        document.fonts.load('600 1em "JetBrains Mono"')
+      ]).catch(function () {});
+    }
+    var loaderHidden = false;
+    function hideLoader() {
+      if (loaderHidden) return;
+      loaderHidden = true;
+      var loader = document.getElementById('loading-container');
+      if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(function () {
+          loader.style.display = 'none';
+        }, 200);
+      }
+    }
+    window.addEventListener('flutter-first-frame', hideLoader);
+    setTimeout(hideLoader, 8000);
   </script>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCKZ9B4_ObWtM-Y3I18wrRftbiWL_q7yio",
-    authDomain: "kabir-s-portfolio.firebaseapp.com",
-    projectId: "kabir-s-portfolio",
-    storageBucket: "kabir-s-portfolio.appspot.com",
-    messagingSenderId: "223927331600",
-    appId: "1:223927331600:web:dac0d449fac56d91ac9395",
-    measurementId: "G-Z8BHCD87C5"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-
-
+  <noscript>
+    <div style="color:#F8FAFC;background:#080D19;padding:32px;font-family:sans-serif;max-width:720px;margin:40px auto;">
+      <h1>Md. Kabir Hossain — Senior Flutter Developer &amp; Mobile Architect</h1>
+      <p>5+ years of experience building scalable cross-platform mobile applications with Flutter, Clean Architecture, BLoC, and Kotlin.</p>
+      <p><a href="https://github.com/kabirhossainbd" style="color:#1677FF;">GitHub</a> &bull; <a href="https://www.linkedin.com/in/mdkabirhossainbd/" style="color:#1677FF;">LinkedIn</a></p>
+    </div>
+  </noscript>
+  <script src="flutter_bootstrap.js" async></script>
 </body>
+
 </html>
