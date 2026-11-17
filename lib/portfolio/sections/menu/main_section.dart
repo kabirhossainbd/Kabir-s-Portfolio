@@ -49,7 +49,9 @@ class _MainPageState extends State<MainPage> {
               isRevealed: !_showSplash,
               child: Stack(
                 children: [
-                  const Body(),
+                  const SelectionArea(
+                    child: Body(),
+                  ),
                   const ArrowOnTop(),
                   Responsive.isTablet(context) || Responsive.isMobile(context)
                       ? const NavBarTablet()

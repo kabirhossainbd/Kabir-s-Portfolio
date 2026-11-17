@@ -52,8 +52,9 @@ class _ProjectCardState extends State<ProjectCard> {
               padding: EdgeInsets.zero,
               borderRadius: BorderRadius.circular(24),
               borderGradient: AppGradients.glassBorder(isHovered: true),
-              child: SingleChildScrollView(
-                child: Column(
+              child: SelectionArea(
+                child: SingleChildScrollView(
+                  child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -265,7 +266,8 @@ class _ProjectCardState extends State<ProjectCard> {
               ),
             ),
           ),
-        );
+        ),
+      );
       },
     );
   }
