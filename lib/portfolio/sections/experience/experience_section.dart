@@ -76,28 +76,28 @@ class ExperienceSection extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                    Wrap(
+                                      alignment: WrapAlignment.spaceBetween,
+                                      crossAxisAlignment: WrapCrossAlignment.center,
+                                      spacing: 10,
+                                      runSpacing: 6,
                                       children: [
-                                        Expanded(
-                                          child: Text(
-                                            item.role,
-                                            style: typography.headingMedium.copyWith(
-                                              fontSize: 18,
-                                              color: colors.textPrimary,
-                                            ),
+                                        Text(
+                                          item.role,
+                                          style: typography.headingMedium.copyWith(
+                                            fontSize: 17.5,
+                                            color: colors.textPrimary,
+                                            fontWeight: FontWeight.w700,
                                           ),
                                         ),
-                                        const SizedBox(width: 10),
                                         Container(
                                           padding: const EdgeInsets.symmetric(
-                                            horizontal: 12,
-                                            vertical: 5,
+                                            horizontal: 10,
+                                            vertical: 4,
                                           ),
                                           decoration: BoxDecoration(
                                             color: colors.primary.withValues(alpha: 0.14),
-                                            borderRadius: BorderRadius.circular(12),
+                                            borderRadius: BorderRadius.circular(10),
                                             border: Border.all(
                                               color: colors.primary.withValues(alpha: 0.35),
                                             ),
@@ -105,8 +105,8 @@ class ExperienceSection extends StatelessWidget {
                                           child: Text(
                                             item.period,
                                             style: typography.monoBadge.copyWith(
-                                              fontSize: 10.5,
-                                              letterSpacing: 0.5,
+                                              fontSize: 10,
+                                              letterSpacing: 0.4,
                                               color: colors.primary,
                                             ),
                                           ),
