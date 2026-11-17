@@ -27,65 +27,71 @@ class NavbarDesktop extends StatelessWidget {
         delay: const Duration(milliseconds: 20),
         duration: const Duration(milliseconds: 460),
         curve: Curves.easeOutCubic,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          child: GlassContainer(
-            blur: 0,
-            color: (isDark ? AppColors.surfaceDark : Colors.white)
-                .withValues(alpha: 0.94),
-            borderRadius: BorderRadius.circular(24),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-            borderColor: isDark
-                ? Colors.white.withValues(alpha: 0.12)
-                : const Color(0xFF0066FF).withValues(alpha: 0.12),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              child: GlassContainer(
+                blur: 0,
+                color: (isDark ? AppColors.surfaceDark : Colors.white)
+                    .withValues(alpha: 0.94),
+                borderRadius: BorderRadius.circular(24),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                borderColor: isDark
+                    ? Colors.white.withValues(alpha: 0.12)
+                    : const Color(0xFF0066FF).withValues(alpha: 0.12),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const NavBarLogo(),
-                    const Spacer(),
                     Row(
-                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        ...NavBarUtils.names.asMap().entries.map(
-                              (e) => NavBarActionButton(
-                                label: e.value,
-                                index: e.key,
+                        const NavBarLogo(),
+                        const Spacer(),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ...NavBarUtils.names.asMap().entries.map(
+                                  (e) => NavBarActionButton(
+                                    label: e.value,
+                                    index: e.key,
+                                  ),
+                                ),
+                            const SizedBox(width: 16),
+                            EntranceFader(
+                              offset: const Offset(0, -10),
+                              delay: const Duration(milliseconds: 180),
+                              duration: const Duration(milliseconds: 380),
+                              child: FuturisticButton(
+                                label: 'Resume',
+                                icon: Icons.download_rounded,
+                                borderRadius: 14,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 18,
+                                  vertical: 11,
+                                ),
+                                onPressed: () => openURL(StaticUtils.resume),
                               ),
                             ),
-                        const SizedBox(width: 16),
-                        EntranceFader(
-                          offset: const Offset(0, -10),
-                          delay: const Duration(milliseconds: 180),
-                          duration: const Duration(milliseconds: 380),
-                          child: FuturisticButton(
-                            label: 'Resume',
-                            icon: Icons.download_rounded,
-                            borderRadius: 14,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 18,
-                              vertical: 11,
+                            const SizedBox(width: 14),
+                            _ThemeToggleButton(
+                              isDark: isDark,
+                              onTap: () {
+                                appProvider.setTheme(
+                                  isDark ? ThemeMode.light : ThemeMode.dark,
+                                );
+                              },
                             ),
-                            onPressed: () => openURL(StaticUtils.resume),
-                          ),
-                        ),
-                        const SizedBox(width: 14),
-                        _ThemeToggleButton(
-                          isDark: isDark,
-                          onTap: () {
-                            appProvider.setTheme(
-                              isDark ? ThemeMode.light : ThemeMode.dark,
-                            );
-                          },
+                          ],
                         ),
                       ],
                     ),
+                    const SizedBox(height: 6),
+                    const _NavBarProgressBar(),
                   ],
                 ),
-                const SizedBox(height: 6),
-                const _NavBarProgressBar(),
-              ],
+              ),
             ),
           ),
         ),
@@ -109,50 +115,56 @@ class NavBarTablet extends StatelessWidget {
         delay: const Duration(milliseconds: 20),
         duration: const Duration(milliseconds: 420),
         curve: Curves.easeOutCubic,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: GlassContainer(
-            blur: 0,
-            color: (isDark ? AppColors.surfaceDark : Colors.white)
-                .withValues(alpha: 0.94),
-            borderRadius: BorderRadius.circular(20),
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-            borderColor: isDark
-                ? Colors.white.withValues(alpha: 0.12)
-                : const Color(0xFF0066FF).withValues(alpha: 0.12),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: GlassContainer(
+                blur: 0,
+                color: (isDark ? AppColors.surfaceDark : Colors.white)
+                    .withValues(alpha: 0.94),
+                borderRadius: BorderRadius.circular(20),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                borderColor: isDark
+                    ? Colors.white.withValues(alpha: 0.12)
+                    : const Color(0xFF0066FF).withValues(alpha: 0.12),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                      highlightColor: Colors.white54,
-                      splashRadius: AppDimensions.normalize(10),
-                      onPressed: () {
-                        drawerProvider.key.currentState!.openDrawer();
-                      },
-                      icon: Icon(
-                        Icons.menu_rounded,
-                        color: isDark ? Colors.white : const Color(0xFF0F172A),
-                        size: 24,
-                      ),
+                    Row(
+                      children: [
+                        IconButton(
+                          highlightColor: Colors.white54,
+                          splashRadius: AppDimensions.normalize(10),
+                          onPressed: () {
+                            drawerProvider.key.currentState!.openDrawer();
+                          },
+                          icon: Icon(
+                            Icons.menu_rounded,
+                            color: isDark ? Colors.white : const Color(0xFF0F172A),
+                            size: 24,
+                          ),
+                        ),
+                        const Spacer(),
+                        const NavBarLogo(),
+                        const Spacer(),
+                        _ThemeToggleButton(
+                          isDark: isDark,
+                          onTap: () {
+                            appProvider.setTheme(
+                              isDark ? ThemeMode.light : ThemeMode.dark,
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                    const Spacer(),
-                    const NavBarLogo(),
-                    const Spacer(),
-                    _ThemeToggleButton(
-                      isDark: isDark,
-                      onTap: () {
-                        appProvider.setTheme(
-                          isDark ? ThemeMode.light : ThemeMode.dark,
-                        );
-                      },
-                    ),
+                    const SizedBox(height: 4),
+                    const _NavBarProgressBar(),
                   ],
                 ),
-                const SizedBox(height: 4),
-                const _NavBarProgressBar(),
-              ],
+              ),
             ),
           ),
         ),
@@ -226,4 +238,3 @@ class _NavBarProgressBar extends StatelessWidget {
     );
   }
 }
-

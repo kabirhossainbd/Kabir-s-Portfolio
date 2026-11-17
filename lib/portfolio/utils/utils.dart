@@ -29,7 +29,7 @@ class StaticUtils {
   ];
 
   static const String resume =
-      'https://drive.google.com/file/d/1fktTBY1Q-HXKk_uNI6hh0FvAm5YZcx77/view?usp=sharing';
+      'https://drive.google.com/file/d/1nujJz8B22WTTBevx_z9UuK4xaFkgPfL4/view?usp=sharing';
 
   static const String gitHub = "https://github.com/kabirhossainbd";
 }

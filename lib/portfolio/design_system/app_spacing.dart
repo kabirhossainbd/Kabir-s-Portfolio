@@ -12,7 +12,7 @@ abstract final class AppSpacing {
   static const double xxl = 48.0;
   static const double xxxl = 64.0;
 
-  static const double maxContentWidth = 1180.0;
+  static const double maxContentWidth = 1280.0;
 
   // Consistent border radii
   static const double radiusSm = 12.0;

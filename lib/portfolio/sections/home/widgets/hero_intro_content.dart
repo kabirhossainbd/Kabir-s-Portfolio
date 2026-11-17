@@ -84,8 +84,8 @@ class _HeroIntroContentState extends State<HeroIntroContent>
     final double headlineSize = widget.isMobile
         ? 30
         : widget.isCompact
-            ? 36
-            : 46;
+            ? 38
+            : 50;
 
     return Column(
       crossAxisAlignment:

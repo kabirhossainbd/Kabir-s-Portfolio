@@ -23,8 +23,8 @@ class QuickStats extends StatelessWidget {
 
     return Wrap(
       alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
-      spacing: 14,
-      runSpacing: 14,
+      spacing: 10,
+      runSpacing: 10,
       children: stats.asMap().entries.map((entry) {
         final stat = entry.value;
         return EntranceFader(
@@ -77,7 +77,7 @@ class _StatCardState extends State<_StatCard> {
         duration: const Duration(milliseconds: 220),
         curve: Curves.easeOutCubic,
         transform: Matrix4.translationValues(0, isHovered ? -4 : 0, 0),
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: isHovered
               ? colors.surfaceElevated.withValues(alpha: isDark ? 0.94 : 1.0)
